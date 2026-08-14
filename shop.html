@@ -264,14 +264,13 @@
         });
         
         function addToCart(id) {
-            const existing = cart.find(x => x.id === id);
-            if (existing) existing.qty++;
-            else cart.push({...products.find(p => p.id === id), qty: 1});
-            saveCart();
-            showToast('✅ Added to cart!');
-            sendAddToCartNotification(products.find(p => p.id === id));
-            toggleCart();
-        }
+    const existing = cart.find(x => x.id === id);
+    if (existing) existing.qty++;
+    else cart.push({...products.find(p => p.id === id), qty: 1});
+    saveCart();
+    showToast('✅ Added to cart!');
+    toggleCart(); // Sirf cart sidebar khule
+}
         
         function buyNow(id) {
             const existing = cart.find(x => x.id === id);
