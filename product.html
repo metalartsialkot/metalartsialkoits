@@ -362,15 +362,14 @@
     }
     
     // ADD TO CART - Cart sidebar khule + Notification
-    function addToCart() {
-        const existing = cart.find(x => x.id === currentProduct.id);
-        if (existing) existing.qty += quantity;
-        else cart.push({...currentProduct, qty: quantity});
-        saveCart();
-        showToast('✅ Added to cart!');
-        sendAddToCartNotification(currentProduct);
-        toggleCart(); // Cart sidebar khule
-    }
+    unction addToCart() {
+    const existing = cart.find(x => x.id === currentProduct.id);
+    if (existing) existing.qty += quantity;
+    else cart.push({...currentProduct, qty: quantity});
+    saveCart();
+    showToast('✅ Added to cart!');
+    toggleCart(); // Sirf cart sidebar khule
+}
     
     // BUY NOW - Direct checkout redirect
     function buyNow() {
