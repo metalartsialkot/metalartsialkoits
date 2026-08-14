@@ -272,13 +272,13 @@
     toggleCart(); // Sirf cart sidebar khule
 }
         
-        function buyNow(id) {
-            const existing = cart.find(x => x.id === id);
-            if (existing) existing.qty++;
-            else cart.push({...products.find(p => p.id === id), qty: 1});
-            saveCart();
-            window.location.href = 'checkout.html';
-        }
+        function buyNow(id) { 
+    const existing = cart.find(x => x.id === id);
+    if (existing) existing.qty++;
+    else cart.push({...products.find(p => p.id === id), qty: 1});
+    saveCart();
+    window.location.href = 'checkout.html'; // ✅ Direct checkout
+}
         
         async function sendAddToCartNotification(product) {
             const waMsg = `🛒 *ADDED TO CART!*\n\n*Product:* ${product.name}\n*Price:* Rs. ${product.price.toLocaleString()}`;
