@@ -11,83 +11,71 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <style>
-        :root {
-            --gold: #C4A265;
-            --gold-light: #D4B87A;
-            --dark: #1A1815;
-            --dark-light: #2C2824;
-            --cream: #FAF7F2;
-            --cream-dark: #F5F0E8;
-            --green: #1B5E20;
-            --red: #E53935;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: var(--cream); color: #2C2824; overflow-x: hidden; padding-top: 100px; }
+        :root { --gold:#C4A265; --gold-light:#D4B87A; --dark:#1A1815; --cream:#FAF7F2; --cream-dark:#F5F0E8; --green:#1B5E20; --red:#E53935; }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Inter',sans-serif; background:var(--cream); color:#2C2824; overflow-x:hidden; padding-top:100px; }
         
-        .fixed-header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; }
-        .azadi-banner { background: linear-gradient(135deg, #01411C, #1a7a3a, #01411C); padding: 7px 15px; text-align: center; border-bottom: 2px solid #C4A265; }
-        .azadi-content { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
-        .azadi-title { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 700; color: #C4A265; }
-        .azadi-offer { font-size: 11px; color: white; }
-        .azadi-offer strong { color: #C4A265; font-size: 13px; }
-        .azadi-save { background: #FF6B6B; color: white; padding: 3px 12px; border-radius: 50px; font-size: 10px; font-weight: 700; animation: pulse 1.5s infinite; }
-        .azadi-btn { background: #C4A265; color: #01411C; padding: 5px 18px; border-radius: 50px; font-weight: 700; font-size: 10px; text-decoration: none; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .fixed-header { position:fixed; top:0; left:0; width:100%; z-index:1000; }
+        .azadi-banner { background:linear-gradient(135deg,#01411C,#1a7a3a,#01411C); padding:7px 15px; text-align:center; border-bottom:2px solid #C4A265; }
+        .azadi-content { display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; }
+        .azadi-title { font-family:'Cormorant Garamond',serif; font-size:17px; font-weight:700; color:#C4A265; }
+        .azadi-offer { font-size:11px; color:white; }
+        .azadi-offer strong { color:#C4A265; font-size:13px; }
+        .azadi-save { background:#FF6B6B; color:white; padding:3px 12px; border-radius:50px; font-size:10px; font-weight:700; animation:pulse 1.5s infinite; }
+        .azadi-btn { background:#C4A265; color:#01411C; padding:5px 18px; border-radius:50px; font-weight:700; font-size:10px; text-decoration:none; }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
         
-        .premium-nav { background: rgba(250, 247, 242, 0.98); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(196, 162, 101, 0.2); }
-        .nav-container { max-width: 1300px; margin: 0 auto; padding: 9px 15px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-        .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
-        .nav-logo img { width: 38px; height: 38px; border-radius: 8px; border: 2px solid var(--gold); object-fit: contain; background: #F5F0E8; }
-        .nav-logo-text { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 700; color: var(--gold); }
-        .nav-logo-sub { font-size: 6px; color: #8B7355; letter-spacing: 1px; text-transform: uppercase; }
-        .nav-links { display: flex; gap: 12px; list-style: none; }
-        .nav-links a { color: var(--dark); text-decoration: none; font-size: 9px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
-        .nav-links a:hover, .nav-links a.active { color: var(--gold); }
-        .nav-actions { display: flex; align-items: center; gap: 4px; }
-        .nav-icon-btn { background: none; border: none; font-size: 14px; cursor: pointer; position: relative; color: var(--dark); padding: 5px; border-radius: 50%; }
-        .nav-cart-badge { position: absolute; top: -2px; right: -2px; background: var(--red); color: white; font-size: 7px; width: 14px; height: 14px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
-        .mobile-menu-btn { display: none; background: none; border: none; font-size: 18px; cursor: pointer; }
-        .mobile-menu { display: none; background: white; padding: 10px; }
-        .mobile-menu.active { display: block; }
-        .mobile-menu a { display: block; padding: 10px; color: var(--dark); text-decoration: none; font-size: 12px; border-bottom: 1px solid #eee; }
+        .premium-nav { background:rgba(250,247,242,0.98); backdrop-filter:blur(20px); border-bottom:1px solid rgba(196,162,101,0.2); }
+        .nav-container { max-width:1300px; margin:0 auto; padding:9px 15px; display:flex; align-items:center; justify-content:space-between; gap:10px; }
+        .nav-logo { display:flex; align-items:center; gap:8px; text-decoration:none; }
+        .nav-logo img { width:38px; height:38px; border-radius:8px; border:2px solid var(--gold); object-fit:contain; background:#F5F0E8; }
+        .nav-logo-text { font-family:'Cormorant Garamond',serif; font-size:17px; font-weight:700; color:var(--gold); }
+        .nav-logo-sub { font-size:6px; color:#8B7355; letter-spacing:1px; text-transform:uppercase; }
+        .nav-links { display:flex; gap:12px; list-style:none; }
+        .nav-links a { color:var(--dark); text-decoration:none; font-size:9px; font-weight:600; letter-spacing:1px; text-transform:uppercase; }
+        .nav-links a:hover, .nav-links a.active { color:var(--gold); }
+        .nav-actions { display:flex; align-items:center; gap:4px; }
+        .nav-icon-btn { background:none; border:none; font-size:14px; cursor:pointer; position:relative; color:var(--dark); padding:5px; border-radius:50%; }
+        .nav-cart-badge { position:absolute; top:-2px; right:-2px; background:var(--red); color:white; font-size:7px; width:14px; height:14px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; }
+        .mobile-menu-btn { display:none; background:none; border:none; font-size:18px; cursor:pointer; }
+        .mobile-menu { display:none; background:white; padding:10px; }
+        .mobile-menu.active { display:block; }
+        .mobile-menu a { display:block; padding:10px; color:var(--dark); text-decoration:none; font-size:12px; border-bottom:1px solid #eee; }
         
-        .gallery-hero { background: linear-gradient(135deg, #1A1815, #2C2824); padding: 60px 20px 40px; text-align: center; }
-        .gallery-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: 40px; color: white; }
-        .gallery-hero p { color: #D4C5B2; font-size: 13px; }
-        .instagram-link { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); color: white; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 12px; margin-top: 15px; }
+        .gallery-hero { background:linear-gradient(135deg,#1A1815,#2C2824); padding:60px 20px 40px; text-align:center; }
+        .gallery-hero h1 { font-family:'Cormorant Garamond',serif; font-size:40px; color:white; }
+        .gallery-hero p { color:#D4C5B2; font-size:13px; }
+        .instagram-link { display:inline-flex; align-items:center; gap:8px; background:linear-gradient(45deg,#f09433,#dc2743,#bc1888); color:white; padding:10px 25px; border-radius:50px; text-decoration:none; font-weight:600; font-size:12px; margin-top:15px; }
         
-        .gallery-section { padding: 40px 20px 60px; max-width: 1200px; margin: 0 auto; }
-        .gallery-section-title { text-align: center; margin-bottom: 30px; }
-        .gallery-section-title h2 { font-family: 'Cormorant Garamond', serif; font-size: 32px; }
-        .gallery-section-title p { color: #666; font-size: 13px; }
-        #curator-feed-instagram { max-width: 1000px; margin: 0 auto; }
+        .gallery-section { padding:40px 20px 60px; max-width:1200px; margin:0 auto; }
+        .gallery-section-title { text-align:center; margin-bottom:30px; }
+        .gallery-section-title h2 { font-family:'Cormorant Garamond',serif; font-size:32px; }
+        .gallery-section-title p { color:#666; font-size:13px; }
         
-        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; background: #25D366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; z-index: 998; box-shadow: 0 5px 20px rgba(37,211,102,0.4); text-decoration: none; animation: pulseWA 2s infinite; }
-        @keyframes pulseWA { 0%, 100% { box-shadow: 0 5px 20px rgba(37,211,102,0.4); } 50% { box-shadow: 0 5px 35px rgba(37,211,102,0.8); } }
+        /* Curator Feed Styling */
+        #curator-feed-default-feed-layout { max-width:1000px; margin:0 auto; }
+        .crt-grid { gap:15px !important; }
+        .crt-post { border-radius:14px !important; overflow:hidden !important; transition:all 0.3s !important; }
+        .crt-post:hover { transform:translateY(-5px) !important; box-shadow:0 10px 25px rgba(0,0,0,0.15) !important; }
         
-        .live-activity { position: fixed; bottom: 15px; left: 15px; z-index: 999; max-width: 290px; }
-        .live-activity-item { background: white; border-radius: 10px; padding: 10px 14px; box-shadow: 0 5px 20px rgba(0,0,0,0.15); margin-bottom: 6px; font-size: 11px; border: 1px solid #E8E0D5; cursor: pointer; animation: slideIn 0.5s ease; }
-        @keyframes slideIn { 0% { transform: translateX(-80px); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } }
+        .whatsapp-float { position:fixed; bottom:20px; right:20px; width:50px; height:50px; background:#25D366; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:24px; z-index:998; box-shadow:0 5px 20px rgba(37,211,102,0.4); text-decoration:none; animation:pulseWA 2s infinite; }
+        @keyframes pulseWA { 0%,100%{box-shadow:0 5px 20px rgba(37,211,102,0.4)} 50%{box-shadow:0 5px 35px rgba(37,211,102,0.8)} }
         
-        .cart-sidebar { position: fixed; top: 0; right: -400px; width: 100%; max-width: 380px; height: 100%; background: white; z-index: 99999; transition: right 0.3s; display: flex; flex-direction: column; }
-        .cart-sidebar.open { right: 0; }
-        .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 99998; display: none; }
-        .cart-overlay.show { display: block; }
+        .live-activity { position:fixed; bottom:15px; left:15px; z-index:999; max-width:290px; }
+        .live-activity-item { background:white; border-radius:10px; padding:10px 14px; box-shadow:0 5px 20px rgba(0,0,0,0.15); margin-bottom:6px; font-size:11px; border:1px solid #E8E0D5; cursor:pointer; animation:slideIn 0.5s ease; }
+        @keyframes slideIn { 0%{transform:translateX(-80px);opacity:0} 100%{transform:translateX(0);opacity:1} }
         
-        .footer-social a { color: #8B7355; transition: all 0.3s; }
-        .footer-social a:hover { color: #C4A265 !important; transform: translateY(-2px); }
+        .cart-sidebar { position:fixed; top:0; right:-400px; width:100%; max-width:380px; height:100%; background:white; z-index:99999; transition:right 0.3s; display:flex; flex-direction:column; }
+        .cart-sidebar.open { right:0; }
+        .cart-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); z-index:99998; display:none; }
+        .cart-overlay.show { display:block; }
         
-        @media (max-width: 1024px) {
-            .nav-links { display: none; }
-            .mobile-menu-btn { display: block; }
-        }
-        @media (max-width: 768px) {
-            body { padding-top: 92px; }
-            .gallery-hero h1 { font-size: 32px; }
-        }
-        @media (max-width: 480px) {
-            .gallery-hero h1 { font-size: 26px; }
-        }
+        .footer-social a { color:#8B7355; transition:all 0.3s; }
+        .footer-social a:hover { color:#C4A265 !important; transform:translateY(-2px); }
+        
+        @media(max-width:1024px){ .nav-links{display:none} .mobile-menu-btn{display:block} }
+        @media(max-width:768px){ body{padding-top:92px} .gallery-hero h1{font-size:32px} }
+        @media(max-width:480px){ .gallery-hero h1{font-size:26px} }
     </style>
 </head>
 <body>
@@ -143,7 +131,7 @@
     <!-- Gallery Hero -->
     <section class="gallery-hero">
         <h1>Our Instagram Gallery</h1>
-        <p>Follow @metalartsialkot for latest designs and offers</p>
+        <p>Follow @metalartsialkot for latest designs</p>
         <a href="https://www.instagram.com/metalartsialkot/" target="_blank" class="instagram-link">
             <i class="fab fa-instagram"></i> Follow @metalartsialkot
         </a>
@@ -153,16 +141,18 @@
     <section class="gallery-section">
         <div class="gallery-section-title">
             <h2>Latest From Instagram</h2>
-            <p>See our newest designs and customer photos</p>
+            <p>Auto-updates from our Instagram</p>
         </div>
-        <div id="curator-feed-instagram">
-            <div style="text-align:center;padding:40px;color:#666;">Loading Instagram feed...</div>
+        
+        <!-- Curator.io Feed - YOUR FEED ID -->
+        <div id="curator-feed-default-feed-layout">
+            <a href="https://curator.io" target="_blank" class="crt-logo crt-tag">Powered by Curator.io</a>
         </div>
     </section>
     
     <!-- Premium Footer -->
-    <footer style="background:linear-gradient(180deg, #0D0B09, #1A1815);color:#D4C5B2;">
-        <div style="height:3px;background:linear-gradient(90deg, transparent, #C4A265, transparent);"></div>
+    <footer style="background:linear-gradient(180deg,#0D0B09,#1A1815);color:#D4C5B2;">
+        <div style="height:3px;background:linear-gradient(90deg,transparent,#C4A265,transparent);"></div>
         <div style="max-width:1200px;margin:0 auto;padding:50px 20px 25px;">
             <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1.3fr;gap:30px;text-align:left;">
                 <div>
@@ -180,7 +170,7 @@
                     </div>
                 </div>
                 <div>
-                    <h4 style="color:#C4A265;font-size:11px;font-family:'Cormorant Garamond',serif;margin-bottom:15px;letter-spacing:2px;">QUICK LINKS</h4>
+                    <h4 style="color:#C4A265;font-size:11px;font-family:'Cormorant Garamond',serif;margin-bottom:15px;">QUICK LINKS</h4>
                     <div style="display:flex;flex-direction:column;gap:8px;font-size:11px;">
                         <a href="index.html" style="color:#8B7355;text-decoration:none;">Home</a>
                         <a href="shop.html" style="color:#8B7355;text-decoration:none;">Shop</a>
@@ -190,7 +180,7 @@
                     </div>
                 </div>
                 <div>
-                    <h4 style="color:#C4A265;font-size:11px;font-family:'Cormorant Garamond',serif;margin-bottom:15px;letter-spacing:2px;">POLICIES</h4>
+                    <h4 style="color:#C4A265;font-size:11px;font-family:'Cormorant Garamond',serif;margin-bottom:15px;">POLICIES</h4>
                     <div style="display:flex;flex-direction:column;gap:8px;font-size:11px;">
                         <a href="policies.html" style="color:#8B7355;text-decoration:none;">Shipping</a>
                         <a href="policies.html" style="color:#8B7355;text-decoration:none;">Returns</a>
@@ -199,7 +189,7 @@
                     </div>
                 </div>
                 <div>
-                    <h4 style="color:#C4A265;font-size:11px;font-family:'Cormorant Garamond',serif;margin-bottom:15px;letter-spacing:2px;">CONTACT</h4>
+                    <h4 style="color:#C4A265;font-size:11px;font-family:'Cormorant Garamond',serif;margin-bottom:15px;">CONTACT</h4>
                     <div style="display:flex;flex-direction:column;gap:10px;font-size:11px;color:#8B7355;">
                         <span><i class="fab fa-whatsapp" style="color:#C4A265;"></i> 0309-9915777</span>
                         <span><i class="fas fa-globe" style="color:#C4A265;"></i> metalartsialkot.com</span>
@@ -210,7 +200,7 @@
             </div>
         </div>
         <div style="border-top:1px solid rgba(196,162,101,0.1);padding:15px;text-align:center;">
-            <p style="font-size:8px;color:#555;letter-spacing:2px;">© 2025 METAL ART SIALKOT</p>
+            <p style="font-size:8px;color:#555;">© 2025 METAL ART SIALKOT</p>
         </div>
     </footer>
     
@@ -231,37 +221,32 @@
         </div>
     </div>
     
-    <!-- Curator.io Script -->
+    <!-- Curator.io Script - YOUR FEED ID -->
     <script type="text/javascript">
+    /* curator-feed-default-feed-layout */
     (function(){
-        var i, e, d = document, s = "script";
-        i = d.createElement("script");
-        i.async = 1;
-        i.charset = "UTF-8";
-        i.src = "https://cdn.curator.io/published/34c5ce1f-fa4f-4254-9c67-2a2daf96f6c0.js";
-        e = d.getElementsByTagName(s)[0];
-        e.parentNode.insertBefore(i, e);
+        var i,e,d=document,s="script";i=d.createElement("script");i.async=1;i.charset="UTF-8";
+        i.src="https://cdn.curator.io/published/98c0175d-6f0e-4965-a291-5ea3ed38e2f4.js";
+        e=d.getElementsByTagName(s)[0];e.parentNode.insertBefore(i,e);
     })();
     </script>
     
     <script>
         let cart = JSON.parse(localStorage.getItem('metalCart') || '[]');
         const products = [
-            {id:1, name:"Masha Allah", price:6000, img:"images/products/masha-allah.jpg"},
-            {id:2, name:"Bismillah", price:6000, img:"images/products/bismillah.jpg"},
-            {id:3, name:"Alhamdulillah", price:6000, img:"images/products/alhamdulillah.jpg"},
-            {id:4, name:"Ayat ul Kursi", price:7000, img:"images/products/ayat-kursi.jpg"},
-            {id:5, name:"First Kalma", price:6000, img:"images/products/first-kalma.jpg"},
-            {id:6, name:"Hasbunallah", price:6000, img:"images/products/hasbunallah.jpg"},
-            {id:7, name:"Fabi Ayyi Ala", price:6000, img:"images/products/fabi-ayyi.jpg"},
-            {id:8, name:"La Ilaha", price:6000, img:"images/products/la-ilaha.jpg"}
+            {id:1, name:"Masha Allah", price:6000, img:"https://via.placeholder.com/800x800/C4A265/FFFFFF?text=Masha+Allah"},
+            {id:2, name:"Bismillah", price:6000, img:"https://via.placeholder.com/800x800/D4B87A/FFFFFF?text=Bismillah"},
+            {id:3, name:"Alhamdulillah", price:6000, img:"https://via.placeholder.com/800x800/B8944A/FFFFFF?text=Alhamdulillah"},
+            {id:4, name:"Ayat ul Kursi", price:7000, img:"https://via.placeholder.com/800x800/C4A265/FFFFFF?text=Ayat+ul+Kursi"},
+            {id:5, name:"First Kalma", price:6000, img:"https://via.placeholder.com/800x800/D4B87A/FFFFFF?text=First+Kalma"},
+            {id:6, name:"Hasbunallah", price:6000, img:"https://via.placeholder.com/800x800/C4A265/FFFFFF?text=Hasbunallah"},
+            {id:7, name:"Fabi Ayyi Ala", price:6000, img:"https://via.placeholder.com/800x800/B8944A/FFFFFF?text=Fabi+Ayyi+Ala"},
+            {id:8, name:"La Ilaha", price:6000, img:"https://via.placeholder.com/800x800/C4A265/FFFFFF?text=La+Ilaha"}
         ];
         
-        function getFallbackImage(name) {
-            return `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><rect width="400" height="400" fill="%23C4A265"/><text x="200" y="200" font-size="35" text-anchor="middle" fill="white" font-family="Georgia" font-weight="bold">${name}</text></svg>`;
-        }
+        function getFallbackImage(name) { return `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><rect width="400" height="400" fill="%23C4A265"/><text x="200" y="200" font-size="35" text-anchor="middle" fill="white" font-family="Georgia" font-weight="bold">${name}</text></svg>`; }
         
-        function updateCartBadge() { const total = cart.reduce((s, i) => s + i.qty, 0); document.getElementById('cartBadge').style.display = total > 0 ? 'flex' : 'none'; document.getElementById('cartBadge').textContent = total; }
+        function updateCartBadge() { const total = cart.reduce((s,i) => s + i.qty, 0); document.getElementById('cartBadge').style.display = total > 0 ? 'flex' : 'none'; document.getElementById('cartBadge').textContent = total; }
         function toggleCart() { document.getElementById('cartSidebar').classList.toggle('open'); document.getElementById('cartOverlay').classList.toggle('show'); renderCart(); }
         function closeCart() { document.getElementById('cartSidebar').classList.remove('open'); document.getElementById('cartOverlay').classList.remove('show'); }
         function removeFromCart(id) { cart = cart.filter(i => i.id !== id); localStorage.setItem('metalCart', JSON.stringify(cart)); updateCartBadge(); renderCart(); }
@@ -269,13 +254,13 @@
             const container = document.getElementById('cartItems'); const footer = document.getElementById('cartFooter');
             if (cart.length === 0) { container.innerHTML = '<p style="text-align:center;color:#999;padding:30px;">Cart is empty</p>'; footer.style.display = 'none'; return; }
             container.innerHTML = cart.map(item => `<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #eee;"><img src="${item.img}" style="width:50px;height:50px;object-fit:cover;border-radius:8px;" onerror="this.onerror=null;this.src='${getFallbackImage(encodeURIComponent(item.name))}';"><div style="flex:1;"><strong style="font-size:12px;">${item.name}</strong><p style="color:#C4A265;font-size:11px;">Rs. ${(item.price * item.qty).toLocaleString()}</p></div><button onclick="removeFromCart(${item.id})" style="background:none;border:none;color:#E53935;cursor:pointer;">✕</button></div>`).join('');
-            document.getElementById('cartTotalPrice').textContent = 'Rs. ' + cart.reduce((s, i) => s + i.price * i.qty, 0).toLocaleString(); footer.style.display = 'block';
+            document.getElementById('cartTotalPrice').textContent = 'Rs. ' + cart.reduce((s,i) => s + i.price * i.qty, 0).toLocaleString(); footer.style.display = 'block';
         }
-        function checkout() { if (cart.length === 0) { alert('Cart is empty!'); return; } window.location.href = 'checkout.html'; }
+        function checkout() { if (cart.length === 0) return; window.location.href = 'checkout.html'; }
         function toggleMobileMenu() { document.getElementById('mobileMenu').classList.toggle('active'); }
         
-        const names = ['Ahmed','Fatima','Muhammad','Aisha','Ali','Zainab','Hassan','Sana'];
-        const cities = ['Lahore','Karachi','Islamabad','Dubai','London','New York','Toronto','Sydney'];
+        const names = ['Ahmed','Fatima','Muhammad','Aisha','Ali','Zainab'];
+        const cities = ['Lahore','Karachi','Islamabad','Dubai','London','Toronto'];
         function showLiveActivity() { const name = names[Math.floor(Math.random()*names.length)]; const city = cities[Math.floor(Math.random()*cities.length)]; const product = products[Math.floor(Math.random()*products.length)]; const div = document.createElement('div'); div.className = 'live-activity-item'; div.innerHTML = `<strong>${name}</strong> from ${city} purchased ${product.name} 🎉`; document.getElementById('liveActivity').appendChild(div); setTimeout(() => div.remove(), 6000); }
         
         document.addEventListener('DOMContentLoaded', () => {
