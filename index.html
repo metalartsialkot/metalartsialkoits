@@ -402,13 +402,13 @@
 }
         
         // BUY NOW - Direct checkout
-        function buyNow(id) { 
-            const existing = cart.find(x => x.id === id); 
-            if (existing) existing.qty++; 
-            else cart.push({...products.find(p => p.id === id), qty: 1}); 
-            saveCart(); 
-            window.location.href = 'checkout.html';
-        }
+     function buyNow(id) {
+    const existing = cart.find(x => x.id === id);
+    if (existing) existing.qty++;
+    else cart.push({...products.find(p => p.id === id), qty: 1});
+    saveCart();
+    window.location.href = 'checkout.html'; // Checkout form khule
+}
         
         function removeFromCart(id) { cart = cart.filter(i => i.id !== id); saveCart(); renderCart(); }
         function saveCart() { localStorage.setItem('metalCart', JSON.stringify(cart)); updateCartBadge(); }
