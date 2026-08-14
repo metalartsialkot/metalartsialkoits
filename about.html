@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Metal Art Sialkot</title>
+    
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        :root {
+            --gold: #C4A265;
+            --gold-light: #D4B87A;
+            --dark: #1A1815;
+            --dark-light: #2C2824;
+            --cream: #FAF7F2;
+            --cream-dark: #F5F0E8;
+            --green: #1B5E20;
+            --red: #E53935;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: #2C2824;
+            overflow-x: hidden;
+        }
+        
+        /* ===== NAVIGATION ===== */
+        .premium-nav {
+            background: rgba(250, 247, 242, 0.98);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(196, 162, 101, 0.2);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .premium-nav.scrolled {
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+        
+        .nav-logo img {
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            object-fit: contain;
+            border: 2px solid var(--gold);
+        }
+        
+        .nav-logo-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1;
+        }
+        
+        .nav-logo-sub {
+            font-size: 7px;
+            color: #8B7355;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 18px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--gold);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-icon-btn {
+            background: none;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            position: relative;
+            color: var(--dark);
+            padding: 8px;
+            transition: all 0.3s;
+            border-radius: 50%;
+        }
+        
+        .nav-icon-btn:hover {
+            background: var(--cream-dark);
+            color: var(--gold);
+        }
+        
+        .nav-cart-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--red);
+            color: white;
+            font-size: 8px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            color: var(--dark);
+        }
+        
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            z-index: 999;
+        }
+        
+        .mobile-menu.active {
+            display: block;
+        }
+        
+        .mobile-menu a {
+            display: block;
+            padding: 12px;
+            color: var(--dark);
+            text-decoration: none;
+            font-size: 13px;
+            border-bottom: 1px solid #eee;
+            font-weight: 500;
+        }
+        
+        /* ===== ABOUT HERO ===== */
+        .about-hero {
+            background: linear-gradient(135deg, #1A1815, #2C2824);
+            padding: 120px 20px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(196,162,101,0.15), transparent 60%);
+        }
+        
+        .about-hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 48px;
+            color: white;
+            position: relative;
+            z-index: 2;
+            margin-bottom: 10px;
+        }
+        
+        .about-hero p {
+            color: #D4C5B2;
+            font-size: 15px;
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* ===== ABOUT CONTENT ===== */
+        .about-section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+        
+        .about-image {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 3px solid var(--gold);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .about-text h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 36px;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+        
+        .about-text p {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 15px;
+        }
+        
+        .about-text .highlight {
+            color: var(--gold);
+            font-weight: 600;
+        }
+        
+        /* ===== STATS ===== */
+        .stats-section {
+            background: var(--cream-dark);
+            padding: 60px 20px;
+            margin: 60px 0;
+        }
+        
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+        
+        .stat-card {
+            text-align: center;
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(196,162,101,0.1);
+            transition: all 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .stat-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+        
+        .stat-number {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* ===== VALUES ===== */
+        .values-section {
+            padding: 60px 0;
+        }
+        
+        .values-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .values-title h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 36px;
+            color: var(--dark);
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+        
+        .value-card {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 16px;
+            border: 1px solid rgba(196,162,101,0.1);
+            transition: all 0.3s;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .value-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+        
+        .value-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .value-card p {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (max-width: 768px) {
+            .about-hero h1 { font-size: 36px; }
+            .about-grid { grid-template-columns: 1fr; }
+            .values-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        }
+        
+        @media (max-width: 480px) {
+            .about-hero h1 { font-size: 28px; }
+            .stats-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .stat-number { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="premium-nav" id="mainNav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="images/logo.png" alt="Metal Art Sialkot" onerror="this.src='https://via.placeholder.com/200x200/C4A265/FFFFFF?text=MAS'">
+                <div>
+                    <div class="nav-logo-text">Metal Art Sialkot</div>
+                    <div class="nav-logo-sub">Premium Islamic Art</div>
+                </div>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="product.html">Products</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="policies.html">Policies</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <button class="nav-icon-btn" onclick="window.location.href='login.html'">
+                    <i class="fas fa-user"></i>
+                </button>
+                <button class="nav-icon-btn" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="nav-cart-badge" id="cartBadge" style="display:none;">0</span>
+                </button>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="index.html">🏠 Home</a>
+            <a href="shop.html">🛍️ Shop</a>
+            <a href="product.html">📦 Products</a>
+            <a href="gallery.html">📸 Gallery</a>
+            <a href="reviews.html">⭐ Reviews</a>
+            <a href="about.html">ℹ️ About</a>
+            <a href="policies.html">📋 Policies</a>
+            <a href="login.html">👤 Login</a>
+        </div>
+    </nav>
+    
+    <!-- About Hero -->
+    <section class="about-hero">
+        <h1>About Metal Art Sialkot</h1>
+        <p>Crafting premium Islamic metal wall art with passion and precision</p>
+    </section>
+    
+    <!-- About Content -->
+    <section class="about-section">
+        <div class="about-grid">
+            <div class="about-image">
+                <img src="images/hero-banner.jpg" alt="Metal Art Sialkot Workshop" onerror="this.src='https://via.placeholder.com/800x600/C4A265/FFFFFF?text=Metal+Art+Sialkot'">
+            </div>
+            <div class="about-text">
+                <h2>Our Story</h2>
+                <p>Welcome to <span class="highlight">Metal Art Sialkot</span>, where tradition meets innovation. We are dedicated to creating premium Islamic metal wall art that brings spirituality and elegance to your sacred spaces.</p>
+                <p>Our journey began with a simple vision: to craft Islamic calligraphy pieces that are not just decorations, but expressions of faith and artistry. Each piece is meticulously designed and precision laser cut to capture the beauty of Islamic calligraphy.</p>
+                <p>Based in Sialkot, Pakistan - the city renowned for its metal craftsmanship - we combine centuries-old artistry with modern laser technology to create pieces that are truly exceptional.</p>
+            </div>
+        </div>
+        
+        <!-- Stats Section -->
+        <div class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">🛍️</div>
+                    <div class="stat-number">10,000+</div>
+                    <div class="stat-label">Orders Delivered</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🌍</div>
+                    <div class="stat-number">25+</div>
+                    <div class="stat-label">Countries Served</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-number">4.9/5</div>
+                    <div class="stat-label">Customer Rating</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🎨</div>
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Unique Designs</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Values Section -->
+        <div class="values-section">
+            <div class="values-title">
+                <h2>Our Values</h2>
+                <p style="color:#666;font-size:14px;margin-top:10px;">What makes us different</p>
+            </div>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">🔬</div>
+                    <h3>Precision Craftsmanship</h3>
+                    <p>Every piece is laser cut with 0.8mm precision, ensuring perfect detail in every curve and line of Islamic calligraphy.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">✨</div>
+                    <h3>Premium Quality</h3>
+                    <p>We use only the finest stainless steel with golden mirror finish that never fades, rusts, or breaks.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🤝</div>
+                    <h3>Customer First</h3>
+                    <p>Your satisfaction is our priority. We offer 5-year warranty and free shipping across Pakistan and worldwide.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div style="padding:18px 20px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center;">
+            <h2 style="font-family:'Cormorant Garamond',serif;font-size:22px;margin:0;">🛒 Your Cart</h2>
+            <button onclick="closeCart()" style="background:none;border:none;font-size:28px;cursor:pointer;color:#999;">✕</button>
+        </div>
+        <div id="cartItems" style="flex:1;overflow-y:auto;padding:15px 20px;">
+            <div style="text-align:center;padding:40px 0;color:#999;">
+                <i class="fas fa-shopping-cart" style="font-size:50px;color:#ddd;display:block;margin-bottom:15px;"></i>
+                <p>Your cart is empty</p>
+            </div>
+        </div>
+        <div id="cartFooter" style="display:none;padding:18px 20px;border-top:2px solid #eee;background:#FAF7F2;">
+            <div style="display:flex;justify-content:space-between;font-size:18px;font-weight:700;padding:10px 0;">
+                <span>Total:</span>
+                <span style="color:#C4A265;" id="cartTotalPrice">Rs. 0</span>
+            </div>
+            <button onclick="checkout()" style="width:100%;padding:14px;background:linear-gradient(135deg,#25D366,#20B85A);color:white;border:none;border-radius:50px;font-weight:700;font-size:16px;cursor:pointer;margin-top:10px;">Proceed to Checkout</button>
+        </div>
+    </div>
+    
+    <script>
+        let cart = JSON.parse(localStorage.getItem('metalCart') || '[]');
+        
+        function updateCartBadge() {
+            const total = cart.reduce((s, i) => s + i.qty, 0);
+            const badge = document.getElementById('cartBadge');
+            badge.style.display = total > 0 ? 'flex' : 'none';
+            badge.textContent = total;
+        }
+        
+        function toggleCart() {
+            document.getElementById('cartSidebar').classList.toggle('open');
+            document.getElementById('cartOverlay').classList.toggle('show');
+            if (document.getElementById('cartSidebar').classList.contains('open')) {
+                renderCart();
+            }
+        }
+        
+        function closeCart() {
+            document.getElementById('cartSidebar').classList.remove('open');
+            document.getElementById('cartOverlay').classList.remove('show');
+        }
+        
+        function renderCart() {
+            const container = document.getElementById('cartItems');
+            const footer = document.getElementById('cartFooter');
+            
+            if (cart.length === 0) {
+                container.innerHTML = '<div style="text-align:center;padding:40px 0;color:#999;"><i class="fas fa-shopping-cart" style="font-size:50px;color:#ddd;display:block;margin-bottom:15px;"></i><p>Your cart is empty</p></div>';
+                footer.style.display = 'none';
+                return;
+            }
+            
+            container.innerHTML = cart.map(item => `
+                <div style="display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #f5f0e8;align-items:center;">
+                    <img src="${item.img}" style="width:60px;height:60px;object-fit:contain;background:#F5F0E8;border-radius:8px;" onerror="this.src='https://via.placeholder.com/60x60/C4A265/FFFFFF?text=MAS'">
+                    <div style="flex:1;">
+                        <strong style="font-size:14px;">${item.name}</strong>
+                        <p style="color:#C4A265;font-weight:700;font-size:14px;">Rs. ${(item.price * item.qty).toLocaleString()}</p>
+                    </div>
+                    <button onclick="removeFromCart(${item.id})" style="color:#e53935;cursor:pointer;background:none;border:none;font-size:16px;">✕</button>
+                </div>
+            `).join('');
+            
+            const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+            document.getElementById('cartTotalPrice').textContent = 'Rs. ' + total.toLocaleString();
+            footer.style.display = 'block';
+        }
+        
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            localStorage.setItem('metalCart', JSON.stringify(cart));
+            updateCartBadge();
+            renderCart();
+        }
+        
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Cart is empty!');
+                return;
+            }
+            window.location.href = 'checkout.html';
+        }
+        
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartBadge();
+        });
+    </script>
+</body>
+</html>

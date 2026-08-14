@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details | Metal Art Sialkot</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+    <style>
+        :root {
+            --gold: #C4A265;
+            --gold-light: #D4B87A;
+            --gold-dark: #B8944A;
+            --dark: #1A1815;
+            --dark-light: #2C2824;
+            --cream: #FAF7F2;
+            --cream-dark: #F5F0E8;
+            --green: #1B5E20;
+            --red: #E53935;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: #2C2824;
+            overflow-x: hidden;
+        }
+        
+        /* ===== NAVIGATION ===== */
+        .premium-nav {
+            background: rgba(250, 247, 242, 0.98);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(196, 162, 101, 0.2);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .premium-nav.scrolled {
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+        
+        .nav-logo img {
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            object-fit: contain;
+            border: 2px solid var(--gold);
+        }
+        
+        .nav-logo-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1;
+        }
+        
+        .nav-logo-sub {
+            font-size: 7px;
+            color: #8B7355;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 18px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--gold);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+        
+        .nav-icon-btn {
+            background: none;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            position: relative;
+            color: var(--dark);
+            padding: 8px;
+            transition: all 0.3s;
+            border-radius: 50%;
+        }
+        
+        .nav-icon-btn:hover {
+            background: var(--cream-dark);
+            color: var(--gold);
+        }
+        
+        .nav-cart-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--red);
+            color: white;
+            font-size: 8px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            color: var(--dark);
+        }
+        
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            z-index: 999;
+        }
+        
+        .mobile-menu.active {
+            display: block;
+        }
+        
+        .mobile-menu a {
+            display: block;
+            padding: 12px;
+            color: var(--dark);
+            text-decoration: none;
+            font-size: 13px;
+            border-bottom: 1px solid #eee;
+            font-weight: 500;
+        }
+        
+        /* ===== PRODUCT DETAIL ===== */
+        .product-detail-section {
+            padding: 120px 20px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .breadcrumb {
+            font-size: 11px;
+            color: #999;
+            margin-bottom: 30px;
+        }
+        
+        .breadcrumb a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+        
+        .breadcrumb span {
+            margin: 0 8px;
+        }
+        
+        .product-detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+        
+        .product-detail-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            background: white;
+            border: 2px solid var(--gold);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .product-detail-image img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .product-detail-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--gold);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 700;
+            z-index: 2;
+            letter-spacing: 1px;
+        }
+        
+        .product-detail-info h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 38px;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        
+        .product-rating {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .stars {
+            color: #FFB300;
+            font-size: 18px;
+        }
+        
+        .rating-text {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .product-price-box {
+            background: var(--cream-dark);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(196,162,101,0.2);
+        }
+        
+        .current-price {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--gold);
+        }
+        
+        .original-price {
+            font-size: 18px;
+            color: #999;
+            text-decoration: line-through;
+            margin-left: 10px;
+        }
+        
+        .discount-badge {
+            background: var(--red);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-left: 10px;
+        }
+        
+        .product-meta {
+            margin-bottom: 20px;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 13px;
+        }
+        
+        .meta-item .label {
+            font-weight: 600;
+            min-width: 120px;
+            color: #666;
+        }
+        
+        .meta-item .value {
+            color: var(--dark);
+        }
+        
+        .stock-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .stock-in {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+        
+        .stock-low {
+            background: #FFF3E0;
+            color: #E65100;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .quantity-selector label {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .qty-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+            background: white;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--gold);
+            transition: all 0.3s;
+        }
+        
+        .qty-btn:hover {
+            background: var(--gold);
+            color: white;
+        }
+        
+        .qty-display {
+            font-size: 20px;
+            font-weight: 700;
+            min-width: 40px;
+            text-align: center;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .btn-add-to-cart {
+            flex: 1;
+            background: var(--dark);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 700;
+            transition: all 0.3s;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-add-to-cart:hover {
+            background: var(--dark-light);
+            transform: translateY(-2px);
+        }
+        
+        .btn-buy-now {
+            flex: 1;
+            background: linear-gradient(135deg, #C4A265, #D4B87A);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 700;
+            transition: all 0.3s;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-buy-now:hover {
+            box-shadow: 0 10px 30px rgba(196, 162, 101, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        .product-description {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(196,162,101,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .product-description h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .product-description p {
+            font-size: 13px;
+            line-height: 1.8;
+            color: #666;
+        }
+        
+        .features-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+        
+        .features-list li {
+            padding: 8px 0;
+            font-size: 13px;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .features-list li i {
+            color: var(--gold);
+        }
+        
+        /* ===== RELATED PRODUCTS ===== */
+        .related-section {
+            padding: 40px 20px 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .related-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .related-title h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            color: var(--dark);
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+        
+        .related-card {
+            background: white;
+            border: 1px solid rgba(196, 162, 101, 0.1);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s;
+            cursor: pointer;
+        }
+        
+        .related-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .related-image {
+            aspect-ratio: 1;
+            overflow: hidden;
+            background: var(--cream-dark);
+        }
+        
+        .related-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .related-card:hover .related-image img {
+            transform: scale(1.1);
+        }
+        
+        .related-info {
+            padding: 15px;
+        }
+        
+        .related-name {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        .related-price {
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 16px;
+        }
+        
+        /* ===== CART SIDEBAR ===== */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -420px;
+            width: 100%;
+            max-width: 400px;
+            height: 100%;
+            background: white;
+            z-index: 999999;
+            transition: right 0.4s ease;
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .cart-sidebar.open {
+            right: 0;
+        }
+        
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 999998;
+            display: none;
+        }
+        
+        .cart-overlay.show {
+            display: block;
+        }
+        
+        /* ===== TOAST ===== */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--dark);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            z-index: 9999;
+            animation: slideUp 0.5s ease;
+            font-size: 13px;
+        }
+        
+        @keyframes slideUp {
+            0% { transform: translateY(50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+            .product-detail-grid { gap: 30px; }
+            .related-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        
+        @media (max-width: 768px) {
+            .product-detail-grid { grid-template-columns: 1fr; }
+            .product-detail-info h1 { font-size: 28px; }
+            .related-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .action-buttons { flex-direction: column; }
+            .nav-logo-text { font-size: 18px; }
+        }
+        
+        @media (max-width: 480px) {
+            .product-detail-info h1 { font-size: 24px; }
+            .current-price { font-size: 26px; }
+            .related-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="premium-nav" id="mainNav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="images/logo.png" alt="Metal Art Sialkot" onerror="this.src='https://via.placeholder.com/200x200/C4A265/FFFFFF?text=MAS'">
+                <div>
+                    <div class="nav-logo-text">Metal Art Sialkot</div>
+                    <div class="nav-logo-sub">Premium Islamic Art</div>
+                </div>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="product.html" class="active">Products</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="policies.html">Policies</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <button class="nav-icon-btn" onclick="window.location.href='login.html'" title="Account">
+                    <i class="fas fa-user"></i>
+                </button>
+                <button class="nav-icon-btn" onclick="toggleCart()" title="Cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="nav-cart-badge" id="cartBadge" style="display:none;">0</span>
+                </button>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="index.html">🏠 Home</a>
+            <a href="shop.html">🛍️ Shop</a>
+            <a href="product.html">📦 Products</a>
+            <a href="gallery.html">📸 Gallery</a>
+            <a href="reviews.html">⭐ Reviews</a>
+            <a href="about.html">ℹ️ About</a>
+            <a href="policies.html">📋 Policies</a>
+            <a href="login.html">👤 Login</a>
+        </div>
+    </nav>
+    
+    <!-- Product Detail Section -->
+    <section class="product-detail-section">
+        <div class="breadcrumb">
+            <a href="index.html">Home</a>
+            <span>›</span>
+            <a href="shop.html">Shop</a>
+            <span>›</span>
+            <span id="breadcrumbProduct">Product</span>
+        </div>
+        
+        <div class="product-detail-grid" id="productDetail">
+            <!-- Product details will be loaded here -->
+        </div>
+    </section>
+    
+    <!-- Related Products -->
+    <section class="related-section">
+        <div class="related-title">
+            <h2>You May Also Like</h2>
+        </div>
+        <div class="related-grid" id="relatedGrid">
+            <!-- Related products will be loaded here -->
+        </div>
+    </section>
+    
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div style="padding:18px 20px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center;">
+            <h2 style="font-family:'Cormorant Garamond',serif;font-size:22px;margin:0;">🛒 Your Cart</h2>
+            <button onclick="closeCart()" style="background:none;border:none;font-size:28px;cursor:pointer;color:#999;">✕</button>
+        </div>
+        <div id="cartItems" style="flex:1;overflow-y:auto;padding:15px 20px;">
+            <div style="text-align:center;padding:40px 0;color:#999;">
+                <i class="fas fa-shopping-cart" style="font-size:50px;color:#ddd;display:block;margin-bottom:15px;"></i>
+                <p>Your cart is empty</p>
+            </div>
+        </div>
+        <div id="cartFooter" style="display:none;padding:18px 20px;border-top:2px solid #eee;background:#FAF7F2;">
+            <div style="display:flex;justify-content:space-between;font-size:18px;font-weight:700;padding:10px 0;border-top:2px solid #eee;">
+                <span>Total:</span>
+                <span style="color:#C4A265;" id="cartTotalPrice">Rs. 0</span>
+            </div>
+            <button onclick="checkout()" style="width:100%;padding:14px;background:linear-gradient(135deg,#25D366,#20B85A);color:white;border:none;border-radius:50px;font-weight:700;font-size:16px;cursor:pointer;margin-top:10px;">Proceed to Checkout</button>
+        </div>
+    </div>
+    
+    <script>
+        // ========================================
+        // PRODUCTS DATA
+        // ========================================
+        const products = [
+            {
+                id: 1, 
+                code: "MAS-001", 
+                name: "Masha Allah", 
+                cat: "calligraphy", 
+                price: 6000, 
+                img: "images/products/masha-allah.jpg", 
+                best: true, 
+                stock: 5, 
+                sold: 234, 
+                size: '40"W × 10"H',
+                material: 'Stainless Steel',
+                finish: 'Golden Mirror',
+                warranty: '5 Years',
+                desc: "Premium laser cut Masha Allah Islamic wall art. Precision crafted 0.8mm stainless steel with golden mirror finish. Each piece is carefully designed to bring elegance and spirituality to your space. The intricate laser cutting ensures perfect detail in every curve and line.",
+                features: [
+                    'Precision laser cut 0.8mm stainless steel',
+                    'Premium golden mirror finish',
+                    'Unbreakable and rust-free',
+                    'Complete mounting kit included',
+                    '5-year warranty against fading',
+                    'Free shipping across Pakistan'
+                ]
+            },
+            {
+                id: 2, 
+                code: "MAS-002", 
+                name: "Bismillah", 
+                cat: "bismillah", 
+                price: 6000, 
+                img: "images/products/bismillah.jpg", 
+                best: false, 
+                stock: 3, 
+                sold: 189, 
+                size: '40"W × 10"H',
+                material: 'Stainless Steel',
+                finish: 'Golden Mirror',
+                warranty: '5 Years',
+                desc: "Bismillah teardrop design with laser precision. Beautiful golden finish that complements any interior. The unique teardrop shape makes it a stunning centerpiece for your home or office.",
+                features: [
+                    'Unique teardrop design',
+                    'Laser precision cutting',
+                    'Golden mirror finish',
+                    'Solid steel construction',
+                    '5-year warranty',
+                    'Free shipping'
+                ]
+            },
+            {
+                id: 3, 
+                code: "MAS-003", 
+                name: "Alhamdulillah", 
+                cat: "calligraphy", 
+                price: 6000, 
+                img: "images/products/alhamdulillah.jpg", 
+                best: false, 
+                stock: 8, 
+                sold: 156, 
+                size: '40"W × 10"H',
+                material: 'Stainless Steel',
+                finish: 'Golden Mirror',
+                warranty: '5 Years',
+                desc: "Alhamdulillah premium Islamic wall art. Solid steel construction with golden finish. Perfect for expressing gratitude in your living space.",
+                features: [
+                    'Premium stainless steel',
+                    'Golden mirror finish',
+                    'Unbreakable design',
+                    'Easy installation',
+                    '5-year warranty',
+                    'Free shipping'
+                ]
+            },
+            {
+                id: 4, 
+                code: "MAS-004", 
+                name: "Ayat ul Kursi Round", 
+                cat: "ayat", 
+                price: 7000, 
+                img: "images/products/ayat-kursi.jpg", 
+                best: true, 
+                stock: 2, 
+                sold: 312, 
+                size: '19"W × 23"H',
+                material: 'Stainless Steel',
+                finish: 'Golden Mirror',
+                warranty: '5 Years',
+                desc: "Ayat ul Kursi luxury round design. Bestseller with 312+ sold. Full verse in circular laser cut with premium gold finish. A masterpiece that transforms any wall into a focal point.",
+                features: [
+                    'Bestseller design',
+                    'Full Ayat ul Kursi verse',
+                    'Circular laser cut',
+                    'Premium gold finish',
+                    '5-year warranty',
+                    'Free shipping'
+                ]
+            },
+            {
+                id: 5, 
+                code: "MAS-005", 
+                name: "First Kalma", 
+                cat: "kalima", 
+                price: 6000, 
+                img: "images/products/first-kalma.jpg", 
+                best: false, 
+                stock: 6, 
+                sold: 145, 
+                size: '40"W × 10"H',
+                material: 'Stainless Steel',
+                finish: 'Golden Mirror',
+                warranty: '5 Years',
+                desc: "First Kalma circular design. Laser cut perfection with golden finish. A beautiful representation of faith for your home.",
+                features: [
+                    'Circular design',
+                    'Laser cut precision',
+                    'Golden finish',
+                    'Solid steel',
+                    '5-year warranty',
+                    'Free shipping'
+                ]
+            },
+            {
+                id: 6, 
+                code: "MAS-006", 
+                name: "Hasbunallah", 
+                cat: "calligraphy", 
+                price: 6000, 
+                img: "images/products/hasbunallah.jpg", 
+                best: true, 
+                stock: 4, 
+                sold: 178, 
+                size: '40"W × 10"H',
+                material: 'Stainless Steel',
+                finish: 'Golden Mirror',
+                warranty: '5 Years',
+                desc: "Hasbunallah premium wall décor. Golden finish, unbreakable steel. A powerful reminder of faith and trust in Allah.",
+                features: [
+                    'Premium steel construction',
+                    'Golden mirror finish',
+                    'Unbreakable',
+                    'Easy mounting',
+                    '5-year warranty',
+                    'Free shipping'
+                ]
+            },
+            {
+                id: 7, 
+                code: "MAS-007", 
+                name: "Fabi Ayyi Ala", 
+                cat: "calligraphy", 
+                price: 6000, 
+                img: "images/products/fabi-ayyi.jpg", 
+                best: false, 
+                stock: 10, 
+                sold: 98, 
+                size: '40"W × 10"H',
+                material: 'Stainless Steel',
+                finish: 'Golden Mirror',
+                warranty: '5 Years',
+                desc: "Surah Ar-Rahman verse. Premium laser-cut stainless steel with golden finish. Beautiful calligraphy that inspires gratitude.",
+                features: [
+                    'Surah Ar-Rahman verse',
+                    'Laser precision',
+                    'Golden finish',
+                    'Solid steel',
+                    '5-year warranty',
+                    'Free shipping'
+                ]
+            },
+            {
+                id: 8, 
+                code: "MAS-008", 
+                name: "La Ilaha Illa Anta", 
+                cat: "kalima", 
+                price: 6000, 
+                img: "images/products/la-ilaha.jpg", 
+                best: false, 
+                stock: 7, 
+                sold: 67, 
+                size: '40"W × 10"H',
+                material: 'Stainless Steel',
+                finish: 'Golden Mirror',
+                warranty: '5 Years',
+                desc: "Ayat-e-Karima Islamic wall art. Precision fiber laser cut with golden finish. A beautiful addition to any prayer room.",
+                features: [
+                    'Ayat-e-Karima',
+                    'Fiber laser cut',
+                    'Golden finish',
+                    'Unbreakable',
+                    '5-year warranty',
+                    'Free shipping'
+                ]
+            }
+        ];
+        
+        let cart = JSON.parse(localStorage.getItem('metalCart') || '[]');
+        let currentProduct = null;
+        let quantity = 1;
+        
+        // ===== GET PRODUCT ID FROM URL =====
+        function getProductIdFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return parseInt(params.get('id')) || 1;
+        }
+        
+        // ===== LOAD PRODUCT DETAILS =====
+        function loadProductDetail() {
+            const productId = getProductIdFromUrl();
+            currentProduct = products.find(p => p.id === productId);
+            
+            if (!currentProduct) {
+                currentProduct = products[0];
+            }
+            
+            document.getElementById('breadcrumbProduct').textContent = currentProduct.name;
+            document.title = currentProduct.name + ' | Metal Art Sialkot';
+            
+            const container = document.getElementById('productDetail');
+            
+            const stockClass = currentProduct.stock <= 5 ? 'stock-low' : 'stock-in';
+            const stockText = currentProduct.stock <= 5 ? `🔥 Only ${currentProduct.stock} left!` : '✅ In Stock';
+            const badge = currentProduct.best ? '⭐ BESTSELLER' : (currentProduct.cat === 'ayat' ? '👑 PREMIUM' : '');
+            
+            container.innerHTML = `
+                <div class="product-detail-image">
+                    ${badge ? `<span class="product-detail-badge">${badge}</span>` : ''}
+                    <img src="${currentProduct.img}" alt="${currentProduct.name}" onerror="this.src='https://via.placeholder.com/800x800/C4A265/FFFFFF?text=${encodeURIComponent(currentProduct.name)}'">
+                </div>
+                
+                <div class="product-detail-info">
+                    <h1>${currentProduct.name}</h1>
+                    
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-text">4.9/5 (${currentProduct.sold}+ reviews)</span>
+                    </div>
+                    
+                    <div class="product-price-box">
+                        <span class="current-price">Rs. ${currentProduct.price.toLocaleString()}</span>
+                        <span class="original-price">Rs. ${(currentProduct.price + 1000).toLocaleString()}</span>
+                        <span class="discount-badge">SAVE Rs. 1,000</span>
+                    </div>
+                    
+                    <div class="product-meta">
+                        <div class="meta-item">
+                            <span class="label">Product Code</span>
+                            <span class="value" style="font-family:monospace;">${currentProduct.code}</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="label">Size</span>
+                            <span class="value">${currentProduct.size}</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="label">Material</span>
+                            <span class="value">${currentProduct.material}</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="label">Finish</span>
+                            <span class="value">${currentProduct.finish}</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="label">Warranty</span>
+                            <span class="value">${currentProduct.warranty}</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="label">Availability</span>
+                            <span class="value">
+                                <span class="stock-status ${stockClass}">${stockText}</span>
+                            </span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="label">Sold</span>
+                            <span class="value">🔥 ${currentProduct.sold}+ pieces sold</span>
+                        </div>
+                    </div>
+                    
+                    <div class="quantity-selector">
+                        <label>Quantity:</label>
+                        <button class="qty-btn" onclick="changeQuantity(-1)">−</button>
+                        <span class="qty-display" id="qtyDisplay">1</span>
+                        <button class="qty-btn" onclick="changeQuantity(1)">+</button>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn-add-to-cart" onclick="addToCart()">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                        <button class="btn-buy-now" onclick="buyNow()">
+                            <i class="fas fa-bolt"></i> Buy Now
+                        </button>
+                    </div>
+                    
+                    <div class="product-description">
+                        <h3>Product Description</h3>
+                        <p>${currentProduct.desc}</p>
+                        
+                        <h3 style="margin-top:20px;">Key Features</h3>
+                        <ul class="features-list">
+                            ${currentProduct.features.map(f => `<li><i class="fas fa-check-circle"></i> ${f}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `;
+            
+            // Load related products
+            loadRelatedProducts();
+        }
+        
+        // ===== LOAD RELATED PRODUCTS =====
+        function loadRelatedProducts() {
+            const related = products.filter(p => p.id !== currentProduct.id && p.cat === currentProduct.cat);
+            const others = products.filter(p => p.id !== currentProduct.id && p.cat !== currentProduct.cat);
+            const allRelated = [...related, ...others].slice(0, 4);
+            
+            const grid = document.getElementById('relatedGrid');
+            grid.innerHTML = allRelated.map(p => `
+                <div class="related-card" onclick="window.location.href='product.html?id=${p.id}'">
+                    <div class="related-image">
+                        <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/800x800/C4A265/FFFFFF?text=${encodeURIComponent(p.name)}'">
+                    </div>
+                    <div class="related-info">
+                        <h3 class="related-name">${p.name}</h3>
+                        <p class="related-price">Rs. ${p.price.toLocaleString()}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // ===== QUANTITY FUNCTIONS =====
+        function changeQuantity(delta) {
+            quantity = Math.max(1, quantity + delta);
+            document.getElementById('qtyDisplay').textContent = quantity;
+        }
+        
+        // ===== CART FUNCTIONS =====
+        function addToCart() {
+            const existing = cart.find(x => x.id === currentProduct.id);
+            if (existing) {
+                existing.qty += quantity;
+            } else {
+                cart.push({...currentProduct, qty: quantity});
+            }
+            saveCart();
+            showToast('✅ Added to cart!');
+        }
+        
+        function buyNow() {
+            addToCart();
+            toggleCart();
+        }
+        
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            saveCart();
+            renderCart();
+        }
+        
+        function updateCartQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.qty += delta;
+                if (item.qty <= 0) {
+                    removeFromCart(id);
+                    return;
+                }
+                saveCart();
+                renderCart();
+            }
+        }
+        
+        function saveCart() {
+            localStorage.setItem('metalCart', JSON.stringify(cart));
+            updateCartBadge();
+        }
+        
+        function updateCartBadge() {
+            const total = cart.reduce((s, i) => s + i.qty, 0);
+            const badge = document.getElementById('cartBadge');
+            badge.style.display = total > 0 ? 'flex' : 'none';
+            badge.textContent = total;
+        }
+        
+        function toggleCart() {
+            document.getElementById('cartSidebar').classList.toggle('open');
+            document.getElementById('cartOverlay').classList.toggle('show');
+            if (document.getElementById('cartSidebar').classList.contains('open')) {
+                renderCart();
+            }
+        }
+        
+        function closeCart() {
+            document.getElementById('cartSidebar').classList.remove('open');
+            document.getElementById('cartOverlay').classList.remove('show');
+        }
+        
+        function renderCart() {
+            const container = document.getElementById('cartItems');
+            const footer = document.getElementById('cartFooter');
+            
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align:center;padding:40px 0;color:#999;">
+                        <i class="fas fa-shopping-cart" style="font-size:50px;color:#ddd;display:block;margin-bottom:15px;"></i>
+                        <p>Your cart is empty</p>
+                    </div>
+                `;
+                footer.style.display = 'none';
+                return;
+            }
+            
+            container.innerHTML = cart.map(item => `
+                <div style="display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #f5f0e8;align-items:center;">
+                    <img src="${item.img}" style="width:60px;height:60px;object-fit:contain;background:#F5F0E8;border-radius:8px;" onerror="this.src='https://via.placeholder.com/60x60/C4A265/FFFFFF?text=MAS'">
+                    <div style="flex:1;">
+                        <strong style="font-size:14px;">${item.name}</strong>
+                        <p style="color:#C4A265;font-weight:700;font-size:14px;">Rs. ${(item.price * item.qty).toLocaleString()}</p>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:6px;">
+                        <button onclick="updateCartQty(${item.id},-1)" style="width:28px;height:28px;border-radius:50%;border:1px solid #ddd;background:white;cursor:pointer;">−</button>
+                        <span>${item.qty}</span>
+                        <button onclick="updateCartQty(${item.id},1)" style="width:28px;height:28px;border-radius:50%;border:1px solid #ddd;background:white;cursor:pointer;">+</button>
+                    </div>
+                    <button onclick="removeFromCart(${item.id})" style="color:#e53935;cursor:pointer;background:none;border:none;font-size:16px;">✕</button>
+                </div>
+            `).join('');
+            
+            const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+            document.getElementById('cartTotalPrice').textContent = 'Rs. ' + total.toLocaleString();
+            footer.style.display = 'block';
+        }
+        
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Cart is empty!');
+                return;
+            }
+            window.location.href = 'checkout.html';
+        }
+        
+        // ===== TOAST =====
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+        
+        // ===== MOBILE MENU =====
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+        
+        // ===== INITIALIZE =====
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProductDetail();
+            updateCartBadge();
+            
+            window.addEventListener('scroll', () => {
+                const nav = document.getElementById('mainNav');
+                if (window.scrollY > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
