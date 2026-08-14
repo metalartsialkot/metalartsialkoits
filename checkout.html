@@ -11,7 +11,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <style>
-        :root { --gold:#C4A265; --gold-light:#D4B87A; --dark:#1A1815; --cream:#FAF7F2; --green:#1B5E20; --red:#E53935; --blue:#2196F3; }
+        :root { --gold:#C4A265; --gold-light:#D4B87A; --dark:#1A1815; --cream:#FAF7F2; --green:#1B5E20; --red:#E53935; }
         * { margin:0; padding:0; box-sizing:border-box; }
         body { font-family:'Inter',sans-serif; background:var(--cream); color:#2C2824; padding-top:90px; }
         
@@ -20,55 +20,71 @@
         .checkout-header p { font-size:10px; color:#D4C5B2; }
         
         .checkout-container { max-width:1100px; margin:0 auto; padding:20px; display:grid; grid-template-columns:1fr 400px; gap:25px; }
+        
         .form-section { background:white; border-radius:16px; padding:25px; border:1px solid rgba(196,162,101,0.2); }
-        .form-section h2 { font-family:'Cormorant Garamond',serif; font-size:22px; margin-bottom:20px; color:var(--dark); border-bottom:2px solid var(--gold); padding-bottom:10px; }
+        .form-section h2 { font-family:'Cormorant Garamond',serif; font-size:20px; margin-bottom:15px; color:var(--dark); border-bottom:2px solid var(--gold); padding-bottom:10px; }
+        
         .form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
         .form-group { margin-bottom:15px; }
         .form-group label { font-size:11px; font-weight:600; display:block; margin-bottom:5px; color:#333; }
         .form-group label .required { color:var(--red); }
         .form-group input, .form-group select, .form-group textarea { width:100%; padding:12px 14px; border:2px solid #E8E0D5; border-radius:12px; font-size:13px; font-family:'Inter',sans-serif; background:white; transition:all 0.3s; }
-        .form-group input:focus, .form-group select:focus { border-color:var(--gold); outline:none; box-shadow:0 0 0 3px rgba(196,162,101,0.15); }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color:var(--gold); outline:none; box-shadow:0 0 0 3px rgba(196,162,101,0.15); }
         
-        .phone-group { display:flex; gap:8px; }
-        .phone-code { width:85px; padding:12px; border:2px solid #E8E0D5; border-radius:12px; background:#F5F0E8; text-align:center; font-weight:600; }
-        
-        .payment-methods { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
-        .payment-option { padding:15px; border:2px solid #E8E0D5; border-radius:12px; text-align:center; cursor:pointer; transition:all 0.3s; }
+        .payment-methods { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+        .payment-option { padding:18px; border:2px solid #E8E0D5; border-radius:12px; text-align:center; cursor:pointer; transition:all 0.3s; }
         .payment-option.selected { border-color:var(--gold); background:rgba(196,162,101,0.1); }
-        .payment-option i { font-size:22px; display:block; margin-bottom:8px; }
+        .payment-option i { font-size:24px; display:block; margin-bottom:8px; }
         .payment-option span { font-size:10px; font-weight:600; }
         
-        .bank-details { display:none; background:#F5F0E8; padding:15px; border-radius:12px; margin-top:10px; }
+        .advance-options { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:10px; }
+        .advance-option { padding:12px; border:2px solid #E8E0D5; border-radius:12px; text-align:center; cursor:pointer; transition:all 0.3s; }
+        .advance-option.selected { border-color:var(--gold); background:rgba(196,162,101,0.1); }
+        .advance-option .percentage { font-size:16px; font-weight:800; color:var(--gold); }
+        .advance-option .discount { font-size:10px; color:var(--green); font-weight:600; }
+        
+        .bank-details { display:none; background:#F5F0E8; padding:20px; border-radius:12px; margin-top:10px; border:2px solid var(--gold); }
         .bank-details.show { display:block; }
-        .card-details { display:none; margin-top:10px; }
-        .card-details.show { display:block; }
+        .bank-details h4 { color:var(--gold); font-size:13px; margin-bottom:8px; }
+        .bank-details p { font-size:12px; line-height:1.8; color:#333; }
+        .bank-details .warning { color:var(--red); font-size:10px; margin-top:8px; }
         
         .coupon-row { display:flex; gap:10px; }
-        .coupon-row input { flex:1; padding:12px; border:2px solid #E8E0D5; border-radius:12px; }
-        .coupon-btn { padding:12px 20px; background:var(--gold); color:white; border:none; border-radius:12px; cursor:pointer; font-weight:600; }
+        .coupon-row input { flex:1; padding:12px; border:2px solid #E8E0D5; border-radius:12px; font-size:13px; }
+        .coupon-btn { padding:12px 20px; background:var(--gold); color:white; border:none; border-radius:12px; cursor:pointer; font-weight:600; white-space:nowrap; }
         
         .currency-selector { display:flex; gap:8px; flex-wrap:wrap; }
         .currency-btn { padding:8px 15px; border-radius:50px; border:2px solid #E8E0D5; background:white; cursor:pointer; font-size:11px; font-weight:600; }
         .currency-btn.active { border-color:var(--gold); background:var(--gold); color:white; }
         
         .summary-section { background:white; border-radius:16px; padding:25px; border:1px solid rgba(196,162,101,0.2); height:fit-content; position:sticky; top:100px; }
+        .summary-section h3 { font-family:'Cormorant Garamond',serif; font-size:20px; margin-bottom:15px; }
         .summary-item { display:flex; gap:10px; padding:10px 0; border-bottom:1px solid #eee; align-items:center; }
         .summary-item img { width:50px; height:50px; object-fit:cover; border-radius:8px; background:#F5F0E8; }
         .summary-item-info { flex:1; }
         .summary-item-name { font-size:12px; font-weight:600; }
         .summary-item-qty { font-size:10px; color:#666; }
         .summary-item-price { font-weight:700; font-size:12px; color:var(--gold); }
+        
         .summary-totals { margin-top:15px; border-top:2px solid #eee; padding-top:15px; }
         .summary-row { display:flex; justify-content:space-between; font-size:13px; margin-bottom:8px; }
         .summary-row.total { font-size:18px; font-weight:800; color:var(--gold); border-top:2px solid #eee; padding-top:10px; }
+        .summary-row.advance { color:#C4A265; font-weight:600; }
+        .summary-row.remaining { color:#1B5E20; font-weight:600; }
         
         .place-order-btn { width:100%; padding:16px; background:linear-gradient(135deg,#25D366,#128C7E); color:white; border:none; border-radius:50px; font-weight:700; font-size:15px; cursor:pointer; margin-top:15px; }
+        .place-order-btn:hover { transform:translateY(-2px); box-shadow:0 10px 25px rgba(37,211,102,0.3); }
         
         .trust-badges { display:flex; gap:15px; justify-content:center; flex-wrap:wrap; margin-top:15px; }
         .trust-badge { font-size:9px; color:#666; text-align:center; }
         
+        .badge { padding:10px; border-radius:10px; margin-bottom:10px; text-align:center; font-size:11px; font-weight:700; }
+        .badge-azadi { background:#E8F5E9; color:#01411C; border:2px solid #01411C; }
+        .badge-advance { background:#FFF8E1; color:#C4A265; border:2px solid #C4A265; }
+        .badge-coupon { background:#E3F2FD; color:#2196F3; border:2px solid #2196F3; }
+        
         @media(max-width:900px){ .checkout-container{grid-template-columns:1fr} .summary-section{position:static} }
-        @media(max-width:600px){ .form-row{grid-template-columns:1fr} .payment-methods{grid-template-columns:1fr} body{padding-top:70px} }
+        @media(max-width:600px){ .form-row{grid-template-columns:1fr} .payment-methods{grid-template-columns:1fr} .advance-options{grid-template-columns:1fr} body{padding-top:70px} }
     </style>
 </head>
 <body>
@@ -78,6 +94,7 @@
     </div>
     
     <div class="checkout-container">
+        <!-- FORM SECTION -->
         <div class="form-section">
             <h2>📦 Shipping Information</h2>
             
@@ -92,11 +109,14 @@
                 </div>
             </div>
             
-            <div class="form-group">
-                <label>Phone Number <span class="required">*</span></label>
-                <div class="phone-group">
-                    <div class="phone-code" id="phoneCode">+92</div>
-                    <input type="tel" id="coPhone" placeholder="300 1234567" style="flex:1;padding:12px;border:2px solid #E8E0D5;border-radius:12px;">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Phone Number <span class="required">*</span></label>
+                    <input type="tel" id="coPhone" placeholder="0300 1234567">
+                </div>
+                <div class="form-group">
+                    <label>WhatsApp Number</label>
+                    <input type="tel" id="coWhatsApp" placeholder="Same as phone">
                 </div>
             </div>
             
@@ -108,11 +128,11 @@
             <div class="form-row">
                 <div class="form-group">
                     <label>Country <span class="required">*</span></label>
-                    <select id="coCountry" onchange="onCountryChange()"><option value="">🌍 Select Country</option></select>
+                    <select id="coCountry" onchange="onCountryChange()"><option value="">Select Country</option></select>
                 </div>
                 <div class="form-group">
                     <label>State / Province</label>
-                    <select id="coState"><option value="">📍 Select State</option></select>
+                    <select id="coState"><option value="">Select State</option></select>
                 </div>
             </div>
             
@@ -135,40 +155,42 @@
                 </div>
                 <div class="payment-option" onclick="selectPayment(this, 'Bank Transfer')">
                     <i class="fas fa-university" style="color:#C4A265;"></i>
-                    <span>Bank Transfer</span>
-                </div>
-                <div class="payment-option" onclick="selectPayment(this, 'Card')">
-                    <i class="fas fa-credit-card" style="color:#2196F3;"></i>
-                    <span>Credit/Debit Card</span>
+                    <span>Bank Transfer (Advance)</span>
                 </div>
             </div>
             
+            <!-- ADVANCE PAYMENT OPTIONS -->
+            <div id="advanceSection" style="display:none;margin-top:15px;">
+                <h3 style="font-size:13px;font-weight:700;margin-bottom:8px;color:#C4A265;">🎉 ADVANCE PAYMENT DISCOUNT!</h3>
+                <div class="advance-options">
+                    <div class="advance-option selected" onclick="selectAdvance(this, 0)">
+                        <div class="percentage">0%</div>
+                        <div style="font-size:9px;color:#666;">Full COD</div>
+                        <div class="discount">No Discount</div>
+                    </div>
+                    <div class="advance-option" onclick="selectAdvance(this, 10)">
+                        <div class="percentage">10%</div>
+                        <div style="font-size:9px;color:#666;">Advance</div>
+                        <div class="discount">GET 10% OFF!</div>
+                    </div>
+                    <div class="advance-option" onclick="selectAdvance(this, 20)">
+                        <div class="percentage">20%</div>
+                        <div style="font-size:9px;color:#666;">Advance</div>
+                        <div class="discount">GET 20% OFF!</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- BANK DETAILS -->
             <div class="bank-details" id="bankDetails">
-                <strong style="font-size:12px;">🏦 Bank Transfer Details:</strong>
-                <p style="font-size:11px;margin-top:5px;">Bank: Meezan Bank<br>Account Title: Metal Art Sialkot<br>Account #: 1234-5678-9012-3456<br>IBAN: PK00MEZN0000001234567890</p>
-            </div>
-            
-            <div class="card-details" id="cardDetails">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Card Number</label>
-                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456">
-                    </div>
-                    <div class="form-group">
-                        <label>Expiry Date</label>
-                        <input type="text" id="cardExpiry" placeholder="MM/YY">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>CVV</label>
-                        <input type="password" id="cardCVV" placeholder="***" maxlength="4">
-                    </div>
-                    <div class="form-group">
-                        <label>Card Holder Name</label>
-                        <input type="text" id="cardName" placeholder="AHMED KHAN">
-                    </div>
-                </div>
+                <h4>🏦 Faysal Bank Details:</h4>
+                <p>
+                    <strong>Account Title:</strong> Metal Art Sialkot<br>
+                    <strong>Account #:</strong> 3043499000009018<br>
+                    <strong>IBAN:</strong> PK29FAYS3043499000009018<br>
+                    <strong>Bank:</strong> Faysal Bank
+                </p>
+                <p class="warning">⚠️ Send advance payment then share screenshot on WhatsApp: 0309-9915777</p>
             </div>
             
             <h2 style="margin-top:25px;">🎫 Coupon Code</h2>
@@ -185,80 +207,92 @@
                 <button class="currency-btn" onclick="setCurrency('GBP', this)">🇬🇧 GBP</button>
                 <button class="currency-btn" onclick="setCurrency('EUR', this)">🇪🇺 EUR</button>
                 <button class="currency-btn" onclick="setCurrency('AED', this)">🇦🇪 AED</button>
-                <button class="currency-btn" onclick="setCurrency('SAR', this)">🇸🇦 SAR</button>
             </div>
         </div>
         
+        <!-- SUMMARY SECTION -->
         <div class="summary-section">
-            <h3 style="font-family:'Cormorant Garamond',serif;font-size:20px;">🛍️ Order Summary</h3>
-            <div id="offerBadge" style="display:none;background:#E8F5E9;padding:10px;border-radius:10px;margin-bottom:10px;text-align:center;border:2px solid #01411C;"><strong style="color:#01411C;">🇵🇰 AZADI OFFER!</strong></div>
-            <div id="couponBadge" style="display:none;background:#FFF8E1;padding:10px;border-radius:10px;margin-bottom:10px;text-align:center;border:2px solid #C4A265;"><strong style="color:#C4A265;">🎫 COUPON APPLIED!</strong></div>
+            <h3>🛍️ Order Summary</h3>
+            <div id="offerBadge" class="badge badge-azadi" style="display:none;">🇵🇰 AZADI OFFER APPLIED!</div>
+            <div id="advanceBadge" class="badge badge-advance" style="display:none;">🎉 ADVANCE DISCOUNT APPLIED!</div>
+            <div id="couponBadge" class="badge badge-coupon" style="display:none;">🎫 COUPON APPLIED!</div>
             <div id="summaryItems"></div>
             <div class="summary-totals" id="summaryTotals"></div>
-            <div id="deliveryTime" style="font-size:11px;color:#1B5E20;margin-top:10px;text-align:center;"></div>
             <button class="place-order-btn" onclick="placeOrder()">✅ Place Order</button>
             <div class="trust-badges">
                 <span class="trust-badge">🔒 Secure<br>Checkout</span>
                 <span class="trust-badge">✅ 5-Year<br>Warranty</span>
                 <span class="trust-badge">🚚 Free<br>Shipping</span>
-                <span class="trust-badge">💯 Satisfaction<br>Guaranteed</span>
             </div>
         </div>
     </div>
     
     <script>
-        const countriesData = [
-            {name:"Pakistan", flag:"🇵🇰", code:"+92", states:["Punjab","Sindh","KPK","Balochistan","Islamabad"], delivery:"2-5 days"},
-            {name:"United States", flag:"🇺🇸", code:"+1", states:["California","New York","Texas","Florida"], delivery:"7-10 days"},
-            {name:"United Kingdom", flag:"🇬🇧", code:"+44", states:["England","Scotland","Wales"], delivery:"5-7 days"},
-            {name:"UAE", flag:"🇦🇪", code:"+971", states:["Dubai","Abu Dhabi","Sharjah"], delivery:"3-5 days"},
-            {name:"Saudi Arabia", flag:"🇸🇦", code:"+966", states:["Riyadh","Jeddah","Makkah"], delivery:"3-5 days"},
-            {name:"Canada", flag:"🇨🇦", code:"+1", states:["Ontario","Quebec","BC"], delivery:"7-10 days"},
-            {name:"Australia", flag:"🇦🇺", code:"+61", states:["NSW","Victoria","Queensland"], delivery:"7-10 days"},
-            {name:"Qatar", flag:"🇶🇦", code:"+974", states:["Doha"], delivery:"3-5 days"},
-            {name:"Kuwait", flag:"🇰🇼", code:"+965", states:["Kuwait City"], delivery:"3-5 days"},
-            {name:"Oman", flag:"🇴🇲", code:"+968", states:["Muscat"], delivery:"3-5 days"},
-            {name:"Bahrain", flag:"🇧🇭", code:"+973", states:["Manama"], delivery:"3-5 days"},
-            {name:"Germany", flag:"🇩🇪", code:"+49", states:["Bavaria","Berlin"], delivery:"5-7 days"},
-            {name:"France", flag:"🇫🇷", code:"+33", states:["Paris"], delivery:"5-7 days"},
-            {name:"India", flag:"🇮🇳", code:"+91", states:["Maharashtra","Delhi"], delivery:"5-7 days"},
-            {name:"Turkey", flag:"🇹🇷", code:"+90", states:["Istanbul","Ankara"], delivery:"5-7 days"}
-        ];
+        // ===== CONFIGURATION =====
+        const BANK_DETAILS = {
+            accountTitle: 'Metal Art Sialkot',
+            accountNumber: '3043499000009018',
+            iban: 'PK29FAYS3043499000009018',
+            bank: 'Faysal Bank'
+        };
         
-        const shippingRates = {'Pakistan':0,'UAE':2000,'Saudi Arabia':2000,'Qatar':2000,'Kuwait':2000,'Oman':2000,'Bahrain':2000,'United States':5000,'Canada':5000,'United Kingdom':4000,'Germany':4000,'France':4000,'Australia':5000,'India':2500,'Turkey':3000};
+        const countriesData = [
+            {name:"Pakistan", flag:"🇵🇰", states:["Punjab","Sindh","KPK","Balochistan","Islamabad"]},
+            {name:"United States", flag:"🇺🇸", states:["California","New York","Texas","Florida"]},
+            {name:"United Kingdom", flag:"🇬🇧", states:["England","Scotland","Wales"]},
+            {name:"UAE", flag:"🇦🇪", states:["Dubai","Abu Dhabi","Sharjah"]},
+            {name:"Saudi Arabia", flag:"🇸🇦", states:["Riyadh","Jeddah","Makkah"]},
+            {name:"Canada", flag:"🇨🇦", states:["Ontario","Quebec","BC"]},
+            {name:"Australia", flag:"🇦🇺", states:["NSW","Victoria","Queensland"]},
+            {name:"Qatar", flag:"🇶🇦", states:["Doha"]},
+            {name:"Kuwait", flag:"🇰🇼", states:["Kuwait City"]},
+            {name:"Oman", flag:"🇴🇲", states:["Muscat"]},
+            {name:"Bahrain", flag:"🇧🇭", states:["Manama"]},
+            {name:"Germany", flag:"🇩🇪", states:["Bavaria","Berlin"]},
+            {name:"France", flag:"🇫🇷", states:["Paris"]},
+            {name:"India", flag:"🇮🇳", states:["Maharashtra","Delhi"]},
+            {name:"Turkey", flag:"🇹🇷", states:["Istanbul","Ankara"]}
+        ];
         
         let cart = JSON.parse(localStorage.getItem('metalCart') || '[]');
         let currentCurrency = 'PKR';
         let selectedPayment = 'COD';
+        let advancePercentage = 0;
         let couponDiscount = 0;
-        let shippingCost = 0;
-        const rates = {PKR:1,USD:0.0036,GBP:0.0028,EUR:0.0033,AED:0.013,SAR:0.014};
-        const symbols = {PKR:'Rs.',USD:'$',GBP:'£',EUR:'€',AED:'AED',SAR:'SAR'};
+        const rates = {PKR:1,USD:0.0036,GBP:0.0028,EUR:0.0033,AED:0.013};
+        const symbols = {PKR:'Rs.',USD:'$',GBP:'£',EUR:'€',AED:'AED'};
         
+        // ===== LOAD COUNTRIES =====
         function loadCountries() {
-            document.getElementById('coCountry').innerHTML = '<option value="">🌍 Select Country</option>' + countriesData.map(c => `<option value="${c.name}">${c.flag} ${c.name}</option>`).join('');
+            document.getElementById('coCountry').innerHTML = '<option value="">Select Country</option>' + countriesData.map(c => `<option value="${c.name}">${c.flag} ${c.name}</option>`).join('');
         }
         
         function onCountryChange() {
             const country = countriesData.find(c => c.name === document.getElementById('coCountry').value);
             if (country) {
-                document.getElementById('phoneCode').textContent = country.code;
-                shippingCost = shippingRates[country.name] || 0;
-                document.getElementById('deliveryTime').textContent = `🚚 Estimated Delivery: ${country.delivery}`;
-                const stateSelect = document.getElementById('coState');
-                stateSelect.innerHTML = '<option value="">📍 Select State</option>' + country.states.map(s => `<option value="${s}">${s}</option>`).join('');
+                document.getElementById('coState').innerHTML = '<option value="">Select State</option>' + country.states.map(s => `<option value="${s}">${s}</option>`).join('');
             }
-            renderSummary();
         }
         
+        // ===== PAYMENT =====
         function selectPayment(el, method) {
             selectedPayment = method;
             document.querySelectorAll('.payment-option').forEach(p => p.classList.remove('selected'));
             el.classList.add('selected');
             document.getElementById('bankDetails').classList.toggle('show', method === 'Bank Transfer');
-            document.getElementById('cardDetails').classList.toggle('show', method === 'Card');
+            document.getElementById('advanceSection').style.display = method === 'Bank Transfer' ? 'block' : 'none';
+            if (method === 'COD') advancePercentage = 0;
+            renderSummary();
         }
         
+        function selectAdvance(el, percentage) {
+            advancePercentage = percentage;
+            document.querySelectorAll('.advance-option').forEach(a => a.classList.remove('selected'));
+            el.classList.add('selected');
+            renderSummary();
+        }
+        
+        // ===== COUPON =====
         function applyCoupon() {
             const code = document.getElementById('couponCode').value.trim();
             const promos = JSON.parse(localStorage.getItem('metalPromoCodes') || '[]');
@@ -270,11 +304,12 @@
                 document.getElementById('couponBadge').style.display = 'block';
                 renderSummary();
             } else {
-                document.getElementById('couponMessage').textContent = '❌ Invalid coupon';
+                document.getElementById('couponMessage').textContent = '❌ Invalid or expired coupon';
                 document.getElementById('couponMessage').style.color = 'red';
             }
         }
         
+        // ===== CURRENCY =====
         function setCurrency(currency, el) {
             currentCurrency = currency;
             document.querySelectorAll('.currency-btn').forEach(b => b.classList.remove('active'));
@@ -284,15 +319,19 @@
         
         function formatPrice(pkr) { return symbols[currentCurrency] + ' ' + (pkr * rates[currentCurrency]).toFixed(2); }
         
+        // ===== RENDER SUMMARY =====
         function renderSummary() {
             const container = document.getElementById('summaryItems');
             const totalsDiv = document.getElementById('summaryTotals');
+            
             if (cart.length === 0) { container.innerHTML = '<p style="text-align:center;color:#999;">Cart is empty</p>'; totalsDiv.innerHTML = ''; return; }
             
             container.innerHTML = cart.map(item => `<div class="summary-item"><img src="${item.img}" onerror="this.src='https://via.placeholder.com/50x50/C4A265/FFFFFF?text=MAS'"><div class="summary-item-info"><div class="summary-item-name">${item.name}</div><div class="summary-item-qty">Qty: ${item.qty}</div></div><div class="summary-item-price">${formatPrice(item.price * item.qty)}</div></div>`).join('');
             
             let subtotal = 0;
             cart.forEach(item => { subtotal += item.price * item.qty; });
+            
+            // Azadi Discount
             let azadiDiscount = 0;
             let hasMashaAllah = cart.some(i => i.id === 1);
             let hasBismillah = cart.some(i => i.id === 2);
@@ -300,24 +339,44 @@
                 const pairs = Math.min(cart.find(i=>i.id===1)?.qty||0, cart.find(i=>i.id===2)?.qty||0);
                 azadiDiscount = pairs * 2000;
             }
+            
+            // Advance Discount
+            const advanceDiscount = advancePercentage > 0 ? (subtotal * advancePercentage / 100) : 0;
+            
+            // Coupon Discount
             const couponAmount = couponDiscount > 0 ? (subtotal * couponDiscount / 100) : 0;
-            const total = subtotal - azadiDiscount - couponAmount + shippingCost;
+            
+            // Final Total
+            const total = subtotal - azadiDiscount - advanceDiscount - couponAmount;
+            
+            // Advance Amount
+            const advanceAmount = advancePercentage > 0 ? (total * advancePercentage / 100) : 0;
+            const remainingAmount = total - advanceAmount;
+            
+            // Badges
+            document.getElementById('offerBadge').style.display = azadiDiscount > 0 ? 'block' : 'none';
+            document.getElementById('advanceBadge').style.display = advanceDiscount > 0 ? 'block' : 'none';
             
             totalsDiv.innerHTML = `
                 <div class="summary-row"><span>Subtotal:</span><span>${formatPrice(subtotal)}</span></div>
-                ${azadiDiscount > 0 ? `<div class="summary-row" style="color:green;"><span>Azadi:</span><span>-${formatPrice(azadiDiscount)}</span></div>` : ''}
-                ${couponAmount > 0 ? `<div class="summary-row" style="color:#C4A265;"><span>Coupon:</span><span>-${formatPrice(couponAmount)}</span></div>` : ''}
-                <div class="summary-row"><span>Shipping:</span><span style="color:${shippingCost===0?'green':'inherit'};">${shippingCost===0?'FREE':formatPrice(shippingCost)}</span></div>
+                ${azadiDiscount > 0 ? `<div class="summary-row" style="color:green;"><span>🇵🇰 Azadi Discount:</span><span>-${formatPrice(azadiDiscount)}</span></div>` : ''}
+                ${advanceDiscount > 0 ? `<div class="summary-row" style="color:#C4A265;"><span>🎉 Advance (${advancePercentage}%):</span><span>-${formatPrice(advanceDiscount)}</span></div>` : ''}
+                ${couponAmount > 0 ? `<div class="summary-row" style="color:#2196F3;"><span>🎫 Coupon (${couponDiscount}%):</span><span>-${formatPrice(couponAmount)}</span></div>` : ''}
+                <div class="summary-row"><span>Shipping:</span><span style="color:green;">FREE</span></div>
                 <div class="summary-row total"><span>Total:</span><span>${formatPrice(total)}</span></div>
+                ${advanceAmount > 0 ? `
+                <div class="summary-row advance"><span>Advance to Pay (Bank):</span><span>${formatPrice(advanceAmount)}</span></div>
+                <div class="summary-row remaining"><span>Remaining (COD):</span><span>${formatPrice(remainingAmount)}</span></div>
+                ` : ''}
             `;
         }
         
+        // ===== PLACE ORDER =====
         async function placeOrder() {
             const name = document.getElementById('coName').value.trim();
             const email = document.getElementById('coEmail').value.trim();
             const phone = document.getElementById('coPhone').value.trim();
-            const phoneCode = document.getElementById('phoneCode').textContent;
-            const fullPhone = phoneCode + ' ' + phone;
+            const whatsapp = document.getElementById('coWhatsApp').value.trim() || phone;
             const address = document.getElementById('coAddress').value.trim();
             const country = document.getElementById('coCountry').value;
             const state = document.getElementById('coState').value;
@@ -329,6 +388,7 @@
             
             let subtotal = 0;
             cart.forEach(item => { subtotal += item.price * item.qty; });
+            
             let azadiDiscount = 0;
             let hasMashaAllah = cart.some(i => i.id === 1);
             let hasBismillah = cart.some(i => i.id === 2);
@@ -336,13 +396,18 @@
                 const pairs = Math.min(cart.find(i=>i.id===1)?.qty||0, cart.find(i=>i.id===2)?.qty||0);
                 azadiDiscount = pairs * 2000;
             }
+            
+            const advanceDiscount = advancePercentage > 0 ? (subtotal * advancePercentage / 100) : 0;
             const couponAmount = couponDiscount > 0 ? (subtotal * couponDiscount / 100) : 0;
-            const total = subtotal - azadiDiscount - couponAmount + shippingCost;
+            const total = subtotal - azadiDiscount - advanceDiscount - couponAmount;
+            const advanceAmount = advancePercentage > 0 ? (total * advancePercentage / 100) : 0;
+            const remainingAmount = total - advanceAmount;
+            
             const orderId = 'MAS-' + Date.now().toString().slice(-8);
             const invoiceNumber = 'INV-' + Math.floor(Math.random() * 100000);
             const promoCode = 'WELCOME5-' + Math.random().toString(36).substring(2, 8).toUpperCase();
             
-            const order = {orderId, invoiceNumber, date:new Date().toLocaleString(), name, email, phone:fullPhone, address, country, state, city, zip, items:cart.slice(), subtotal, azadiDiscount, couponDiscount, couponAmount, shippingCost, total, promoCode, paymentMethod:selectedPayment, status:'Pending'};
+            const order = {orderId, invoiceNumber, date:new Date().toLocaleString(), name, email, phone, whatsapp, address, country, state, city, zip, items:cart.slice(), subtotal, azadiDiscount, advancePercentage, advanceDiscount, couponDiscount, couponAmount, advanceAmount, remainingAmount, total, promoCode, paymentMethod:selectedPayment, status:'Pending'};
             
             const orders = JSON.parse(localStorage.getItem('metalOrders') || '[]');
             orders.push(order);
@@ -354,12 +419,14 @@
             
             localStorage.setItem('customerInfo', JSON.stringify({name, email, phone, address, country, city, zip}));
             
-            const adminMsg = `🔔 NEW ORDER!\n\nOrder: ${orderId}\nInvoice: ${invoiceNumber}\n\nCustomer: ${name}\nPhone: ${fullPhone}\nEmail: ${email}\nAddress: ${address}, ${city}, ${state}, ${zip}, ${country}\n\nItems:\n${cart.map(i => `• ${i.name} x${i.qty} = Rs. ${(i.price*i.qty).toLocaleString()}`).join('\n')}\n\nSubtotal: Rs. ${subtotal.toLocaleString()}\n${azadiDiscount > 0 ? `Azadi: -Rs. ${azadiDiscount.toLocaleString()}\n` : ''}${couponAmount > 0 ? `Coupon: -Rs. ${couponAmount.toLocaleString()}\n` : ''}Shipping: ${shippingCost === 0 ? 'FREE' : 'Rs. ' + shippingCost.toLocaleString()}\nTOTAL: Rs. ${total.toLocaleString()}\nPayment: ${selectedPayment}\nPromo: ${promoCode}`;
+            const bankMsg = `\n\n🏦 BANK DETAILS:\nAccount Title: ${BANK_DETAILS.accountTitle}\nAccount #: ${BANK_DETAILS.accountNumber}\nIBAN: ${BANK_DETAILS.iban}\nBank: ${BANK_DETAILS.bank}`;
+            
+            const adminMsg = `🔔 NEW ORDER!\n\nOrder: ${orderId}\nInvoice: ${invoiceNumber}\n\nCustomer: ${name}\nPhone: ${phone}\nEmail: ${email}\nAddress: ${address}, ${city}, ${state}, ${zip}, ${country}\n\nItems:\n${cart.map(i => `• ${i.name} x${i.qty} = Rs. ${(i.price*i.qty).toLocaleString()}`).join('\n')}\n\nSubtotal: Rs. ${subtotal.toLocaleString()}\n${azadiDiscount > 0 ? `Azadi: -Rs. ${azadiDiscount.toLocaleString()}\n` : ''}${advanceDiscount > 0 ? `Advance Discount (${advancePercentage}%): -Rs. ${advanceDiscount.toLocaleString()}\n` : ''}${couponAmount > 0 ? `Coupon: -Rs. ${couponAmount.toLocaleString()}\n` : ''}TOTAL: Rs. ${total.toLocaleString()}\nPayment: ${selectedPayment}\n${advanceAmount > 0 ? `Advance: Rs. ${advanceAmount.toLocaleString()}\nRemaining COD: Rs. ${remainingAmount.toLocaleString()}\n${bankMsg}\n` : ''}\nPromo: ${promoCode}`;
             window.open(`https://wa.me/923099915777?text=${encodeURIComponent(adminMsg)}`, '_blank');
             
             const custPhone = phone.replace(/\D/g, '');
             if (custPhone.length >= 10) {
-                const custMsg = `✅ ORDER CONFIRMED!\n\nDear ${name},\n\nOrder: ${orderId}\nTotal: Rs. ${total.toLocaleString()}\nPayment: ${selectedPayment}\n\n🎫 PROMO: ${promoCode}\n5% OFF next order (30 days)\n\nTrack your order at:\nmetalartsialkot.com\n\n📞 0309-9915777`;
+                const custMsg = `✅ ORDER CONFIRMED!\n\nDear ${name},\n\nOrder: ${orderId}\nTotal: Rs. ${total.toLocaleString()}\nPayment: ${selectedPayment}\n${advanceAmount > 0 ? `\nAdvance to Pay: Rs. ${advanceAmount.toLocaleString()}\nRemaining COD: Rs. ${remainingAmount.toLocaleString()}\n${bankMsg}\n` : ''}\n🎫 PROMO: ${promoCode}\n5% OFF next order (30 days)\n\nMetal Art Sialkot\n📞 0309-9915777`;
                 window.open(`https://wa.me/${custPhone}?text=${encodeURIComponent(custMsg)}`, '_blank');
             }
             
@@ -368,18 +435,20 @@
             } catch(e) {}
             
             try {
-                await fetch('https://formspree.io/f/mnpazgbe', {method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body:JSON.stringify({_subject:`✅ Order Confirmed: ${orderId}`, email:email, _replyto:'info@metalartsialkot.com', message:`Dear ${name},\n\nThank you for your order!\n\nOrder: ${orderId}\nInvoice: ${invoiceNumber}\nTotal: Rs. ${total.toLocaleString()}\nPayment: ${selectedPayment}\n\n🎫 PROMO: ${promoCode}\n5% OFF next order (30 days)\n\n${address}, ${city}, ${state}, ${zip}, ${country}\n\nMetal Art Sialkot\n📞 0309-9915777\n🌐 metalartsialkot.com`})});
+                await fetch('https://formspree.io/f/mnpazgbe', {method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body:JSON.stringify({_subject:`✅ Order Confirmed: ${orderId}`, email:email, _replyto:'info@metalartsialkot.com', message:`Dear ${name},\n\nThank you for your order!\n\nOrder: ${orderId}\nTotal: Rs. ${total.toLocaleString()}\nPayment: ${selectedPayment}\n${advanceAmount > 0 ? `\nAdvance: Rs. ${advanceAmount.toLocaleString()}\nRemaining COD: Rs. ${remainingAmount.toLocaleString()}\n${bankMsg}\n` : ''}\n🎫 PROMO: ${promoCode}\n5% OFF next order (30 days)\n\nMetal Art Sialkot\n📞 0309-9915777`})});
             } catch(e) {}
             
             cart = [];
             localStorage.setItem('metalCart', JSON.stringify(cart));
-            alert(`✅ ORDER PLACED!\n\nOrder ID: ${orderId}\nPromo: ${promoCode}\n\nTrack your order on our website!`);
+            
+            alert(`✅ ORDER PLACED!\n\nOrder ID: ${orderId}\nTotal: Rs. ${total.toLocaleString()}\n${advanceAmount > 0 ? `Advance: Rs. ${advanceAmount.toLocaleString()}\n` : ''}Promo: ${promoCode}`);
             window.location.href = 'index.html';
         }
         
         document.addEventListener('DOMContentLoaded', () => {
             loadCountries();
             renderSummary();
+            
             const saved = JSON.parse(localStorage.getItem('customerInfo') || 'null');
             if (saved) {
                 document.getElementById('coName').value = saved.name || '';
