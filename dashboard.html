@@ -23,484 +23,153 @@
             --blue: #2196F3;
             --orange: #FF9800;
         }
-        
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--cream); color: #2C2824; overflow-x: hidden; }
         
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--cream);
-            color: #2C2824;
-            overflow-x: hidden;
-        }
+        .dashboard-container { display: flex; min-height: 100vh; }
         
-        .dashboard-container {
-            display: flex;
-            min-height: 100vh;
-        }
+        .sidebar { width: 260px; background: linear-gradient(180deg, #1A1815, #2C2824); color: white; position: fixed; top: 0; left: 0; height: 100vh; z-index: 100; display: flex; flex-direction: column; }
+        .sidebar-header { padding: 20px; text-align: center; border-bottom: 1px solid rgba(196,162,101,0.2); }
+        .sidebar-header img { width: 55px; height: 55px; border-radius: 10px; border: 2px solid var(--gold); object-fit: contain; background: #F5F0E8; }
+        .sidebar-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--gold); margin-top: 8px; }
+        .sidebar-header p { font-size: 8px; color: #8B7355; letter-spacing: 2px; }
         
-        /* ===== SIDEBAR ===== */
-        .sidebar {
-            width: 260px;
-            background: linear-gradient(180deg, #1A1815, #2C2824);
-            color: white;
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100vh;
-            z-index: 100;
-            transition: all 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
+        .sidebar-nav { flex: 1; padding: 15px 10px; overflow-y: auto; }
+        .sidebar-nav a { display: flex; align-items: center; gap: 10px; padding: 11px 14px; color: #D4C5B2; text-decoration: none; font-size: 11px; font-weight: 500; border-radius: 8px; margin-bottom: 4px; cursor: pointer; transition: all 0.3s; }
+        .sidebar-nav a:hover, .sidebar-nav a.active { background: rgba(196,162,101,0.15); color: var(--gold); }
+        .sidebar-nav a i { width: 18px; text-align: center; font-size: 13px; }
         
-        .sidebar-header {
-            padding: 20px;
-            text-align: center;
-            border-bottom: 1px solid rgba(196,162,101,0.2);
-        }
+        .sidebar-footer { padding: 12px; border-top: 1px solid rgba(196,162,101,0.2); }
         
-        .sidebar-header img {
-            width: 60px;
-            height: 60px;
-            border-radius: 12px;
-            border: 2px solid var(--gold);
-            margin-bottom: 10px;
-        }
+        .main-content { flex: 1; margin-left: 260px; padding: 20px; }
+        .dashboard-header { background: white; border-radius: 14px; padding: 18px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 3px 15px rgba(0,0,0,0.05); }
+        .dashboard-header h1 { font-family: 'Cormorant Garamond', serif; font-size: 24px; }
+        .user-info { display: flex; align-items: center; gap: 10px; }
+        .user-avatar { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, #C4A265, #D4B87A); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 16px; }
         
-        .sidebar-header h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 20px;
-            color: var(--gold);
-        }
-        
-        .sidebar-header p {
-            font-size: 9px;
-            color: #8B7355;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-        
-        .sidebar-nav {
-            flex: 1;
-            padding: 20px 10px;
-            overflow-y: auto;
-        }
-        
-        .sidebar-nav a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 13px 15px;
-            color: #D4C5B2;
-            text-decoration: none;
-            font-size: 12px;
-            font-weight: 500;
-            border-radius: 10px;
-            margin-bottom: 5px;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        
-        .sidebar-nav a:hover,
-        .sidebar-nav a.active {
-            background: rgba(196,162,101,0.15);
-            color: var(--gold);
-        }
-        
-        .sidebar-nav a i {
-            width: 20px;
-            text-align: center;
-            font-size: 14px;
-        }
-        
-        .sidebar-footer {
-            padding: 15px;
-            border-top: 1px solid rgba(196,162,101,0.2);
-        }
-        
-        /* ===== MAIN CONTENT ===== */
-        .main-content {
-            flex: 1;
-            margin-left: 260px;
-            padding: 20px;
-        }
-        
-        .dashboard-header {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-        }
-        
-        .dashboard-header h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 28px;
-            color: var(--dark);
-        }
-        
-        .dashboard-header .user-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #C4A265, #D4B87A);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-        }
-        
-        /* ===== STATS CARDS ===== */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        
-        .stat-card {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            transition: all 0.3s;
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        
-        .stat-card-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 15px;
-        }
-        
-        .stat-icon {
-            width: 45px;
-            height: 45px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-        }
-        
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 18px; }
+        .stat-card { background: white; border-radius: 12px; padding: 18px; box-shadow: 0 3px 15px rgba(0,0,0,0.05); }
+        .stat-card-header { display: flex; align-items: center; gap: 10px; }
+        .stat-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
         .stat-icon.gold { background: rgba(196,162,101,0.15); color: var(--gold); }
         .stat-icon.green { background: #E8F5E9; color: var(--green); }
         .stat-icon.blue { background: #E3F2FD; color: var(--blue); }
         .stat-icon.orange { background: #FFF3E0; color: var(--orange); }
+        .stat-number { font-size: 24px; font-weight: 800; }
+        .stat-label { font-size: 9px; color: #666; text-transform: uppercase; letter-spacing: 1px; }
         
-        .stat-number {
-            font-size: 28px;
-            font-weight: 800;
-            color: var(--dark);
-        }
-        
-        .stat-label {
-            font-size: 11px;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        /* ===== TABLE ===== */
-        .table-container {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            overflow-x: auto;
-        }
-        
-        .table-title {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: var(--dark);
-        }
-        
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        
-        .data-table th {
-            padding: 12px 15px;
-            text-align: left;
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #666;
-            background: var(--cream-dark);
-            font-weight: 700;
-            white-space: nowrap;
-        }
-        
-        .data-table td {
-            padding: 12px 15px;
-            font-size: 12px;
-            border-bottom: 1px solid #f5f0e8;
-        }
-        
-        .data-table tr:hover {
-            background: #FAF7F2;
-        }
-        
-        .status-badge {
-            padding: 5px 12px;
-            border-radius: 50px;
-            font-size: 10px;
-            font-weight: 700;
-            display: inline-block;
-        }
-        
+        .table-container { background: white; border-radius: 12px; padding: 18px; box-shadow: 0 3px 15px rgba(0,0,0,0.05); overflow-x: auto; }
+        .table-title { font-size: 16px; font-weight: 700; margin-bottom: 12px; }
+        .data-table { width: 100%; border-collapse: collapse; }
+        .data-table th { padding: 10px 12px; text-align: left; font-size: 9px; text-transform: uppercase; color: #666; background: var(--cream-dark); font-weight: 700; white-space: nowrap; }
+        .data-table td { padding: 10px 12px; font-size: 11px; border-bottom: 1px solid #f5f0e8; }
+        .status-badge { padding: 4px 10px; border-radius: 50px; font-size: 9px; font-weight: 700; }
         .status-pending { background: #FFF3E0; color: #E65100; }
         .status-completed { background: #E8F5E9; color: #2E7D32; }
         .status-cancelled { background: #FFEBEE; color: #C62828; }
-        
-        .action-btn {
-            padding: 5px 10px;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            font-size: 10px;
-            font-weight: 600;
-            margin: 2px;
-            transition: all 0.2s;
-        }
-        
-        .action-btn:hover {
-            transform: scale(1.05);
-        }
-        
+        .action-btn { padding: 4px 8px; border-radius: 4px; border: none; cursor: pointer; font-size: 9px; font-weight: 600; margin: 1px; }
         .btn-complete { background: #4CAF50; color: white; }
         .btn-pending { background: #FF9800; color: white; }
         .btn-view { background: #2196F3; color: white; }
         .btn-delete { background: #E53935; color: white; }
         
-        /* ===== SECTION DISPLAY ===== */
-        .dashboard-section {
-            display: none;
-        }
+        .dashboard-section { display: none; }
+        .dashboard-section.active { display: block; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { 0% { opacity: 0; transform: translateY(15px); } 100% { opacity: 1; transform: translateY(0); } }
         
-        .dashboard-section.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
+        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; width: 45px; height: 45px; background: #25D366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; z-index: 998; box-shadow: 0 5px 20px rgba(37,211,102,0.4); text-decoration: none; animation: pulseWA 2s infinite; }
+        @keyframes pulseWA { 0%, 100% { box-shadow: 0 5px 20px rgba(37,211,102,0.4); } 50% { box-shadow: 0 5px 30px rgba(37,211,102,0.7); } }
         
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* ===== MOBILE RESPONSIVE ===== */
-        @media (max-width: 1024px) {
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        
+        @media (max-width: 1024px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) {
-            .sidebar {
-                width: 0;
-                overflow: hidden;
-            }
-            .sidebar.open {
-                width: 260px;
-            }
-            .main-content {
-                margin-left: 0;
-            }
-            .dashboard-header h1 {
-                font-size: 20px;
-            }
+            .sidebar { width: 0; overflow: hidden; }
+            .sidebar.open { width: 240px; }
+            .main-content { margin-left: 0; }
+            .dashboard-header h1 { font-size: 18px; }
             .stats-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-            .stat-number { font-size: 22px; }
+            .stat-number { font-size: 20px; }
         }
-        
-        @media (max-width: 480px) {
-            .stats-grid { grid-template-columns: 1fr; }
-            .dashboard-header {
-                flex-direction: column;
-                gap: 10px;
-            }
-        }
+        @media (max-width: 480px) { .stats-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
     <div class="dashboard-container">
-        <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <img src="images/logo.png" alt="Metal Art Sialkot" onerror="this.src='https://via.placeholder.com/200x200/C4A265/FFFFFF?text=MAS'">
+                <img src="images/logo.png" alt="Logo" onerror="this.onerror=null;this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2215%22 fill=%22%23C4A265%22/><text x=%2250%22 y=%2270%22 font-size=%2250%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22Georgia%22 font-weight=%22bold%22>M</text></svg>'">
                 <h2>Metal Art Sialkot</h2>
                 <p>Admin Dashboard</p>
             </div>
-            
             <nav class="sidebar-nav">
-                <a class="active" onclick="showSection('overview')" title="Overview">
-                    <i class="fas fa-chart-line"></i> Overview
-                </a>
-                <a onclick="showSection('orders')" title="Orders">
-                    <i class="fas fa-shopping-cart"></i> Orders
-                </a>
-                <a onclick="showSection('visitors')" title="Visitors">
-                    <i class="fas fa-users"></i> Visitors
-                </a>
-                <a onclick="showSection('promos')" title="Promo Codes">
-                    <i class="fas fa-ticket-alt"></i> Promo Codes
-                </a>
-                <a onclick="showSection('products')" title="Products">
-                    <i class="fas fa-box"></i> Products
-                </a>
-                <a onclick="showSection('reviews')" title="Reviews">
-                    <i class="fas fa-star"></i> Reviews
-                </a>
-                <a onclick="showSection('settings')" title="Settings">
-                    <i class="fas fa-cog"></i> Settings
-                </a>
+                <a class="active" onclick="showSection('overview')"><i class="fas fa-chart-line"></i> Overview</a>
+                <a onclick="showSection('orders')"><i class="fas fa-shopping-cart"></i> Orders</a>
+                <a onclick="showSection('visitors')"><i class="fas fa-users"></i> Visitors</a>
+                <a onclick="showSection('promos')"><i class="fas fa-ticket-alt"></i> Promo Codes</a>
+                <a onclick="showSection('products')"><i class="fas fa-box"></i> Products</a>
+                <a onclick="showSection('reviews')"><i class="fas fa-star"></i> Reviews</a>
+                <a onclick="showSection('settings')"><i class="fas fa-cog"></i> Settings</a>
             </nav>
-            
             <div class="sidebar-footer">
-                <button onclick="logout()" style="width:100%;padding:12px;background:var(--red);color:white;border:none;border-radius:10px;cursor:pointer;font-weight:600;font-size:12px;">
-                    <i class="fas fa-sign-out-alt"></i> Logout
-                </button>
+                <button onclick="logout()" style="width:100%;padding:11px;background:var(--red);color:white;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-size:11px;"><i class="fas fa-sign-out-alt"></i> Logout</button>
             </div>
         </aside>
         
-        <!-- Main Content -->
         <main class="main-content">
-            <!-- Header -->
             <header class="dashboard-header">
-                <div style="display:flex;align-items:center;gap:15px;">
-                    <button onclick="toggleSidebar()" style="display:none;background:none;border:none;font-size:24px;cursor:pointer;" id="menuToggle">☰</button>
+                <div style="display:flex;align-items:center;gap:12px;">
+                    <button onclick="toggleSidebar()" style="display:none;background:none;border:none;font-size:22px;cursor:pointer;" id="menuToggle">☰</button>
                     <h1 id="pageTitle">Dashboard Overview</h1>
                 </div>
                 <div class="user-info">
-                    <span id="userRole" style="font-size:11px;color:#666;"></span>
+                    <span id="userRole" style="font-size:10px;color:#666;"></span>
                     <div class="user-avatar" id="userAvatar">A</div>
-                    <div>
-                        <strong id="userName" style="font-size:13px;">Admin</strong>
-                        <p id="userEmail" style="font-size:10px;color:#666;">admin@metalartsialkot.com</p>
-                    </div>
+                    <div><strong id="userName" style="font-size:12px;">Admin</strong><p id="userEmail" style="font-size:9px;color:#666;">admin@metalartsialkot.com</p></div>
                 </div>
             </header>
             
-            <!-- Overview Section -->
             <section class="dashboard-section active" id="overviewSection">
                 <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-card-header">
-                            <div class="stat-icon gold"><i class="fas fa-shopping-bag"></i></div>
-                            <div>
-                                <div class="stat-number" id="totalOrders">0</div>
-                                <div class="stat-label">Total Orders</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-card-header">
-                            <div class="stat-icon green"><i class="fas fa-money-bill-wave"></i></div>
-                            <div>
-                                <div class="stat-number" id="totalRevenue">Rs. 0</div>
-                                <div class="stat-label">Total Revenue</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-card-header">
-                            <div class="stat-icon orange"><i class="fas fa-clock"></i></div>
-                            <div>
-                                <div class="stat-number" id="pendingOrders">0</div>
-                                <div class="stat-label">Pending Orders</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-card-header">
-                            <div class="stat-icon blue"><i class="fas fa-users"></i></div>
-                            <div>
-                                <div class="stat-number" id="totalVisitors">0</div>
-                                <div class="stat-label">Total Visitors</div>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="stat-card"><div class="stat-card-header"><div class="stat-icon gold"><i class="fas fa-shopping-bag"></i></div><div><div class="stat-number" id="totalOrders">0</div><div class="stat-label">Total Orders</div></div></div></div>
+                    <div class="stat-card"><div class="stat-card-header"><div class="stat-icon green"><i class="fas fa-money-bill-wave"></i></div><div><div class="stat-number" id="totalRevenue">Rs. 0</div><div class="stat-label">Revenue</div></div></div></div>
+                    <div class="stat-card"><div class="stat-card-header"><div class="stat-icon orange"><i class="fas fa-clock"></i></div><div><div class="stat-number" id="pendingOrders">0</div><div class="stat-label">Pending</div></div></div></div>
+                    <div class="stat-card"><div class="stat-card-header"><div class="stat-icon blue"><i class="fas fa-users"></i></div><div><div class="stat-number" id="totalVisitors">0</div><div class="stat-label">Visitors</div></div></div></div>
                 </div>
-                
-                <!-- Recent Orders -->
-                <div class="table-container">
-                    <h3 class="table-title">📦 Recent Orders</h3>
-                    <div id="recentOrdersTable"></div>
-                </div>
+                <div class="table-container"><h3 class="table-title">📦 Recent Orders</h3><div id="recentOrdersTable"></div></div>
             </section>
             
-            <!-- Orders Section -->
             <section class="dashboard-section" id="ordersSection">
-                <div class="table-container">
-                    <h3 class="table-title">📦 All Orders</h3>
-                    <div id="allOrdersTable"></div>
-                </div>
+                <div class="table-container"><h3 class="table-title">📦 All Orders</h3><div id="allOrdersTable"></div></div>
             </section>
             
-            <!-- Visitors Section -->
             <section class="dashboard-section" id="visitorsSection">
-                <div class="table-container">
-                    <h3 class="table-title">👥 Website Visitors</h3>
-                    <div id="visitorsTable"></div>
-                </div>
+                <div class="table-container"><h3 class="table-title">👥 Visitors</h3><div id="visitorsTable"></div></div>
             </section>
             
-            <!-- Promo Codes Section -->
             <section class="dashboard-section" id="promosSection">
-                <div class="table-container">
-                    <h3 class="table-title">🎫 Promo Codes</h3>
-                    <div id="promosTable"></div>
-                </div>
+                <div class="table-container"><h3 class="table-title">🎫 Promo Codes</h3><div id="promosTable"></div></div>
             </section>
             
-            <!-- Products Section -->
             <section class="dashboard-section" id="productsSection">
-                <div class="table-container">
-                    <h3 class="table-title">🛍️ Products</h3>
-                    <div id="productsTable"></div>
-                </div>
+                <div class="table-container"><h3 class="table-title">🛍️ Products</h3><div id="productsTable"></div></div>
             </section>
             
-            <!-- Reviews Section -->
             <section class="dashboard-section" id="reviewsSection">
-                <div class="table-container">
-                    <h3 class="table-title">⭐ Customer Reviews</h3>
-                    <div id="reviewsTable"></div>
-                </div>
+                <div class="table-container"><h3 class="table-title">⭐ Reviews</h3><div id="reviewsTable"></div></div>
             </section>
             
-            <!-- Settings Section -->
             <section class="dashboard-section" id="settingsSection">
-                <div class="table-container">
-                    <h3 class="table-title">⚙️ Settings</h3>
-                    <div id="settingsContent"></div>
-                </div>
+                <div class="table-container"><h3 class="table-title">⚙️ Settings</h3><div id="settingsContent"></div></div>
             </section>
         </main>
     </div>
     
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/923099915777" target="_blank" class="whatsapp-float"><i class="fab fa-whatsapp"></i></a>
+    
     <script>
-        // ===== CHECK AUTH =====
         const currentUser = JSON.parse(localStorage.getItem('metalUser') || 'null');
-        
         if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'manager')) {
-            alert('⚠️ Access Denied! Please login as admin.');
+            alert('⚠️ Access Denied!');
             window.location.href = 'login.html';
         } else {
             document.getElementById('userName').textContent = currentUser.name;
@@ -509,422 +178,84 @@
             document.getElementById('userRole').textContent = currentUser.role === 'admin' ? '👑 Admin' : '👔 Manager';
         }
         
-        // ===== SHOW SECTION =====
         function showSection(section) {
             document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
             document.querySelectorAll('.dashboard-section').forEach(s => s.classList.remove('active'));
-            
-            const sectionMap = {
-                'overview': 'overviewSection',
-                'orders': 'ordersSection',
-                'visitors': 'visitorsSection',
-                'promos': 'promosSection',
-                'products': 'productsSection',
-                'reviews': 'reviewsSection',
-                'settings': 'settingsSection'
-            };
-            
-            document.getElementById(sectionMap[section]).classList.add('active');
-            
-            // Set active nav
-            const navLinks = document.querySelectorAll('.sidebar-nav a');
-            const navMap = ['overview', 'orders', 'visitors', 'promos', 'products', 'reviews', 'settings'];
-            navLinks[navMap.indexOf(section)].classList.add('active');
-            
-            // Update title
-            const titles = {
-                'overview': 'Dashboard Overview',
-                'orders': 'Orders Management',
-                'visitors': 'Visitor Tracking',
-                'promos': 'Promo Codes',
-                'products': 'Products Management',
-                'reviews': 'Reviews Management',
-                'settings': 'Settings'
-            };
+            const map = {overview:'overviewSection', orders:'ordersSection', visitors:'visitorsSection', promos:'promosSection', products:'productsSection', reviews:'reviewsSection', settings:'settingsSection'};
+            document.getElementById(map[section]).classList.add('active');
+            const navMap = ['overview','orders','visitors','promos','products','reviews','settings'];
+            document.querySelectorAll('.sidebar-nav a')[navMap.indexOf(section)].classList.add('active');
+            const titles = {overview:'Dashboard Overview', orders:'Orders', visitors:'Visitors', promos:'Promo Codes', products:'Products', reviews:'Reviews', settings:'Settings'};
             document.getElementById('pageTitle').textContent = titles[section];
-            
-            // Load data
             loadDashboardData(section);
         }
         
-        // ===== LOAD DASHBOARD DATA =====
         function loadDashboardData(section) {
             const orders = JSON.parse(localStorage.getItem('metalOrders') || '[]');
             const visitors = JSON.parse(localStorage.getItem('visitors') || '[]');
             const promos = JSON.parse(localStorage.getItem('metalPromoCodes') || '[]');
             const reviews = JSON.parse(localStorage.getItem('metalReviews') || '[]');
             
-            switch(section) {
-                case 'overview':
-                    loadOverview(orders, visitors);
-                    break;
-                case 'orders':
-                    loadOrders(orders);
-                    break;
-                case 'visitors':
-                    loadVisitors(visitors);
-                    break;
-                case 'promos':
-                    loadPromos(promos);
-                    break;
-                case 'products':
-                    loadProducts();
-                    break;
-                case 'reviews':
-                    loadReviews(reviews);
-                    break;
-                case 'settings':
-                    loadSettings();
-                    break;
+            if (section === 'overview') {
+                document.getElementById('totalOrders').textContent = orders.length;
+                document.getElementById('totalRevenue').textContent = 'Rs. ' + orders.reduce((s,o) => s + (o.total||0), 0).toLocaleString();
+                document.getElementById('pendingOrders').textContent = orders.filter(o => o.status === 'Pending').length;
+                document.getElementById('totalVisitors').textContent = visitors.length;
+                const recent = orders.slice(-5).reverse();
+                document.getElementById('recentOrdersTable').innerHTML = recent.length === 0 ? '<p style="text-align:center;padding:25px;color:#999;">No orders yet</p>' : `<table class="data-table"><thead><tr><th>Order ID</th><th>Customer</th><th>Total</th><th>Status</th></tr></thead><tbody>${recent.map(o => `<tr><td><strong>${o.orderId}</strong></td><td>${o.name}</td><td>Rs. ${(o.total||0).toLocaleString()}</td><td><span class="status-badge status-${(o.status||'Pending').toLowerCase()}">${o.status||'Pending'}</span></td></tr>`).join('')}</tbody></table>`;
+            }
+            if (section === 'orders') {
+                document.getElementById('allOrdersTable').innerHTML = orders.length === 0 ? '<p style="text-align:center;padding:25px;color:#999;">No orders</p>' : `<table class="data-table"><thead><tr><th>Order</th><th>Customer</th><th>Total</th><th>Status</th><th>Actions</th></tr></thead><tbody>${orders.slice().reverse().map((o,i) => `<tr><td><strong>${o.orderId}</strong></td><td>${o.name}<br><span style="font-size:9px;">${o.email||''}</span></td><td>Rs. ${(o.total||0).toLocaleString()}</td><td><span class="status-badge status-${(o.status||'Pending').toLowerCase()}">${o.status||'Pending'}</span></td><td><button class="action-btn btn-complete" onclick="updateOrderStatus(${i},'Completed')">✓</button><button class="action-btn btn-view" onclick="viewOrderDetails(${i})">👁</button><button class="action-btn btn-delete" onclick="deleteOrder(${i})">✕</button></td></tr>`).join('')}</tbody></table>`;
+            }
+            if (section === 'visitors') {
+                document.getElementById('visitorsTable').innerHTML = visitors.length === 0 ? '<p style="text-align:center;padding:25px;color:#999;">No visitors</p>' : `<table class="data-table"><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Time</th></tr></thead><tbody>${visitors.slice().reverse().map(v => `<tr><td>${v.name||'N/A'}</td><td>${v.email||'N/A'}</td><td>${v.phone||'N/A'}</td><td style="font-size:9px;">${new Date(v.time).toLocaleString()}</td></tr>`).join('')}</tbody></table>`;
+            }
+            if (section === 'promos') {
+                document.getElementById('promosTable').innerHTML = promos.length === 0 ? '<p style="text-align:center;padding:25px;color:#999;">No promos</p>' : `<table class="data-table"><thead><tr><th>Code</th><th>Discount</th><th>Email</th><th>Status</th></tr></thead><tbody>${promos.map(p => `<tr><td><strong>${p.code}</strong></td><td>${p.discount}%</td><td>${p.email||'N/A'}</td><td><span class="status-badge ${p.used ? 'status-cancelled' : 'status-completed'}">${p.used ? 'Used' : 'Active'}</span></td></tr>`).join('')}</tbody></table>`;
+            }
+            if (section === 'products') {
+                const products = [{name:"Masha Allah",price:6000,stock:5,sold:234},{name:"Bismillah",price:6000,stock:3,sold:189},{name:"Alhamdulillah",price:6000,stock:8,sold:156},{name:"Ayat ul Kursi",price:7000,stock:2,sold:312},{name:"First Kalma",price:6000,stock:6,sold:145},{name:"Hasbunallah",price:6000,stock:4,sold:178},{name:"Fabi Ayyi Ala",price:6000,stock:10,sold:98},{name:"La Ilaha",price:6000,stock:7,sold:67}];
+                document.getElementById('productsTable').innerHTML = `<table class="data-table"><thead><tr><th>Product</th><th>Price</th><th>Stock</th><th>Sold</th><th>Status</th></tr></thead><tbody>${products.map(p => `<tr><td><strong>${p.name}</strong></td><td>Rs. ${p.price.toLocaleString()}</td><td>${p.stock}</td><td>${p.sold}</td><td><span class="status-badge ${p.stock <= 5 ? 'status-pending' : 'status-completed'}">${p.stock <= 5 ? 'Low' : 'OK'}</span></td></tr>`).join('')}</tbody></table>`;
+            }
+            if (section === 'reviews') {
+                document.getElementById('reviewsTable').innerHTML = reviews.length === 0 ? '<p style="text-align:center;padding:25px;color:#999;">No reviews</p>' : `<table class="data-table"><thead><tr><th>Name</th><th>Product</th><th>Rating</th><th>Review</th></tr></thead><tbody>${reviews.map(r => `<tr><td>${r.name}</td><td>${r.product}</td><td>${'★'.repeat(r.rating)}</td><td style="font-size:10px;">${r.text}</td></tr>`).join('')}</tbody></table>`;
+            }
+            if (section === 'settings') {
+                document.getElementById('settingsContent').innerHTML = `<div style="max-width:400px;margin:0 auto;padding:15px;"><label style="font-size:11px;font-weight:600;">WhatsApp</label><input id="whatsappNumber" value="923099915777" style="width:100%;padding:10px;border:2px solid #E8E0D5;border-radius:8px;margin:8px 0 15px;"><label style="font-size:11px;font-weight:600;">Email</label><input id="adminEmail" value="info@metalartsialkot.com" style="width:100%;padding:10px;border:2px solid #E8E0D5;border-radius:8px;margin:8px 0 15px;"><button onclick="saveSettings()" style="width:100%;padding:12px;background:#C4A265;color:white;border:none;border-radius:50px;font-weight:700;cursor:pointer;">💾 Save</button></div>`;
             }
         }
         
-        // ===== LOAD OVERVIEW =====
-        function loadOverview(orders, visitors) {
-            const totalOrders = orders.length;
-            const totalRevenue = orders.reduce((s, o) => s + (o.total || 0), 0);
-            const pendingOrders = orders.filter(o => o.status === 'Pending').length;
-            
-            document.getElementById('totalOrders').textContent = totalOrders;
-            document.getElementById('totalRevenue').textContent = 'Rs. ' + totalRevenue.toLocaleString();
-            document.getElementById('pendingOrders').textContent = pendingOrders;
-            document.getElementById('totalVisitors').textContent = visitors.length;
-            
-            // Recent orders (last 5)
-            const recent = orders.slice(-5).reverse();
-            const tableDiv = document.getElementById('recentOrdersTable');
-            
-            if (recent.length === 0) {
-                tableDiv.innerHTML = '<p style="text-align:center;padding:30px;color:#999;">No orders yet</p>';
-            } else {
-                tableDiv.innerHTML = `
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Order ID</th>
-                                <th>Customer</th>
-                                <th>Total</th>
-                                <th>Status</th>
-                                <th>Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${recent.map(o => `
-                                <tr>
-                                    <td><strong>${o.orderId}</strong></td>
-                                    <td>${o.name}</td>
-                                    <td>Rs. ${(o.total || 0).toLocaleString()}</td>
-                                    <td><span class="status-badge status-${(o.status || 'Pending').toLowerCase()}">${o.status || 'Pending'}</span></td>
-                                    <td style="font-size:10px;">${o.date}</td>
-                                </tr>
-                            `).join('')}
-                        </tbody>
-                    </table>
-                `;
-            }
-        }
-        
-        // ===== LOAD ORDERS =====
-        function loadOrders(orders) {
-            const tableDiv = document.getElementById('allOrdersTable');
-            
-            if (orders.length === 0) {
-                tableDiv.innerHTML = '<p style="text-align:center;padding:30px;color:#999;">No orders found</p>';
-                return;
-            }
-            
-            tableDiv.innerHTML = `
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Customer</th>
-                            <th>Phone</th>
-                            <th>Items</th>
-                            <th>Total</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${orders.slice().reverse().map((o, index) => `
-                            <tr>
-                                <td><strong>${o.orderId}</strong></td>
-                                <td>${o.name}<br><span style="font-size:9px;color:#999;">${o.email || ''}</span></td>
-                                <td>${o.phone}</td>
-                                <td>${o.items ? o.items.length : 0} items</td>
-                                <td><strong style="color:var(--gold);">Rs. ${(o.total || 0).toLocaleString()}</strong></td>
-                                <td><span class="status-badge status-${(o.status || 'Pending').toLowerCase()}">${o.status || 'Pending'}</span></td>
-                                <td>
-                                    <button class="action-btn btn-complete" onclick="updateOrderStatus(${index}, 'Completed')">✓</button>
-                                    <button class="action-btn btn-pending" onclick="updateOrderStatus(${index}, 'Pending')">⏳</button>
-                                    <button class="action-btn btn-view" onclick="viewOrderDetails(${index})">👁</button>
-                                    <button class="action-btn btn-delete" onclick="deleteOrder(${index})">✕</button>
-                                </td>
-                            </tr>
-                        `).join('')}
-                    </tbody>
-                </table>
-            `;
-        }
-        
-        // ===== LOAD VISITORS =====
-        function loadVisitors(visitors) {
-            const tableDiv = document.getElementById('visitorsTable');
-            
-            if (visitors.length === 0) {
-                tableDiv.innerHTML = '<p style="text-align:center;padding:30px;color:#999;">No visitors tracked yet</p>';
-                return;
-            }
-            
-            tableDiv.innerHTML = `
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Time</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${visitors.slice().reverse().map(v => `
-                            <tr>
-                                <td>${v.name || 'N/A'}</td>
-                                <td>${v.email || 'N/A'}</td>
-                                <td>${v.phone || 'N/A'}</td>
-                                <td style="font-size:10px;">${new Date(v.time).toLocaleString()}</td>
-                            </tr>
-                        `).join('')}
-                    </tbody>
-                </table>
-            `;
-        }
-        
-        // ===== LOAD PROMOS =====
-        function loadPromos(promos) {
-            const tableDiv = document.getElementById('promosTable');
-            
-            if (promos.length === 0) {
-                tableDiv.innerHTML = '<p style="text-align:center;padding:30px;color:#999;">No promo codes generated yet</p>';
-                return;
-            }
-            
-            tableDiv.innerHTML = `
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Code</th>
-                            <th>Discount</th>
-                            <th>Email</th>
-                            <th>Created</th>
-                            <th>Expires</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${promos.map(p => `
-                            <tr>
-                                <td><strong style="font-family:monospace;">${p.code}</strong></td>
-                                <td>${p.discount}%</td>
-                                <td>${p.email || 'N/A'}</td>
-                                <td style="font-size:10px;">${new Date(p.created).toLocaleDateString()}</td>
-                                <td style="font-size:10px;">${new Date(p.expires).toLocaleDateString()}</td>
-                                <td><span class="status-badge ${p.used ? 'status-cancelled' : 'status-completed'}">${p.used ? 'Used' : 'Active'}</span></td>
-                            </tr>
-                        `).join('')}
-                    </tbody>
-                </table>
-            `;
-        }
-        
-        // ===== LOAD PRODUCTS =====
-        function loadProducts() {
-            const products = [
-                {id:1, name:"Masha Allah", price:6000, stock:5, sold:234},
-                {id:2, name:"Bismillah", price:6000, stock:3, sold:189},
-                {id:3, name:"Alhamdulillah", price:6000, stock:8, sold:156},
-                {id:4, name:"Ayat ul Kursi Round", price:7000, stock:2, sold:312},
-                {id:5, name:"First Kalma", price:6000, stock:6, sold:145},
-                {id:6, name:"Hasbunallah", price:6000, stock:4, sold:178},
-                {id:7, name:"Fabi Ayyi Ala", price:6000, stock:10, sold:98},
-                {id:8, name:"La Ilaha Illa Anta", price:6000, stock:7, sold:67}
-            ];
-            
-            const tableDiv = document.getElementById('productsTable');
-            
-            tableDiv.innerHTML = `
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Product</th>
-                            <th>Price</th>
-                            <th>Stock</th>
-                            <th>Sold</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${products.map(p => `
-                            <tr>
-                                <td><strong>${p.name}</strong></td>
-                                <td>Rs. ${p.price.toLocaleString()}</td>
-                                <td>${p.stock}</td>
-                                <td>${p.sold}</td>
-                                <td><span class="status-badge ${p.stock <= 5 ? 'status-pending' : 'status-completed'}">${p.stock <= 5 ? 'Low Stock' : 'In Stock'}</span></td>
-                            </tr>
-                        `).join('')}
-                    </tbody>
-                </table>
-            `;
-        }
-        
-        // ===== LOAD REVIEWS =====
-        function loadReviews(reviews) {
-            const tableDiv = document.getElementById('reviewsTable');
-            
-            if (reviews.length === 0) {
-                tableDiv.innerHTML = '<p style="text-align:center;padding:30px;color:#999;">No reviews yet</p>';
-                return;
-            }
-            
-            tableDiv.innerHTML = `
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Location</th>
-                            <th>Product</th>
-                            <th>Rating</th>
-                            <th>Review</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${reviews.map(r => `
-                            <tr>
-                                <td>${r.name}</td>
-                                <td>${r.location}</td>
-                                <td>${r.product}</td>
-                                <td>${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</td>
-                                <td style="font-size:11px;">${r.text}</td>
-                            </tr>
-                        `).join('')}
-                    </tbody>
-                </table>
-            `;
-        }
-        
-        // ===== LOAD SETTINGS =====
-        function loadSettings() {
-            const settingsDiv = document.getElementById('settingsContent');
-            
-            settingsDiv.innerHTML = `
-                <div style="max-width:500px;margin:0 auto;padding:20px;">
-                    <h4 style="font-size:16px;margin-bottom:20px;">WhatsApp Number</h4>
-                    <div style="margin-bottom:20px;">
-                        <label style="font-size:12px;font-weight:600;">Admin WhatsApp</label>
-                        <input type="text" id="whatsappNumber" value="923099915777" style="width:100%;padding:12px;border:2px solid #E8E0D5;border-radius:10px;margin-top:5px;">
-                    </div>
-                    
-                    <h4 style="font-size:16px;margin-bottom:20px;">Email Settings</h4>
-                    <div style="margin-bottom:20px;">
-                        <label style="font-size:12px;font-weight:600;">Admin Email</label>
-                        <input type="email" id="adminEmail" value="info@metalartsialkot.com" style="width:100%;padding:12px;border:2px solid #E8E0D5;border-radius:10px;margin-top:5px;">
-                    </div>
-                    
-                    <button onclick="saveSettings()" style="width:100%;padding:14px;background:linear-gradient(135deg,#C4A265,#D4B87A);color:white;border:none;border-radius:50px;font-weight:700;cursor:pointer;">
-                        💾 Save Settings
-                    </button>
-                </div>
-            `;
-        }
-        
-        // ===== UPDATE ORDER STATUS =====
         function updateOrderStatus(index, status) {
             const orders = JSON.parse(localStorage.getItem('metalOrders') || '[]');
             if (orders[index]) {
                 orders[index].status = status;
                 localStorage.setItem('metalOrders', JSON.stringify(orders));
-                loadDashboardData('orders');
-                loadDashboardData('overview');
-                
-                // Send WhatsApp notification
-                const order = orders[index];
-                const phone = order.phone.replace(/\D/g, '');
-                if (phone.length >= 10 && status === 'Completed') {
-                    const msg = '✅ Your order ' + order.orderId + ' has been completed!\nThank you for shopping with Metal Art Sialkot!';
-                    window.open('https://wa.me/' + phone + '?text=' + encodeURIComponent(msg), '_blank');
-                }
+                loadDashboardData('orders'); loadDashboardData('overview');
             }
         }
-        
-        // ===== VIEW ORDER DETAILS =====
         function viewOrderDetails(index) {
-            const orders = JSON.parse(localStorage.getItem('metalOrders') || '[]');
-            const order = orders[index];
-            
-            if (!order) return;
-            
-            let details = 'ORDER DETAILS\n\n';
-            details += 'Order ID: ' + order.orderId + '\n';
-            details += 'Date: ' + order.date + '\n\n';
-            details += 'CUSTOMER:\n';
-            details += 'Name: ' + order.name + '\n';
-            details += 'Phone: ' + order.phone + '\n';
-            details += 'Email: ' + (order.email || 'N/A') + '\n';
-            details += 'Address: ' + (order.address || 'N/A') + '\n\n';
-            details += 'ITEMS:\n';
-            if (order.items) {
-                order.items.forEach((item, i) => {
-                    details += (i+1) + '. ' + item.name + ' x' + item.qty + ' = Rs. ' + (item.price * item.qty).toLocaleString() + '\n';
-                });
-            }
-            details += '\nTOTAL: Rs. ' + (order.total || 0).toLocaleString();
-            
-            alert(details);
+            const order = JSON.parse(localStorage.getItem('metalOrders') || '[]')[index];
+            if (order) alert('Order: ' + order.orderId + '\nCustomer: ' + order.name + '\nTotal: Rs. ' + (order.total||0).toLocaleString());
         }
-        
-        // ===== DELETE ORDER =====
         function deleteOrder(index) {
-            if (confirm('Are you sure you want to delete this order?')) {
+            if (confirm('Delete this order?')) {
                 const orders = JSON.parse(localStorage.getItem('metalOrders') || '[]');
                 orders.splice(index, 1);
                 localStorage.setItem('metalOrders', JSON.stringify(orders));
-                loadDashboardData('orders');
-                loadDashboardData('overview');
+                loadDashboardData('orders'); loadDashboardData('overview');
             }
         }
-        
-        // ===== SAVE SETTINGS =====
         function saveSettings() {
-            const whatsapp = document.getElementById('whatsappNumber').value;
-            const email = document.getElementById('adminEmail').value;
-            
-            localStorage.setItem('whatsappNumber', whatsapp);
-            localStorage.setItem('adminEmail', email);
-            
-            alert('✅ Settings saved!');
+            localStorage.setItem('whatsappNumber', document.getElementById('whatsappNumber').value);
+            localStorage.setItem('adminEmail', document.getElementById('adminEmail').value);
+            alert('✅ Saved!');
         }
+        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
+        function logout() { localStorage.removeItem('metalUser'); window.location.href = 'login.html'; }
         
-        // ===== TOGGLE SIDEBAR (Mobile) =====
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('open');
-        }
-        
-        // ===== LOGOUT =====
-        function logout() {
-            localStorage.removeItem('metalUser');
-            window.location.href = 'login.html';
-        }
-        
-        // ===== INITIALIZE =====
         document.addEventListener('DOMContentLoaded', () => {
             loadDashboardData('overview');
-            
-            // Show menu toggle on mobile
-            if (window.innerWidth < 768) {
-                document.getElementById('menuToggle').style.display = 'block';
-            }
+            if (window.innerWidth < 768) document.getElementById('menuToggle').style.display = 'block';
         });
     </script>
 </body>
