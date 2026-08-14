@@ -5,98 +5,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard | Metal Art Sialkot</title>
     
-    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/metalartsialkot/metalartsialkoits@main/images/logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     
     <style>
-        :root {
-            --gold: #C4A265;
-            --gold-light: #D4B87A;
-            --dark: #1A1815;
-            --dark-light: #2C2824;
-            --cream: #FAF7F2;
-            --cream-dark: #F5F0E8;
-            --green: #1B5E20;
-            --red: #E53935;
-            --blue: #2196F3;
-            --orange: #FF9800;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: var(--cream); color: #2C2824; overflow-x: hidden; }
+        :root { --gold:#C4A265; --gold-light:#D4B87A; --dark:#1A1815; --cream:#FAF7F2; --cream-dark:#F5F0E8; --green:#1B5E20; --red:#E53935; --blue:#2196F3; --orange:#FF9800; }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Inter',sans-serif; background:var(--cream); color:#2C2824; overflow-x:hidden; }
         
-        .dashboard-container { display: flex; min-height: 100vh; }
+        .dashboard-container { display:flex; min-height:100vh; }
         
-        .sidebar { width: 260px; background: linear-gradient(180deg, #1A1815, #2C2824); color: white; position: fixed; top: 0; left: 0; height: 100vh; z-index: 100; display: flex; flex-direction: column; }
-        .sidebar-header { padding: 20px; text-align: center; border-bottom: 1px solid rgba(196,162,101,0.2); }
-        .sidebar-header img { width: 55px; height: 55px; border-radius: 10px; border: 2px solid var(--gold); object-fit: contain; background: #F5F0E8; }
-        .sidebar-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--gold); margin-top: 8px; }
-        .sidebar-header p { font-size: 8px; color: #8B7355; letter-spacing: 2px; }
+        .sidebar { width:260px; background:linear-gradient(180deg,#1A1815,#2C2824); color:white; position:fixed; top:0; left:0; height:100vh; z-index:100; display:flex; flex-direction:column; }
+        .sidebar-header { padding:20px; text-align:center; border-bottom:1px solid rgba(196,162,101,0.2); }
+        .sidebar-header img { width:55px; height:55px; object-fit:contain; }
+        .sidebar-header h2 { font-family:'Cormorant Garamond',serif; font-size:18px; color:var(--gold); margin-top:8px; }
+        .sidebar-header p { font-size:8px; color:#8B7355; letter-spacing:2px; }
         
-        .sidebar-nav { flex: 1; padding: 15px 10px; overflow-y: auto; }
-        .sidebar-nav a { display: flex; align-items: center; gap: 10px; padding: 11px 14px; color: #D4C5B2; text-decoration: none; font-size: 11px; font-weight: 500; border-radius: 8px; margin-bottom: 4px; cursor: pointer; transition: all 0.3s; }
-        .sidebar-nav a:hover, .sidebar-nav a.active { background: rgba(196,162,101,0.15); color: var(--gold); }
-        .sidebar-nav a i { width: 18px; text-align: center; font-size: 13px; }
+        .sidebar-nav { flex:1; padding:15px 10px; overflow-y:auto; }
+        .sidebar-nav a { display:flex; align-items:center; gap:10px; padding:11px 14px; color:#D4C5B2; text-decoration:none; font-size:11px; font-weight:500; border-radius:8px; margin-bottom:4px; cursor:pointer; transition:all 0.3s; }
+        .sidebar-nav a:hover, .sidebar-nav a.active { background:rgba(196,162,101,0.15); color:var(--gold); }
+        .sidebar-nav a i { width:18px; text-align:center; font-size:13px; }
         
-        .sidebar-footer { padding: 12px; border-top: 1px solid rgba(196,162,101,0.2); }
+        .sidebar-footer { padding:12px; border-top:1px solid rgba(196,162,101,0.2); }
         
-        .main-content { flex: 1; margin-left: 260px; padding: 20px; }
-        .dashboard-header { background: white; border-radius: 14px; padding: 18px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 3px 15px rgba(0,0,0,0.05); }
-        .dashboard-header h1 { font-family: 'Cormorant Garamond', serif; font-size: 24px; }
-        .user-info { display: flex; align-items: center; gap: 10px; }
-        .user-avatar { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, #C4A265, #D4B87A); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 16px; }
+        .main-content { flex:1; margin-left:260px; padding:20px; }
+        .dashboard-header { background:white; border-radius:14px; padding:18px; margin-bottom:18px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 3px 15px rgba(0,0,0,0.05); }
+        .dashboard-header h1 { font-family:'Cormorant Garamond',serif; font-size:24px; }
+        .user-info { display:flex; align-items:center; gap:10px; }
+        .user-avatar { width:38px; height:38px; border-radius:50%; background:linear-gradient(135deg,#C4A265,#D4B87A); display:flex; align-items:center; justify-content:center; color:white; font-weight:700; font-size:16px; }
         
-        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 18px; }
-        .stat-card { background: white; border-radius: 12px; padding: 18px; box-shadow: 0 3px 15px rgba(0,0,0,0.05); }
-        .stat-card-header { display: flex; align-items: center; gap: 10px; }
-        .stat-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
-        .stat-icon.gold { background: rgba(196,162,101,0.15); color: var(--gold); }
-        .stat-icon.green { background: #E8F5E9; color: var(--green); }
-        .stat-icon.blue { background: #E3F2FD; color: var(--blue); }
-        .stat-icon.orange { background: #FFF3E0; color: var(--orange); }
-        .stat-number { font-size: 24px; font-weight: 800; }
-        .stat-label { font-size: 9px; color: #666; text-transform: uppercase; letter-spacing: 1px; }
+        .stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:15px; margin-bottom:18px; }
+        .stat-card { background:white; border-radius:12px; padding:18px; box-shadow:0 3px 15px rgba(0,0,0,0.05); }
+        .stat-card-header { display:flex; align-items:center; gap:10px; }
+        .stat-icon { width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; }
+        .stat-icon.gold { background:rgba(196,162,101,0.15); color:var(--gold); }
+        .stat-icon.green { background:#E8F5E9; color:var(--green); }
+        .stat-icon.blue { background:#E3F2FD; color:var(--blue); }
+        .stat-icon.orange { background:#FFF3E0; color:var(--orange); }
+        .stat-number { font-size:24px; font-weight:800; }
+        .stat-label { font-size:9px; color:#666; text-transform:uppercase; letter-spacing:1px; }
         
-        .table-container { background: white; border-radius: 12px; padding: 18px; box-shadow: 0 3px 15px rgba(0,0,0,0.05); overflow-x: auto; }
-        .table-title { font-size: 16px; font-weight: 700; margin-bottom: 12px; }
-        .data-table { width: 100%; border-collapse: collapse; }
-        .data-table th { padding: 10px 12px; text-align: left; font-size: 9px; text-transform: uppercase; color: #666; background: var(--cream-dark); font-weight: 700; white-space: nowrap; }
-        .data-table td { padding: 10px 12px; font-size: 11px; border-bottom: 1px solid #f5f0e8; }
-        .status-badge { padding: 4px 10px; border-radius: 50px; font-size: 9px; font-weight: 700; }
-        .status-pending { background: #FFF3E0; color: #E65100; }
-        .status-completed { background: #E8F5E9; color: #2E7D32; }
-        .status-cancelled { background: #FFEBEE; color: #C62828; }
-        .action-btn { padding: 4px 8px; border-radius: 4px; border: none; cursor: pointer; font-size: 9px; font-weight: 600; margin: 1px; }
-        .btn-complete { background: #4CAF50; color: white; }
-        .btn-pending { background: #FF9800; color: white; }
-        .btn-view { background: #2196F3; color: white; }
-        .btn-delete { background: #E53935; color: white; }
+        .table-container { background:white; border-radius:12px; padding:18px; box-shadow:0 3px 15px rgba(0,0,0,0.05); overflow-x:auto; }
+        .table-title { font-size:16px; font-weight:700; margin-bottom:12px; }
+        .data-table { width:100%; border-collapse:collapse; }
+        .data-table th { padding:10px 12px; text-align:left; font-size:9px; text-transform:uppercase; color:#666; background:var(--cream-dark); font-weight:700; white-space:nowrap; }
+        .data-table td { padding:10px 12px; font-size:11px; border-bottom:1px solid #f5f0e8; }
+        .status-badge { padding:4px 10px; border-radius:50px; font-size:9px; font-weight:700; }
+        .status-pending { background:#FFF3E0; color:#E65100; }
+        .status-completed { background:#E8F5E9; color:#2E7D32; }
+        .status-cancelled { background:#FFEBEE; color:#C62828; }
+        .action-btn { padding:4px 8px; border-radius:4px; border:none; cursor:pointer; font-size:9px; font-weight:600; margin:1px; }
+        .btn-complete { background:#4CAF50; color:white; }
+        .btn-view { background:#2196F3; color:white; }
+        .btn-delete { background:#E53935; color:white; }
         
-        .dashboard-section { display: none; }
-        .dashboard-section.active { display: block; animation: fadeIn 0.4s ease; }
-        @keyframes fadeIn { 0% { opacity: 0; transform: translateY(15px); } 100% { opacity: 1; transform: translateY(0); } }
+        .dashboard-section { display:none; }
+        .dashboard-section.active { display:block; animation:fadeIn 0.4s ease; }
+        @keyframes fadeIn { 0%{opacity:0;transform:translateY(15px)} 100%{opacity:1;transform:translateY(0)} }
         
-        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; width: 45px; height: 45px; background: #25D366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; z-index: 998; box-shadow: 0 5px 20px rgba(37,211,102,0.4); text-decoration: none; animation: pulseWA 2s infinite; }
-        @keyframes pulseWA { 0%, 100% { box-shadow: 0 5px 20px rgba(37,211,102,0.4); } 50% { box-shadow: 0 5px 30px rgba(37,211,102,0.7); } }
+        .whatsapp-float { position:fixed; bottom:20px; right:20px; width:45px; height:45px; background:#25D366; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; z-index:998; box-shadow:0 5px 20px rgba(37,211,102,0.4); text-decoration:none; animation:pulseWA 2s infinite; }
+        @keyframes pulseWA { 0%,100%{box-shadow:0 5px 20px rgba(37,211,102,0.4)} 50%{box-shadow:0 5px 30px rgba(37,211,102,0.7)} }
         
-        @media (max-width: 1024px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 768px) {
-            .sidebar { width: 0; overflow: hidden; }
-            .sidebar.open { width: 240px; }
-            .main-content { margin-left: 0; }
-            .dashboard-header h1 { font-size: 18px; }
-            .stats-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-            .stat-number { font-size: 20px; }
-        }
-        @media (max-width: 480px) { .stats-grid { grid-template-columns: 1fr; } }
+        @media(max-width:1024px){ .stats-grid{grid-template-columns:repeat(2,1fr)} }
+        @media(max-width:768px){ .sidebar{width:0;overflow:hidden} .sidebar.open{width:240px} .main-content{margin-left:0} .dashboard-header h1{font-size:18px} .stats-grid{grid-template-columns:1fr 1fr;gap:10px} .stat-number{font-size:20px} }
+        @media(max-width:480px){ .stats-grid{grid-template-columns:1fr} }
     </style>
 </head>
 <body>
     <div class="dashboard-container">
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <img src="images/logo.png" alt="Logo" onerror="this.onerror=null;this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2215%22 fill=%22%23C4A265%22/><text x=%2250%22 y=%2270%22 font-size=%2250%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22Georgia%22 font-weight=%22bold%22>M</text></svg>'">
+                <img src="https://cdn.jsdelivr.net/gh/metalartsialkot/metalartsialkoits@main/images/logo.png" alt="Logo">
                 <h2>Metal Art Sialkot</h2>
                 <p>Admin Dashboard</p>
             </div>
@@ -163,7 +144,6 @@
         </main>
     </div>
     
-    <!-- WhatsApp Float -->
     <a href="https://wa.me/923099915777" target="_blank" class="whatsapp-float"><i class="fab fa-whatsapp"></i></a>
     
     <script>
@@ -196,32 +176,62 @@
             const promos = JSON.parse(localStorage.getItem('metalPromoCodes') || '[]');
             const reviews = JSON.parse(localStorage.getItem('metalReviews') || '[]');
             
+            console.log('📦 Loading section:', section, '| Orders:', orders.length);
+            
             if (section === 'overview') {
                 document.getElementById('totalOrders').textContent = orders.length;
                 document.getElementById('totalRevenue').textContent = 'Rs. ' + orders.reduce((s,o) => s + (o.total||0), 0).toLocaleString();
-                document.getElementById('pendingOrders').textContent = orders.filter(o => o.status === 'Pending').length;
+                document.getElementById('pendingOrders').textContent = orders.filter(o => o.status === 'Pending' || !o.status).length;
                 document.getElementById('totalVisitors').textContent = visitors.length;
+                
                 const recent = orders.slice(-5).reverse();
-                document.getElementById('recentOrdersTable').innerHTML = recent.length === 0 ? '<p style="text-align:center;padding:25px;color:#999;">No orders yet</p>' : `<table class="data-table"><thead><tr><th>Order ID</th><th>Customer</th><th>Total</th><th>Status</th></tr></thead><tbody>${recent.map(o => `<tr><td><strong>${o.orderId}</strong></td><td>${o.name}</td><td>Rs. ${(o.total||0).toLocaleString()}</td><td><span class="status-badge status-${(o.status||'Pending').toLowerCase()}">${o.status||'Pending'}</span></td></tr>`).join('')}</tbody></table>`;
+                const tableDiv = document.getElementById('recentOrdersTable');
+                if (tableDiv) {
+                    tableDiv.innerHTML = recent.length === 0 ? '<p style="text-align:center;padding:25px;color:#999;">No orders yet</p>' : `<table class="data-table"><thead><tr><th>Order ID</th><th>Customer</th><th>Phone</th><th>Total</th><th>Status</th></tr></thead><tbody>${recent.map(o => `<tr><td><strong>${o.orderId}</strong></td><td>${o.name}</td><td>${o.phone||'N/A'}</td><td>Rs. ${(o.total||0).toLocaleString()}</td><td><span class="status-badge status-pending">${o.status||'Pending'}</span></td></tr>`).join('')}</tbody></table>`;
+                }
             }
+            
             if (section === 'orders') {
-                document.getElementById('allOrdersTable').innerHTML = orders.length === 0 ? '<p style="text-align:center;padding:25px;color:#999;">No orders</p>' : `<table class="data-table"><thead><tr><th>Order</th><th>Customer</th><th>Total</th><th>Status</th><th>Actions</th></tr></thead><tbody>${orders.slice().reverse().map((o,i) => `<tr><td><strong>${o.orderId}</strong></td><td>${o.name}<br><span style="font-size:9px;">${o.email||''}</span></td><td>Rs. ${(o.total||0).toLocaleString()}</td><td><span class="status-badge status-${(o.status||'Pending').toLowerCase()}">${o.status||'Pending'}</span></td><td><button class="action-btn btn-complete" onclick="updateOrderStatus(${i},'Completed')">✓</button><button class="action-btn btn-view" onclick="viewOrderDetails(${i})">👁</button><button class="action-btn btn-delete" onclick="deleteOrder(${i})">✕</button></td></tr>`).join('')}</tbody></table>`;
+                const tableDiv = document.getElementById('allOrdersTable');
+                if (tableDiv) {
+                    tableDiv.innerHTML = orders.length === 0 ? '<p style="text-align:center;padding:25px;color:#999;">No orders</p>' : `<table class="data-table"><thead><tr><th>Order ID</th><th>Customer</th><th>Phone</th><th>Items</th><th>Total</th><th>Promo</th><th>Status</th><th>Actions</th></tr></thead><tbody>${orders.slice().reverse().map((o,i) => `<tr><td><strong>${o.orderId}</strong></td><td>${o.name}<br><span style="font-size:9px;">${o.email||''}</span></td><td>${o.phone||'N/A'}</td><td>${o.items ? o.items.length : 0}</td><td><strong style="color:#C4A265;">Rs. ${(o.total||0).toLocaleString()}</strong></td><td style="font-size:9px;">${o.promoCode||'N/A'}</td><td><span class="status-badge status-pending">${o.status||'Pending'}</span></td><td><button class="action-btn btn-complete" onclick="updateOrderStatus(${i},'Completed')">✓</button><button class="action-btn btn-view" onclick="viewOrderDetails(${i})">👁</button><button class="action-btn btn-delete" onclick="deleteOrder(${i})">✕</button></td></tr>`).join('')}</tbody></table>`;
+                }
             }
+            
             if (section === 'visitors') {
-                document.getElementById('visitorsTable').innerHTML = visitors.length === 0 ? '<p style="text-align:center;padding:25px;color:#999;">No visitors</p>' : `<table class="data-table"><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Time</th></tr></thead><tbody>${visitors.slice().reverse().map(v => `<tr><td>${v.name||'N/A'}</td><td>${v.email||'N/A'}</td><td>${v.phone||'N/A'}</td><td style="font-size:9px;">${new Date(v.time).toLocaleString()}</td></tr>`).join('')}</tbody></table>`;
+                const tableDiv = document.getElementById('visitorsTable');
+                if (tableDiv) {
+                    tableDiv.innerHTML = visitors.length === 0 ? '<p style="text-align:center;padding:25px;color:#999;">No visitors</p>' : `<table class="data-table"><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Time</th></tr></thead><tbody>${visitors.slice().reverse().map(v => `<tr><td>${v.name||'N/A'}</td><td>${v.email||'N/A'}</td><td>${v.phone||'N/A'}</td><td style="font-size:9px;">${new Date(v.time).toLocaleString()}</td></tr>`).join('')}</tbody></table>`;
+                }
             }
+            
             if (section === 'promos') {
-                document.getElementById('promosTable').innerHTML = promos.length === 0 ? '<p style="text-align:center;padding:25px;color:#999;">No promos</p>' : `<table class="data-table"><thead><tr><th>Code</th><th>Discount</th><th>Email</th><th>Status</th></tr></thead><tbody>${promos.map(p => `<tr><td><strong>${p.code}</strong></td><td>${p.discount}%</td><td>${p.email||'N/A'}</td><td><span class="status-badge ${p.used ? 'status-cancelled' : 'status-completed'}">${p.used ? 'Used' : 'Active'}</span></td></tr>`).join('')}</tbody></table>`;
+                const tableDiv = document.getElementById('promosTable');
+                if (tableDiv) {
+                    tableDiv.innerHTML = promos.length === 0 ? '<p style="text-align:center;padding:25px;color:#999;">No promos</p>' : `<table class="data-table"><thead><tr><th>Code</th><th>Discount</th><th>Email</th><th>Status</th></tr></thead><tbody>${promos.map(p => `<tr><td><strong style="font-family:monospace;">${p.code}</strong></td><td>${p.discount}%</td><td>${p.email||'N/A'}</td><td><span class="status-badge ${p.used ? 'status-cancelled' : 'status-completed'}">${p.used ? 'Used' : 'Active'}</span></td></tr>`).join('')}</tbody></table>`;
+                }
             }
+            
             if (section === 'products') {
-                const products = [{name:"Masha Allah",price:6000,stock:5,sold:234},{name:"Bismillah",price:6000,stock:3,sold:189},{name:"Alhamdulillah",price:6000,stock:8,sold:156},{name:"Ayat ul Kursi",price:7000,stock:2,sold:312},{name:"First Kalma",price:6000,stock:6,sold:145},{name:"Hasbunallah",price:6000,stock:4,sold:178},{name:"Fabi Ayyi Ala",price:6000,stock:10,sold:98},{name:"La Ilaha",price:6000,stock:7,sold:67}];
-                document.getElementById('productsTable').innerHTML = `<table class="data-table"><thead><tr><th>Product</th><th>Price</th><th>Stock</th><th>Sold</th><th>Status</th></tr></thead><tbody>${products.map(p => `<tr><td><strong>${p.name}</strong></td><td>Rs. ${p.price.toLocaleString()}</td><td>${p.stock}</td><td>${p.sold}</td><td><span class="status-badge ${p.stock <= 5 ? 'status-pending' : 'status-completed'}">${p.stock <= 5 ? 'Low' : 'OK'}</span></td></tr>`).join('')}</tbody></table>`;
+                const tableDiv = document.getElementById('productsTable');
+                if (tableDiv) {
+                    const products = [{name:"Masha Allah",price:6000,stock:5,sold:234},{name:"Bismillah",price:6000,stock:3,sold:189},{name:"Alhamdulillah",price:6000,stock:8,sold:156},{name:"Ayat ul Kursi",price:7000,stock:2,sold:312},{name:"First Kalma",price:6000,stock:6,sold:145},{name:"Hasbunallah",price:6000,stock:4,sold:178},{name:"Fabi Ayyi Ala",price:6000,stock:10,sold:98},{name:"La Ilaha",price:6000,stock:7,sold:67}];
+                    tableDiv.innerHTML = `<table class="data-table"><thead><tr><th>Product</th><th>Price</th><th>Stock</th><th>Sold</th><th>Status</th></tr></thead><tbody>${products.map(p => `<tr><td><strong>${p.name}</strong></td><td>Rs. ${p.price.toLocaleString()}</td><td>${p.stock}</td><td>${p.sold}</td><td><span class="status-badge ${p.stock <= 5 ? 'status-pending' : 'status-completed'}">${p.stock <= 5 ? 'Low' : 'OK'}</span></td></tr>`).join('')}</tbody></table>`;
+                }
             }
+            
             if (section === 'reviews') {
-                document.getElementById('reviewsTable').innerHTML = reviews.length === 0 ? '<p style="text-align:center;padding:25px;color:#999;">No reviews</p>' : `<table class="data-table"><thead><tr><th>Name</th><th>Product</th><th>Rating</th><th>Review</th></tr></thead><tbody>${reviews.map(r => `<tr><td>${r.name}</td><td>${r.product}</td><td>${'★'.repeat(r.rating)}</td><td style="font-size:10px;">${r.text}</td></tr>`).join('')}</tbody></table>`;
+                const tableDiv = document.getElementById('reviewsTable');
+                if (tableDiv) {
+                    tableDiv.innerHTML = reviews.length === 0 ? '<p style="text-align:center;padding:25px;color:#999;">No reviews</p>' : `<table class="data-table"><thead><tr><th>Name</th><th>Product</th><th>Rating</th><th>Review</th></tr></thead><tbody>${reviews.map(r => `<tr><td>${r.name}</td><td>${r.product}</td><td>${'★'.repeat(r.rating)}</td><td style="font-size:10px;">${r.text}</td></tr>`).join('')}</tbody></table>`;
+                }
             }
+            
             if (section === 'settings') {
-                document.getElementById('settingsContent').innerHTML = `<div style="max-width:400px;margin:0 auto;padding:15px;"><label style="font-size:11px;font-weight:600;">WhatsApp</label><input id="whatsappNumber" value="923099915777" style="width:100%;padding:10px;border:2px solid #E8E0D5;border-radius:8px;margin:8px 0 15px;"><label style="font-size:11px;font-weight:600;">Email</label><input id="adminEmail" value="info@metalartsialkot.com" style="width:100%;padding:10px;border:2px solid #E8E0D5;border-radius:8px;margin:8px 0 15px;"><button onclick="saveSettings()" style="width:100%;padding:12px;background:#C4A265;color:white;border:none;border-radius:50px;font-weight:700;cursor:pointer;">💾 Save</button></div>`;
+                const div = document.getElementById('settingsContent');
+                if (div) {
+                    div.innerHTML = `<div style="max-width:400px;margin:0 auto;padding:15px;"><label style="font-size:11px;font-weight:600;">WhatsApp</label><input id="whatsappNumber" value="923099915777" style="width:100%;padding:10px;border:2px solid #E8E0D5;border-radius:8px;margin:8px 0 15px;"><label style="font-size:11px;font-weight:600;">Email</label><input id="adminEmail" value="info@metalartsialkot.com" style="width:100%;padding:10px;border:2px solid #E8E0D5;border-radius:8px;margin:8px 0 15px;"><button onclick="saveSettings()" style="width:100%;padding:12px;background:#C4A265;color:white;border:none;border-radius:50px;font-weight:700;cursor:pointer;">💾 Save</button></div>`;
+                }
             }
         }
         
@@ -230,30 +240,57 @@
             if (orders[index]) {
                 orders[index].status = status;
                 localStorage.setItem('metalOrders', JSON.stringify(orders));
-                loadDashboardData('orders'); loadDashboardData('overview');
+                loadDashboardData('orders');
+                loadDashboardData('overview');
+                alert('✅ Order marked as ' + status);
             }
         }
+        
         function viewOrderDetails(index) {
-            const order = JSON.parse(localStorage.getItem('metalOrders') || '[]')[index];
-            if (order) alert('Order: ' + order.orderId + '\nCustomer: ' + order.name + '\nTotal: Rs. ' + (order.total||0).toLocaleString());
+            const orders = JSON.parse(localStorage.getItem('metalOrders') || '[]');
+            const order = orders[index];
+            if (order) {
+                let details = 'ORDER DETAILS\n\n';
+                details += 'Order: ' + order.orderId + '\n';
+                details += 'Date: ' + order.date + '\n\n';
+                details += 'Customer: ' + order.name + '\n';
+                details += 'Phone: ' + (order.phone||'N/A') + '\n';
+                details += 'Email: ' + (order.email||'N/A') + '\n';
+                details += 'Address: ' + (order.address||'N/A') + ', ' + (order.city||'') + '\n\n';
+                details += 'Items:\n';
+                if (order.items) {
+                    order.items.forEach((item, i) => {
+                        details += (i+1) + '. ' + item.name + ' x' + item.qty + ' = Rs. ' + (item.price*item.qty).toLocaleString() + '\n';
+                    });
+                }
+                details += '\nTotal: Rs. ' + (order.total||0).toLocaleString();
+                details += '\nPromo: ' + (order.promoCode||'N/A');
+                alert(details);
+            }
         }
+        
         function deleteOrder(index) {
             if (confirm('Delete this order?')) {
                 const orders = JSON.parse(localStorage.getItem('metalOrders') || '[]');
                 orders.splice(index, 1);
                 localStorage.setItem('metalOrders', JSON.stringify(orders));
-                loadDashboardData('orders'); loadDashboardData('overview');
+                loadDashboardData('orders');
+                loadDashboardData('overview');
+                alert('✅ Order deleted');
             }
         }
+        
         function saveSettings() {
             localStorage.setItem('whatsappNumber', document.getElementById('whatsappNumber').value);
             localStorage.setItem('adminEmail', document.getElementById('adminEmail').value);
             alert('✅ Saved!');
         }
+        
         function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
         function logout() { localStorage.removeItem('metalUser'); window.location.href = 'login.html'; }
         
         document.addEventListener('DOMContentLoaded', () => {
+            console.log('✅ Dashboard loaded');
             loadDashboardData('overview');
             if (window.innerWidth < 768) document.getElementById('menuToggle').style.display = 'block';
         });
