@@ -21,339 +21,82 @@
             --green: #1B5E20;
             --red: #E53935;
         }
-        
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #1A1815, #2C2824); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
         
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #1A1815, #2C2824);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
+        .auth-container { background: white; border-radius: 24px; max-width: 450px; width: 100%; padding: 40px; box-shadow: 0 30px 80px rgba(0,0,0,0.3); position: relative; }
+        .auth-logo { text-align: center; margin-bottom: 30px; }
+        .auth-logo img { width: 80px; height: 80px; border-radius: 16px; border: 3px solid var(--gold); margin-bottom: 15px; object-fit: contain; background: #F5F0E8; }
+        .auth-logo h1 { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: var(--dark); }
+        .auth-logo p { font-size: 11px; color: #8B7355; letter-spacing: 2px; text-transform: uppercase; margin-top: 5px; }
         
-        .auth-container {
-            background: white;
-            border-radius: 24px;
-            max-width: 450px;
-            width: 100%;
-            padding: 40px;
-            box-shadow: 0 30px 80px rgba(0,0,0,0.3);
-            position: relative;
-        }
+        .auth-tabs { display: flex; gap: 10px; margin-bottom: 30px; }
+        .auth-tab { flex: 1; padding: 12px; border-radius: 50px; border: 2px solid var(--gold); background: white; color: var(--gold); cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.3s; }
+        .auth-tab.active { background: var(--gold); color: white; }
         
-        .auth-logo {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+        .auth-form { display: none; }
+        .auth-form.active { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
         
-        .auth-logo img {
-            width: 80px;
-            height: 80px;
-            border-radius: 16px;
-            border: 3px solid var(--gold);
-            margin-bottom: 15px;
-        }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-weight: 600; font-size: 13px; margin-bottom: 8px; color: #333; }
+        .form-group label .required { color: var(--red); }
+        .input-wrapper { position: relative; }
+        .input-wrapper i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #999; font-size: 16px; }
+        .input-wrapper input { width: 100%; padding: 14px 16px 14px 45px; border: 2px solid #E8E0D5; border-radius: 12px; font-size: 14px; transition: all 0.3s; font-family: 'Inter', sans-serif; }
+        .input-wrapper input:focus { border-color: var(--gold); outline: none; box-shadow: 0 0 0 3px rgba(196,162,101,0.2); }
+        .password-toggle { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #999; }
         
-        .auth-logo h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 28px;
-            color: var(--dark);
-        }
+        .remember-forgot { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 12px; }
+        .remember-forgot label { display: flex; align-items: center; gap: 5px; cursor: pointer; }
+        .remember-forgot a { color: var(--gold); text-decoration: none; font-weight: 600; }
         
-        .auth-logo p {
-            font-size: 11px;
-            color: #8B7355;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-top: 5px;
-        }
+        .auth-btn { width: 100%; padding: 15px; background: linear-gradient(135deg, #C4A265, #D4B87A); color: white; border: none; border-radius: 50px; font-weight: 700; font-size: 15px; cursor: pointer; transition: all 0.3s; }
+        .auth-btn:hover { box-shadow: 0 10px 30px rgba(196, 162, 101, 0.4); transform: translateY(-2px); }
         
-        .auth-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-        }
+        .auth-divider { text-align: center; margin: 20px 0; position: relative; }
+        .auth-divider::before { content: ''; position: absolute; top: 50%; left: 0; width: 100%; height: 1px; background: #E8E0D5; }
+        .auth-divider span { background: white; padding: 0 15px; position: relative; font-size: 12px; color: #999; }
+        .back-home { display: block; text-align: center; margin-top: 20px; color: #999; text-decoration: none; font-size: 13px; }
+        .back-home:hover { color: var(--gold); }
         
-        .auth-tab {
-            flex: 1;
-            padding: 12px;
-            border-radius: 50px;
-            border: 2px solid var(--gold);
-            background: white;
-            color: var(--gold);
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
+        .profile-view { display: none; text-align: center; }
+        .profile-view.active { display: block; animation: fadeIn 0.5s ease; }
+        .profile-avatar { width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, #C4A265, #D4B87A); display: flex; align-items: center; justify-content: center; color: white; font-size: 40px; font-weight: 700; margin: 0 auto 20px; }
+        .profile-name { font-family: 'Cormorant Garamond', serif; font-size: 24px; color: var(--dark); margin-bottom: 5px; }
+        .profile-email { font-size: 13px; color: #666; margin-bottom: 20px; }
+        .profile-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 25px; }
+        .profile-stat { background: var(--cream-dark); padding: 15px; border-radius: 12px; }
+        .profile-stat-number { font-size: 20px; font-weight: 700; color: var(--gold); }
+        .profile-stat-label { font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-top: 3px; }
+        .logout-btn { width: 100%; padding: 14px; background: var(--dark); color: white; border: none; border-radius: 50px; font-weight: 600; font-size: 14px; cursor: pointer; }
+        .logout-btn:hover { background: #333; }
         
-        .auth-tab.active {
-            background: var(--gold);
-            color: white;
-        }
-        
-        .auth-form {
-            display: none;
-        }
-        
-        .auth-form.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            font-size: 13px;
-            margin-bottom: 8px;
-            color: #333;
-        }
-        
-        .form-group label .required {
-            color: var(--red);
-        }
-        
-        .input-wrapper {
-            position: relative;
-        }
-        
-        .input-wrapper i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #999;
-            font-size: 16px;
-        }
-        
-        .input-wrapper input {
-            width: 100%;
-            padding: 14px 16px 14px 45px;
-            border: 2px solid #E8E0D5;
-            border-radius: 12px;
-            font-size: 14px;
-            transition: all 0.3s;
-            font-family: 'Inter', sans-serif;
-        }
-        
-        .input-wrapper input:focus {
-            border-color: var(--gold);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(196,162,101,0.2);
-        }
-        
-        .password-toggle {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #999;
-        }
-        
-        .remember-forgot {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            font-size: 12px;
-        }
-        
-        .remember-forgot label {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            cursor: pointer;
-        }
-        
-        .remember-forgot a {
-            color: var(--gold);
-            text-decoration: none;
-            font-weight: 600;
-        }
-        
-        .auth-btn {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #C4A265, #D4B87A);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 15px;
-            cursor: pointer;
-            transition: all 0.3s;
-            letter-spacing: 0.5px;
-        }
-        
-        .auth-btn:hover {
-            box-shadow: 0 10px 30px rgba(196, 162, 101, 0.4);
-            transform: translateY(-2px);
-        }
-        
-        .auth-divider {
-            text-align: center;
-            margin: 20px 0;
-            position: relative;
-        }
-        
-        .auth-divider::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: #E8E0D5;
-        }
-        
-        .auth-divider span {
-            background: white;
-            padding: 0 15px;
-            position: relative;
-            font-size: 12px;
-            color: #999;
-        }
-        
-        .back-home {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            color: #999;
-            text-decoration: none;
-            font-size: 13px;
-        }
-        
-        .back-home:hover {
-            color: var(--gold);
-        }
-        
-        /* ===== PROFILE VIEW ===== */
-        .profile-view {
-            display: none;
-            text-align: center;
-        }
-        
-        .profile-view.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .profile-avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #C4A265, #D4B87A);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 40px;
-            font-weight: 700;
-            margin: 0 auto 20px;
-        }
-        
-        .profile-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 24px;
-            color: var(--dark);
-            margin-bottom: 5px;
-        }
-        
-        .profile-email {
-            font-size: 13px;
-            color: #666;
-            margin-bottom: 20px;
-        }
-        
-        .profile-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-        
-        .profile-stat {
-            background: var(--cream-dark);
-            padding: 15px;
-            border-radius: 12px;
-        }
-        
-        .profile-stat-number {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--gold);
-        }
-        
-        .profile-stat-label {
-            font-size: 10px;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 3px;
-        }
-        
-        .logout-btn {
-            width: 100%;
-            padding: 14px;
-            background: var(--dark);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .logout-btn:hover {
-            background: #333;
-        }
+        /* Social Icons */
+        .social-login { display: flex; justify-content: center; gap: 12px; margin-top: 15px; }
+        .social-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid #E8E0D5; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; text-decoration: none; font-size: 16px; }
+        .social-btn:hover { transform: translateY(-3px); }
         
         @media (max-width: 480px) {
-            .auth-container {
-                padding: 25px;
-            }
-            .auth-logo h1 {
-                font-size: 24px;
-            }
-            .auth-logo img {
-                width: 60px;
-                height: 60px;
-            }
+            .auth-container { padding: 25px; }
+            .auth-logo h1 { font-size: 24px; }
+            .auth-logo img { width: 60px; height: 60px; }
         }
     </style>
 </head>
 <body>
     <div class="auth-container">
-        <!-- Logo -->
         <div class="auth-logo">
-            <img src="images/logo.png" alt="Metal Art Sialkot" onerror="this.src='https://via.placeholder.com/200x200/C4A265/FFFFFF?text=MAS'">
+            <img src="images/logo.png" alt="Metal Art Sialkot" onerror="this.onerror=null;this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23C4A265%22/><text x=%2250%22 y=%2270%22 font-size=%2250%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22Georgia%22 font-weight=%22bold%22>M</text></svg>'">
             <h1>Metal Art Sialkot</h1>
             <p>Premium Islamic Art</p>
         </div>
         
-        <!-- Auth Tabs -->
         <div class="auth-tabs">
             <button class="auth-tab active" onclick="showAuthTab('login')">Login</button>
             <button class="auth-tab" onclick="showAuthTab('signup')">Sign Up</button>
         </div>
         
-        <!-- Login Form -->
         <div class="auth-form active" id="loginForm">
             <form onsubmit="login(event)">
                 <div class="form-group">
@@ -363,32 +106,29 @@
                         <input type="email" id="loginEmail" placeholder="you@example.com" required>
                     </div>
                 </div>
-                
                 <div class="form-group">
                     <label>Password <span class="required">*</span></label>
                     <div class="input-wrapper">
                         <i class="fas fa-lock"></i>
                         <input type="password" id="loginPassword" placeholder="Enter your password" required>
-                        <button type="button" class="password-toggle" onclick="togglePassword('loginPassword', this)">
-                            <i class="fas fa-eye"></i>
-                        </button>
+                        <button type="button" class="password-toggle" onclick="togglePassword('loginPassword', this)"><i class="fas fa-eye"></i></button>
                     </div>
                 </div>
-                
                 <div class="remember-forgot">
-                    <label>
-                        <input type="checkbox" id="rememberMe"> Remember me
-                    </label>
+                    <label><input type="checkbox" id="rememberMe"> Remember me</label>
                     <a href="#" onclick="forgotPassword()">Forgot Password?</a>
                 </div>
-                
-                <button type="submit" class="auth-btn">
-                    <i class="fas fa-sign-in-alt"></i> Login
-                </button>
+                <button type="submit" class="auth-btn"><i class="fas fa-sign-in-alt"></i> Login</button>
             </form>
+            
+            <div class="auth-divider"><span>or continue with</span></div>
+            <div class="social-login">
+                <a href="https://www.instagram.com/metalartsialkot/" target="_blank" class="social-btn" style="color:#E4405F;"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/metalartsialkot" target="_blank" class="social-btn" style="color:#1877F2;"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://wa.me/923099915777" target="_blank" class="social-btn" style="color:#25D366;"><i class="fab fa-whatsapp"></i></a>
+            </div>
         </div>
         
-        <!-- Signup Form -->
         <div class="auth-form" id="signupForm">
             <form onsubmit="signup(event)">
                 <div class="form-group">
@@ -398,7 +138,6 @@
                         <input type="text" id="signupName" placeholder="e.g., Ahmed Khan" required>
                     </div>
                 </div>
-                
                 <div class="form-group">
                     <label>Email Address <span class="required">*</span></label>
                     <div class="input-wrapper">
@@ -406,7 +145,6 @@
                         <input type="email" id="signupEmail" placeholder="you@example.com" required>
                     </div>
                 </div>
-                
                 <div class="form-group">
                     <label>Phone Number <span class="required">*</span></label>
                     <div class="input-wrapper">
@@ -414,68 +152,39 @@
                         <input type="tel" id="signupPhone" placeholder="e.g., 0300-1234567" required>
                     </div>
                 </div>
-                
                 <div class="form-group">
                     <label>Password <span class="required">*</span></label>
                     <div class="input-wrapper">
                         <i class="fas fa-lock"></i>
                         <input type="password" id="signupPassword" placeholder="Minimum 6 characters" minlength="6" required>
-                        <button type="button" class="password-toggle" onclick="togglePassword('signupPassword', this)">
-                            <i class="fas fa-eye"></i>
-                        </button>
+                        <button type="button" class="password-toggle" onclick="togglePassword('signupPassword', this)"><i class="fas fa-eye"></i></button>
                     </div>
                 </div>
-                
-                <button type="submit" class="auth-btn">
-                    <i class="fas fa-user-plus"></i> Create Account
-                </button>
+                <button type="submit" class="auth-btn"><i class="fas fa-user-plus"></i> Create Account</button>
             </form>
         </div>
         
-        <!-- Profile View -->
         <div class="profile-view" id="profileView">
             <div class="profile-avatar" id="profileAvatar">A</div>
             <div class="profile-name" id="profileName">---</div>
             <div class="profile-email" id="profileEmail">---</div>
-            
             <div class="profile-stats">
-                <div class="profile-stat">
-                    <div class="profile-stat-number" id="profileOrders">0</div>
-                    <div class="profile-stat-label">Orders</div>
-                </div>
-                <div class="profile-stat">
-                    <div class="profile-stat-number" id="profilePromos">0</div>
-                    <div class="profile-stat-label">Promos</div>
-                </div>
-                <div class="profile-stat">
-                    <div class="profile-stat-number" id="profileReviews">0</div>
-                    <div class="profile-stat-label">Reviews</div>
-                </div>
+                <div class="profile-stat"><div class="profile-stat-number" id="profileOrders">0</div><div class="profile-stat-label">Orders</div></div>
+                <div class="profile-stat"><div class="profile-stat-number" id="profilePromos">0</div><div class="profile-stat-label">Promos</div></div>
+                <div class="profile-stat"><div class="profile-stat-number" id="profileReviews">0</div><div class="profile-stat-label">Reviews</div></div>
             </div>
-            
-            <button class="logout-btn" onclick="logout()">
-                <i class="fas fa-sign-out-alt"></i> Logout
-            </button>
+            <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
         </div>
         
-        <!-- Divider -->
-        <div class="auth-divider">
-            <span>or</span>
-        </div>
-        
-        <!-- Back Home -->
-        <a href="index.html" class="back-home">
-            <i class="fas fa-arrow-left"></i> Back to Home
-        </a>
+        <div class="auth-divider"><span>or</span></div>
+        <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> Back to Home</a>
     </div>
     
     <script>
-        // ===== AUTH TAB SWITCH =====
         function showAuthTab(tab) {
             document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
             document.getElementById('profileView').classList.remove('active');
-            
             if (tab === 'login') {
                 document.querySelectorAll('.auth-tab')[0].classList.add('active');
                 document.getElementById('loginForm').classList.add('active');
@@ -485,66 +194,34 @@
             }
         }
         
-        // ===== PASSWORD TOGGLE =====
         function togglePassword(inputId, button) {
             const input = document.getElementById(inputId);
             const icon = button.querySelector('i');
-            
-            if (input.type === 'password') {
-                input.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-            } else {
-                input.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-            }
+            if (input.type === 'password') { input.type = 'text'; icon.classList.remove('fa-eye'); icon.classList.add('fa-eye-slash'); }
+            else { input.type = 'password'; icon.classList.remove('fa-eye-slash'); icon.classList.add('fa-eye'); }
         }
         
-        // ===== LOGIN =====
         function login(event) {
             event.preventDefault();
-            
             const email = document.getElementById('loginEmail').value.trim();
             const password = document.getElementById('loginPassword').value.trim();
+            if (!email || !password) { alert('⚠️ Please fill all fields!'); return; }
             
-            if (!email || !password) {
-                alert('⚠️ Please fill all fields!');
-                return;
-            }
-            
-            // Check admin credentials
             if (email === 'admin@metalartsialkot.com' && password === 'admin123') {
-                const adminUser = {
-                    name: 'Admin',
-                    email: 'admin@metalartsialkot.com',
-                    phone: '03009991577',
-                    role: 'admin'
-                };
-                localStorage.setItem('metalUser', JSON.stringify(adminUser));
+                localStorage.setItem('metalUser', JSON.stringify({name:'Admin', email, phone:'03009991577', role:'admin'}));
                 alert('✅ Welcome Admin!');
                 window.location.href = 'dashboard.html';
                 return;
             }
-            
-            // Check manager credentials
             if (email === 'manager@metalartsialkot.com' && password === 'manager123') {
-                const managerUser = {
-                    name: 'Manager',
-                    email: 'manager@metalartsialkot.com',
-                    phone: '03009991578',
-                    role: 'manager'
-                };
-                localStorage.setItem('metalUser', JSON.stringify(managerUser));
+                localStorage.setItem('metalUser', JSON.stringify({name:'Manager', email, phone:'03009991578', role:'manager'}));
                 alert('✅ Welcome Manager!');
                 window.location.href = 'dashboard.html';
                 return;
             }
             
-            // Check registered users
             const users = JSON.parse(localStorage.getItem('metalUsers') || '[]');
             const user = users.find(u => u.email === email && u.password === password);
-            
             if (user) {
                 user.role = 'customer';
                 localStorage.setItem('metalUser', JSON.stringify(user));
@@ -555,98 +232,56 @@
             }
         }
         
-        // ===== SIGNUP =====
         function signup(event) {
             event.preventDefault();
-            
             const name = document.getElementById('signupName').value.trim();
             const email = document.getElementById('signupEmail').value.trim();
             const phone = document.getElementById('signupPhone').value.trim();
             const password = document.getElementById('signupPassword').value.trim();
+            if (!name || !email || !phone || !password) { alert('⚠️ Please fill all fields!'); return; }
+            if (password.length < 6) { alert('⚠️ Password must be at least 6 characters!'); return; }
             
-            if (!name || !email || !phone || !password) {
-                alert('⚠️ Please fill all fields!');
-                return;
-            }
-            
-            if (password.length < 6) {
-                alert('⚠️ Password must be at least 6 characters!');
-                return;
-            }
-            
-            // Check if email already exists
             const users = JSON.parse(localStorage.getItem('metalUsers') || '[]');
-            if (users.find(u => u.email === email)) {
-                alert('❌ Email already registered!');
-                return;
-            }
+            if (users.find(u => u.email === email)) { alert('❌ Email already registered!'); return; }
             
-            const newUser = {
-                name,
-                email,
-                phone,
-                password,
-                role: 'customer',
-                createdAt: new Date().toISOString()
-            };
-            
+            const newUser = {name, email, phone, password, role:'customer', createdAt: new Date().toISOString()};
             users.push(newUser);
             localStorage.setItem('metalUsers', JSON.stringify(users));
-            
-            newUser.role = 'customer';
             localStorage.setItem('metalUser', JSON.stringify(newUser));
-            
             showProfile(newUser);
             alert('✅ Account created successfully!');
         }
         
-        // ===== SHOW PROFILE =====
         function showProfile(user) {
             document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
             document.getElementById('profileView').classList.add('active');
-            
             document.getElementById('profileAvatar').textContent = user.name.charAt(0).toUpperCase();
             document.getElementById('profileName').textContent = user.name;
             document.getElementById('profileEmail').textContent = '📧 ' + user.email;
             
-            // Load stats
             const orders = JSON.parse(localStorage.getItem('metalOrders') || '[]');
-            const userOrders = orders.filter(o => o.email === user.email);
-            document.getElementById('profileOrders').textContent = userOrders.length;
-            
+            document.getElementById('profileOrders').textContent = orders.filter(o => o.email === user.email).length;
             const promos = JSON.parse(localStorage.getItem('metalPromoCodes') || '[]');
-            const userPromos = promos.filter(p => p.email === user.email);
-            document.getElementById('profilePromos').textContent = userPromos.length;
-            
+            document.getElementById('profilePromos').textContent = promos.filter(p => p.email === user.email).length;
             const reviews = JSON.parse(localStorage.getItem('metalReviews') || '[]');
-            const userReviews = reviews.filter(r => r.email === user.email);
-            document.getElementById('profileReviews').textContent = userReviews.length;
+            document.getElementById('profileReviews').textContent = reviews.filter(r => r.email === user.email).length;
         }
         
-        // ===== LOGOUT =====
         function logout() {
             localStorage.removeItem('metalUser');
             showAuthTab('login');
             alert('✅ Logged out successfully!');
         }
         
-        // ===== FORGOT PASSWORD =====
         function forgotPassword() {
             const email = document.getElementById('loginEmail').value.trim();
-            
-            if (!email) {
-                alert('⚠️ Please enter your email address first!');
-                return;
-            }
-            
-            alert('📧 Password reset link sent to ' + email + '\n\n(For demo: Contact admin at info@metalartsialkot.com)');
+            if (!email) { alert('⚠️ Please enter your email first!'); return; }
+            alert('📧 Password reset link sent to ' + email);
         }
         
-        // ===== CHECK EXISTING SESSION =====
         document.addEventListener('DOMContentLoaded', () => {
             const currentUser = JSON.parse(localStorage.getItem('metalUser') || 'null');
-            
             if (currentUser) {
                 if (currentUser.role === 'admin' || currentUser.role === 'manager') {
                     window.location.href = 'dashboard.html';
