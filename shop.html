@@ -5,26 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop | Metal Art Sialkot - Premium Islamic Wall Art</title>
     
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/logo.png">
-    
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- EmailJS -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     
     <style>
         :root {
             --gold: #C4A265;
             --gold-light: #D4B87A;
-            --gold-dark: #B8944A;
             --dark: #1A1815;
             --dark-light: #2C2824;
             --cream: #FAF7F2;
@@ -32,553 +21,145 @@
             --green: #1B5E20;
             --red: #E53935;
         }
-        
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--cream); color: #2C2824; overflow-x: hidden; padding-top: 100px; }
         
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--cream);
-            color: #2C2824;
-            overflow-x: hidden;
-        }
+        .fixed-header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; }
+        .azadi-banner { background: linear-gradient(135deg, #01411C, #1a7a3a, #01411C); padding: 7px 15px; text-align: center; border-bottom: 2px solid #C4A265; }
+        .azadi-content { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .azadi-title { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 700; color: #C4A265; }
+        .azadi-offer { font-size: 11px; color: white; }
+        .azadi-offer strong { color: #C4A265; font-size: 13px; }
+        .azadi-save { background: #FF6B6B; color: white; padding: 3px 12px; border-radius: 50px; font-size: 10px; font-weight: 700; animation: pulse 1.5s infinite; }
+        .azadi-btn { background: #C4A265; color: #01411C; padding: 5px 18px; border-radius: 50px; font-weight: 700; font-size: 10px; text-decoration: none; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
         
-        /* ===== NAVIGATION ===== */
-        .premium-nav {
-            background: rgba(250, 247, 242, 0.98);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(196, 162, 101, 0.2);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
+        .premium-nav { background: rgba(250, 247, 242, 0.98); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(196, 162, 101, 0.2); }
+        .nav-container { max-width: 1300px; margin: 0 auto; padding: 9px 15px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+        .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+        .nav-logo img { width: 38px; height: 38px; border-radius: 8px; border: 2px solid var(--gold); object-fit: contain; background: #F5F0E8; }
+        .nav-logo-text { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 700; color: var(--gold); line-height: 1; }
+        .nav-logo-sub { font-size: 6px; color: #8B7355; letter-spacing: 1px; text-transform: uppercase; }
+        .nav-links { display: flex; gap: 12px; list-style: none; }
+        .nav-links a { color: var(--dark); text-decoration: none; font-size: 9px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+        .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+        .nav-actions { display: flex; align-items: center; gap: 4px; }
+        .nav-icon-btn { background: none; border: none; font-size: 14px; cursor: pointer; position: relative; color: var(--dark); padding: 5px; border-radius: 50%; }
+        .nav-cart-badge { position: absolute; top: -2px; right: -2px; background: var(--red); color: white; font-size: 7px; width: 14px; height: 14px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .mobile-menu-btn { display: none; background: none; border: none; font-size: 18px; cursor: pointer; }
+        .mobile-menu { display: none; background: white; padding: 10px; }
+        .mobile-menu.active { display: block; }
+        .mobile-menu a { display: block; padding: 10px; color: var(--dark); text-decoration: none; font-size: 12px; border-bottom: 1px solid #eee; }
         
-        .premium-nav.scrolled {
-            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
-        }
+        .shop-hero { background: linear-gradient(135deg, #1A1815, #2C2824); padding: 60px 20px 40px; text-align: center; }
+        .shop-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: 40px; color: white; }
+        .shop-hero p { color: #D4C5B2; font-size: 13px; }
         
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 12px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-        }
+        .filter-bar { background: white; border-bottom: 1px solid rgba(196,162,101,0.2); padding: 12px 20px; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+        .filter-btn { padding: 8px 18px; border-radius: 50px; border: 2px solid var(--gold); background: white; color: var(--gold); cursor: pointer; font-size: 10px; font-weight: 600; transition: all 0.3s; }
+        .filter-btn:hover, .filter-btn.active { background: var(--gold); color: white; }
         
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            flex-shrink: 0;
-        }
+        .shop-section { padding: 40px 20px 60px; max-width: 1300px; margin: 0 auto; }
+        .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .product-card { background: white; border: 1px solid rgba(196,162,101,0.1); border-radius: 14px; overflow: hidden; transition: all 0.3s; cursor: pointer; }
+        .product-card:hover { transform: translateY(-6px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        .product-image { position: relative; aspect-ratio: 1; overflow: hidden; background: linear-gradient(135deg, #F5F0E8, #E8E0D5); }
+        .product-image img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
+        .product-card:hover .product-image img { transform: scale(1.08); }
+        .product-badge { position: absolute; top: 8px; left: 8px; background: var(--gold); color: white; padding: 4px 12px; border-radius: 50px; font-size: 8px; font-weight: 700; z-index: 3; }
+        .product-info { padding: 12px; }
+        .product-code { font-size: 8px; color: #8B7355; background: var(--cream-dark); padding: 2px 8px; border-radius: 3px; font-family: monospace; display: inline-block; margin-bottom: 5px; }
+        .product-name { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+        .product-price { color: var(--gold); font-weight: 700; font-size: 15px; }
+        .product-size { font-size: 9px; color: var(--green); background: #E8F5E9; padding: 2px 8px; border-radius: 3px; display: inline-block; margin-top: 3px; }
+        .product-sold { font-size: 9px; color: #666; margin-top: 3px; }
+        .stock-low { color: var(--red); font-size: 9px; margin-top: 3px; }
+        .product-actions { display: flex; gap: 6px; margin-top: 8px; }
+        .btn-cart, .btn-buy { flex: 1; padding: 8px; border-radius: 50px; border: none; cursor: pointer; font-size: 9px; font-weight: 600; }
+        .btn-cart { background: var(--dark); color: white; }
+        .btn-buy { background: linear-gradient(135deg, #C4A265, #D4B87A); color: white; }
         
-        .nav-logo img {
-            width: 45px;
-            height: 45px;
-            border-radius: 10px;
-            object-fit: contain;
-            border: 2px solid var(--gold);
-        }
+        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; background: #25D366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; z-index: 998; box-shadow: 0 5px 20px rgba(37,211,102,0.4); text-decoration: none; animation: pulseWA 2s infinite; }
+        @keyframes pulseWA { 0%, 100% { box-shadow: 0 5px 20px rgba(37,211,102,0.4); } 50% { box-shadow: 0 5px 35px rgba(37,211,102,0.8); } }
         
-        .nav-logo-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--gold);
-            line-height: 1;
-        }
+        .live-activity { position: fixed; bottom: 15px; left: 15px; z-index: 999; max-width: 290px; }
+        .live-activity-item { background: white; border-radius: 10px; padding: 10px 14px; box-shadow: 0 5px 20px rgba(0,0,0,0.15); margin-bottom: 6px; font-size: 11px; border: 1px solid #E8E0D5; cursor: pointer; animation: slideIn 0.5s ease; }
+        @keyframes slideIn { 0% { transform: translateX(-80px); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } }
         
-        .nav-logo-sub {
-            font-size: 7px;
-            color: #8B7355;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-top: 2px;
-        }
+        .cart-sidebar { position: fixed; top: 0; right: -400px; width: 100%; max-width: 380px; height: 100%; background: white; z-index: 99999; transition: right 0.3s; display: flex; flex-direction: column; }
+        .cart-sidebar.open { right: 0; }
+        .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 99998; display: none; }
+        .cart-overlay.show { display: block; }
         
-        .nav-links {
-            display: flex;
-            gap: 18px;
-            list-style: none;
-        }
+        .toast { position: fixed; bottom: 80px; right: 20px; background: var(--dark); color: white; padding: 14px 22px; border-radius: 10px; z-index: 99999; font-size: 12px; animation: slideUp 0.5s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        @keyframes slideUp { 0% { transform: translateY(50px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
         
-        .nav-links a {
-            color: var(--dark);
-            text-decoration: none;
-            font-size: 10px;
-            font-weight: 600;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            transition: all 0.3s;
-            position: relative;
-            padding: 5px 0;
-        }
-        
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--gold);
-        }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gold);
-            transition: width 0.3s ease;
-        }
-        
-        .nav-links a:hover::after,
-        .nav-links a.active::after {
-            width: 100%;
-        }
-        
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-shrink: 0;
-        }
-        
-        .nav-icon-btn {
-            background: none;
-            border: none;
-            font-size: 16px;
-            cursor: pointer;
-            position: relative;
-            color: var(--dark);
-            padding: 8px;
-            transition: all 0.3s;
-            border-radius: 50%;
-        }
-        
-        .nav-icon-btn:hover {
-            background: var(--cream-dark);
-            color: var(--gold);
-        }
-        
-        .nav-cart-badge {
-            position: absolute;
-            top: 0;
-            right: 0;
-            background: var(--red);
-            color: white;
-            font-size: 8px;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-        }
-        
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 22px;
-            cursor: pointer;
-            color: var(--dark);
-        }
-        
-        .mobile-menu {
-            display: none;
-            position: fixed;
-            top: 70px;
-            left: 0;
-            width: 100%;
-            background: white;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            z-index: 999;
-        }
-        
-        .mobile-menu.active {
-            display: block;
-        }
-        
-        .mobile-menu a {
-            display: block;
-            padding: 12px;
-            color: var(--dark);
-            text-decoration: none;
-            font-size: 13px;
-            border-bottom: 1px solid #eee;
-            font-weight: 500;
-        }
-        
-        /* ===== SHOP HERO ===== */
-        .shop-hero {
-            background: linear-gradient(135deg, #1A1815, #2C2824);
-            padding: 120px 20px 60px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .shop-hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at center, rgba(196,162,101,0.15), transparent 60%);
-        }
-        
-        .shop-hero h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 48px;
-            color: white;
-            position: relative;
-            z-index: 2;
-            margin-bottom: 10px;
-        }
-        
-        .shop-hero p {
-            color: #D4C5B2;
-            font-size: 15px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        /* ===== FILTER BAR ===== */
-        .filter-bar {
-            background: white;
-            border-bottom: 1px solid rgba(196,162,101,0.2);
-            padding: 15px 20px;
-            position: sticky;
-            top: 70px;
-            z-index: 100;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        
-        .filter-btn {
-            padding: 8px 20px;
-            border-radius: 50px;
-            border: 2px solid var(--gold);
-            background: white;
-            color: var(--gold);
-            cursor: pointer;
-            font-size: 11px;
-            font-weight: 600;
-            transition: all 0.3s;
-            letter-spacing: 0.5px;
-        }
-        
-        .filter-btn:hover,
-        .filter-btn.active {
-            background: var(--gold);
-            color: white;
-        }
-        
-        /* ===== PRODUCT GRID ===== */
-        .shop-section {
-            padding: 40px 20px 80px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 25px;
-        }
-        
-        .product-card {
-            background: white;
-            border: 1px solid rgba(196, 162, 101, 0.1);
-            border-radius: 16px;
-            overflow: hidden;
-            transition: all 0.4s;
-            cursor: pointer;
-            position: relative;
-        }
-        
-        .product-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-        
-        .product-image {
-            position: relative;
-            overflow: hidden;
-            aspect-ratio: 1;
-            background: var(--cream-dark);
-        }
-        
-        .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-        
-        .product-card:hover .product-image img {
-            transform: scale(1.1);
-        }
-        
-        .product-badge {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: var(--gold);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 50px;
-            font-size: 9px;
-            font-weight: 700;
-            z-index: 2;
-            letter-spacing: 1px;
-        }
-        
-        .product-badge.bestseller {
-            background: var(--red);
-        }
-        
-        .product-badge.low-stock {
-            background: #FF9800;
-        }
-        
-        .product-info {
-            padding: 15px;
-        }
-        
-        .product-code {
-            font-size: 9px;
-            color: #8B7355;
-            background: var(--cream-dark);
-            padding: 3px 10px;
-            border-radius: 4px;
-            font-family: monospace;
-            display: inline-block;
-            margin-bottom: 8px;
-        }
-        
-        .product-name {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 5px;
-            font-family: 'Cormorant Garamond', serif;
-        }
-        
-        .product-price {
-            color: var(--gold);
-            font-weight: 700;
-            font-size: 18px;
-        }
-        
-        .product-size {
-            font-size: 10px;
-            color: var(--green);
-            background: #E8F5E9;
-            padding: 3px 10px;
-            border-radius: 4px;
-            display: inline-block;
-            margin-top: 5px;
-        }
-        
-        .product-sold {
-            font-size: 10px;
-            color: #666;
-            margin-top: 5px;
-        }
-        
-        .product-actions {
-            display: flex;
-            gap: 8px;
-            margin-top: 12px;
-        }
-        
-        .btn-add-cart {
-            flex: 1;
-            background: var(--dark);
-            color: white;
-            padding: 10px;
-            border-radius: 50px;
-            border: none;
-            cursor: pointer;
-            font-size: 10px;
-            font-weight: 600;
-            transition: all 0.3s;
-            letter-spacing: 0.5px;
-        }
-        
-        .btn-add-cart:hover {
-            background: var(--dark-light);
-        }
-        
-        .btn-buy-now {
-            flex: 1;
-            background: linear-gradient(135deg, #C4A265, #D4B87A);
-            color: white;
-            padding: 10px;
-            border-radius: 50px;
-            border: none;
-            cursor: pointer;
-            font-size: 10px;
-            font-weight: 600;
-            transition: all 0.3s;
-            letter-spacing: 0.5px;
-        }
-        
-        .btn-buy-now:hover {
-            box-shadow: 0 5px 20px rgba(196, 162, 101, 0.4);
-        }
-        
-        .btn-view {
-            width: 100%;
-            margin-top: 8px;
-            padding: 8px;
-            background: none;
-            border: 1px solid #E8E0D5;
-            border-radius: 50px;
-            font-size: 9px;
-            cursor: pointer;
-            transition: all 0.3s;
-            color: #666;
-        }
-        
-        .btn-view:hover {
-            background: var(--cream-dark);
-            color: var(--gold);
-        }
-        
-        /* ===== CART SIDEBAR ===== */
-        .cart-sidebar {
-            position: fixed;
-            top: 0;
-            right: -420px;
-            width: 100%;
-            max-width: 400px;
-            height: 100%;
-            background: white;
-            z-index: 999999;
-            transition: right 0.4s ease;
-            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .cart-sidebar.open {
-            right: 0;
-        }
-        
-        .cart-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: 999998;
-            display: none;
-        }
-        
-        .cart-overlay.show {
-            display: block;
-        }
-        
-        /* ===== TOAST NOTIFICATION ===== */
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--dark);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 10px;
-            z-index: 9999;
-            animation: slideUp 0.5s ease;
-            font-size: 13px;
-        }
-        
-        @keyframes slideUp {
-            0% { transform: translateY(50px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
-        
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 1200px) {
-            .product-grid { grid-template-columns: repeat(3, 1fr); }
-        }
+        .footer-social a { color: #8B7355; transition: all 0.3s; }
+        .footer-social a:hover { color: #C4A265 !important; transform: translateY(-2px); }
         
         @media (max-width: 1024px) {
             .nav-links { display: none; }
             .mobile-menu-btn { display: block; }
+            .product-grid { grid-template-columns: repeat(3, 1fr); }
         }
-        
         @media (max-width: 768px) {
-            .product-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
-            .shop-hero h1 { font-size: 36px; }
-            .nav-logo-text { font-size: 18px; }
-            .filter-bar { top: 60px; }
+            body { padding-top: 92px; }
+            .product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
         }
-        
         @media (max-width: 480px) {
-            .product-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-            .shop-hero h1 { font-size: 28px; }
-            .product-info { padding: 10px; }
-            .product-name { font-size: 14px; }
-            .product-price { font-size: 15px; }
+            .product-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="premium-nav" id="mainNav">
-        <div class="nav-container">
-            <a href="index.html" class="nav-logo">
-                <img src="images/logo.png" alt="Metal Art Sialkot" onerror="this.src='https://via.placeholder.com/200x200/C4A265/FFFFFF?text=MAS'">
-                <div>
-                    <div class="nav-logo-text">Metal Art Sialkot</div>
-                    <div class="nav-logo-sub">Premium Islamic Art</div>
-                </div>
-            </a>
-            
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="shop.html" class="active">Shop</a></li>
-                <li><a href="product.html">Products</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="reviews.html">Reviews</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="policies.html">Policies</a></li>
-            </ul>
-            
-            <div class="nav-actions">
-                <button class="nav-icon-btn" onclick="window.location.href='login.html'" title="Account">
-                    <i class="fas fa-user"></i>
-                </button>
-                <button class="nav-icon-btn" onclick="toggleCart()" title="Cart">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="nav-cart-badge" id="cartBadge" style="display:none;">0</span>
-                </button>
-                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
-                    <i class="fas fa-bars"></i>
-                </button>
+    <!-- Fixed Header -->
+    <div class="fixed-header">
+        <div class="azadi-banner">
+            <div class="azadi-content">
+                <span>🇵🇰</span>
+                <span class="azadi-title">Azadi Offer</span>
+                <span class="azadi-offer">Buy <strong>Masha Allah</strong> + <strong>Bismillah</strong> = <strong>Rs. 10,000</strong></span>
+                <span class="azadi-save">SAVE Rs. 2,000</span>
+                <a href="#products" class="azadi-btn">Shop Now</a>
             </div>
         </div>
-        
-        <!-- Mobile Menu -->
-        <div class="mobile-menu" id="mobileMenu">
-            <a href="index.html">🏠 Home</a>
-            <a href="shop.html">🛍️ Shop</a>
-            <a href="product.html">📦 Products</a>
-            <a href="gallery.html">📸 Gallery</a>
-            <a href="reviews.html">⭐ Reviews</a>
-            <a href="about.html">ℹ️ About</a>
-            <a href="policies.html">📋 Policies</a>
-            <a href="login.html">👤 Login</a>
-        </div>
-    </nav>
+        <nav class="premium-nav">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">
+                    <img src="images/logo.png" alt="Logo" onerror="this.onerror=null;this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23C4A265%22/><text x=%2250%22 y=%2270%22 font-size=%2250%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22Georgia%22 font-weight=%22bold%22>M</text></svg>'">
+                    <div>
+                        <div class="nav-logo-text">Metal Art Sialkot</div>
+                        <div class="nav-logo-sub">Premium Islamic Art</div>
+                    </div>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html" class="active">Shop</a></li>
+                    <li><a href="product.html">Products</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="reviews.html">Reviews</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="policies.html">Policies</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="nav-icon-btn" onclick="window.location.href='login.html'"><i class="fas fa-user"></i></button>
+                    <button class="nav-icon-btn" onclick="toggleCart()"><i class="fas fa-shopping-cart"></i><span class="nav-cart-badge" id="cartBadge" style="display:none;">0</span></button>
+                    <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+                </div>
+            </div>
+            <div class="mobile-menu" id="mobileMenu">
+                <a href="index.html">🏠 Home</a>
+                <a href="shop.html">🛍️ Shop</a>
+                <a href="product.html">📦 Products</a>
+                <a href="gallery.html">📸 Gallery</a>
+                <a href="reviews.html">⭐ Reviews</a>
+                <a href="about.html">ℹ️ About</a>
+                <a href="policies.html">📋 Policies</a>
+                <a href="login.html">👤 Login</a>
+                <a href="https://wa.me/923099915777" target="_blank">💬 WhatsApp</a>
+            </div>
+        </nav>
+    </div>
     
     <!-- Shop Hero -->
     <section class="shop-hero">
@@ -588,366 +169,204 @@
     
     <!-- Filter Bar -->
     <div class="filter-bar">
-        <button class="filter-btn active" data-filter="all">All Products</button>
+        <button class="filter-btn active" data-filter="all">All</button>
         <button class="filter-btn" data-filter="calligraphy">Calligraphy</button>
         <button class="filter-btn" data-filter="ayat">Ayat ul Kursi</button>
         <button class="filter-btn" data-filter="kalima">Kalima</button>
         <button class="filter-btn" data-filter="bismillah">Bismillah</button>
     </div>
     
-    <!-- Product Grid -->
-    <section class="shop-section">
-        <div class="product-grid" id="productGrid">
-            <!-- Products will be loaded here -->
-        </div>
+    <!-- Products -->
+    <section class="shop-section" id="products">
+        <div class="product-grid" id="productGrid"></div>
     </section>
     
-    <!-- Cart Sidebar -->
+    <!-- Premium Footer -->
+    <footer style="background:linear-gradient(180deg, #0D0B09, #1A1815);color:#D4C5B2;">
+        <div style="height:3px;background:linear-gradient(90deg, transparent, #C4A265, transparent);"></div>
+        <div style="max-width:1200px;margin:0 auto;padding:50px 20px 25px;">
+            <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1.3fr;gap:30px;text-align:left;">
+                <div>
+                    <div style="display:flex;align-items:center;gap:12px;margin-bottom:15px;">
+                        <img src="images/logo.png" alt="Logo" style="width:48px;height:48px;border-radius:8px;border:1px solid #C4A265;" onerror="this.onerror=null;this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2215%22 fill=%22%23C4A265%22/><text x=%2250%22 y=%2270%22 font-size=%2250%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22Georgia%22 font-weight=%22bold%22>M</text></svg>'">
+                        <div><h3 style="color:#C4A265;font-size:20px;font-family:'Cormorant Garamond',serif;">Metal Art Sialkot</h3><p style="font-size:7px;color:#8B7355;">PREMIUM ISLAMIC ART</p></div>
+                    </div>
+                    <div class="footer-social" style="display:flex;gap:15px;font-size:16px;">
+                        <a href="https://www.instagram.com/metalartsialkot/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/metalartsialkot" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.youtube.com/@Metalartsialkot" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.pinterest.com/metalartsialkot/" target="_blank"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="https://www.linkedin.com/company/metalartsialkot" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://wa.me/923099915777" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="color:#C4A265;font-size:11px;font-family:'Cormorant Garamond',serif;margin-bottom:15px;letter-spacing:2px;">QUICK LINKS</h4>
+                    <div style="display:flex;flex-direction:column;gap:8px;font-size:11px;">
+                        <a href="index.html" style="color:#8B7355;text-decoration:none;">Home</a>
+                        <a href="shop.html" style="color:#8B7355;text-decoration:none;">Shop</a>
+                        <a href="product.html" style="color:#8B7355;text-decoration:none;">Products</a>
+                        <a href="gallery.html" style="color:#8B7355;text-decoration:none;">Gallery</a>
+                        <a href="reviews.html" style="color:#8B7355;text-decoration:none;">Reviews</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="color:#C4A265;font-size:11px;font-family:'Cormorant Garamond',serif;margin-bottom:15px;letter-spacing:2px;">POLICIES</h4>
+                    <div style="display:flex;flex-direction:column;gap:8px;font-size:11px;">
+                        <a href="policies.html" style="color:#8B7355;text-decoration:none;">Shipping</a>
+                        <a href="policies.html" style="color:#8B7355;text-decoration:none;">Returns</a>
+                        <a href="policies.html" style="color:#8B7355;text-decoration:none;">Privacy</a>
+                        <a href="policies.html" style="color:#8B7355;text-decoration:none;">Terms</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="color:#C4A265;font-size:11px;font-family:'Cormorant Garamond',serif;margin-bottom:15px;letter-spacing:2px;">CONTACT</h4>
+                    <div style="display:flex;flex-direction:column;gap:10px;font-size:11px;color:#8B7355;">
+                        <span><i class="fab fa-whatsapp" style="color:#C4A265;"></i> 0309-9915777</span>
+                        <span><i class="fas fa-globe" style="color:#C4A265;"></i> metalartsialkot.com</span>
+                        <span><i class="fas fa-envelope" style="color:#C4A265;"></i> info@metalartsialkot.com</span>
+                        <span style="font-size:10px;"><i class="fas fa-map-marker-alt" style="color:#C4A265;"></i> Flat CB-008, Scheme 33, Karachi</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="border-top:1px solid rgba(196,162,101,0.1);padding:15px;text-align:center;">
+            <p style="font-size:8px;color:#555;letter-spacing:2px;">© 2025 METAL ART SIALKOT</p>
+        </div>
+    </footer>
+    
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/923099915777" target="_blank" class="whatsapp-float"><i class="fab fa-whatsapp"></i></a>
+    
+    <!-- Live Activity -->
+    <div class="live-activity" id="liveActivity"></div>
+    
+    <!-- Cart -->
     <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
     <div class="cart-sidebar" id="cartSidebar">
-        <div style="padding:18px 20px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center;">
-            <h2 style="font-family:'Cormorant Garamond',serif;font-size:22px;margin:0;">🛒 Your Cart</h2>
-            <button onclick="closeCart()" style="background:none;border:none;font-size:28px;cursor:pointer;color:#999;">✕</button>
-        </div>
-        <div id="cartItems" style="flex:1;overflow-y:auto;padding:15px 20px;">
-            <div style="text-align:center;padding:40px 0;color:#999;">
-                <i class="fas fa-shopping-cart" style="font-size:50px;color:#ddd;display:block;margin-bottom:15px;"></i>
-                <p>Your cart is empty</p>
-            </div>
-        </div>
-        <div id="cartFooter" style="display:none;padding:18px 20px;border-top:2px solid #eee;background:#FAF7F2;">
-            <div id="offerBadge" style="display:none;background:#E8F5E9;padding:10px 15px;border-radius:10px;margin-bottom:10px;border:2px solid #01411C;">
-                <div style="font-size:13px;font-weight:700;color:#01411C;">🇵🇰 AZADI OFFER APPLIED!</div>
-                <div style="font-size:10px;color:#1B5E20;">You saved Rs. 2,000</div>
-            </div>
-            <div style="display:flex;justify-content:space-between;font-size:18px;font-weight:700;padding:10px 0;border-top:2px solid #eee;">
-                <span>Total:</span>
-                <span style="color:#C4A265;" id="cartTotalPrice">Rs. 0</span>
-            </div>
-            <button onclick="checkout()" style="width:100%;padding:14px;background:linear-gradient(135deg,#25D366,#20B85A);color:white;border:none;border-radius:50px;font-weight:700;font-size:16px;cursor:pointer;margin-top:10px;">Proceed to Checkout</button>
+        <div style="padding:15px 20px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;"><h3 style="font-family:'Cormorant Garamond',serif;font-size:20px;">🛒 Cart</h3><button onclick="closeCart()" style="background:none;border:none;font-size:22px;cursor:pointer;">✕</button></div>
+        <div id="cartItems" style="flex:1;overflow-y:auto;padding:15px;"></div>
+        <div id="cartFooter" style="display:none;padding:15px 20px;border-top:2px solid #eee;">
+            <div id="offerBadge" style="display:none;background:#E8F5E9;padding:8px 12px;border-radius:8px;margin-bottom:8px;font-size:11px;color:#01411C;">🇵🇰 Azadi Offer Applied!</div>
+            <div style="display:flex;justify-content:space-between;font-size:16px;font-weight:700;margin-bottom:10px;"><span>Total:</span><span style="color:#C4A265;" id="cartTotalPrice">Rs. 0</span></div>
+            <button onclick="checkout()" style="width:100%;padding:12px;background:#25D366;color:white;border:none;border-radius:50px;font-weight:700;cursor:pointer;">Checkout</button>
         </div>
     </div>
     
     <script>
-        // ========================================
-        // PRODUCTS DATA
-        // ========================================
+        const FORMSPREE_ID = 'mnpazgbe';
+        const ADMIN_WHATSAPP = '923099915777';
+        const ADMIN_EMAIL = 'info@metalartsialkot.com';
+        
         const products = [
-            {
-                id: 1, 
-                code: "MAS-001", 
-                name: "Masha Allah", 
-                cat: "calligraphy", 
-                price: 6000, 
-                img: "images/products/masha-allah.jpg", 
-                best: true, 
-                stock: 5, 
-                sold: 234, 
-                size: '40"W × 10"H',
-                desc: "Premium laser cut Masha Allah Islamic wall art. Precision crafted 0.8mm stainless steel with golden mirror finish."
-            },
-            {
-                id: 2, 
-                code: "MAS-002", 
-                name: "Bismillah", 
-                cat: "bismillah", 
-                price: 6000, 
-                img: "images/products/bismillah.jpg", 
-                best: false, 
-                stock: 3, 
-                sold: 189, 
-                size: '40"W × 10"H',
-                desc: "Bismillah teardrop design with laser precision. Beautiful golden finish."
-            },
-            {
-                id: 3, 
-                code: "MAS-003", 
-                name: "Alhamdulillah", 
-                cat: "calligraphy", 
-                price: 6000, 
-                img: "images/products/alhamdulillah.jpg", 
-                best: false, 
-                stock: 8, 
-                sold: 156, 
-                size: '40"W × 10"H',
-                desc: "Alhamdulillah premium Islamic wall art. Solid steel construction."
-            },
-            {
-                id: 4, 
-                code: "MAS-004", 
-                name: "Ayat ul Kursi Round", 
-                cat: "ayat", 
-                price: 7000, 
-                img: "images/products/ayat-kursi.jpg", 
-                best: true, 
-                stock: 2, 
-                sold: 312, 
-                size: '19"W × 23"H',
-                desc: "Ayat ul Kursi luxury round design. Bestseller with 312+ sold."
-            },
-            {
-                id: 5, 
-                code: "MAS-005", 
-                name: "First Kalma", 
-                cat: "kalima", 
-                price: 6000, 
-                img: "images/products/first-kalma.jpg", 
-                best: false, 
-                stock: 6, 
-                sold: 145, 
-                size: '40"W × 10"H',
-                desc: "First Kalma circular design. Laser cut perfection."
-            },
-            {
-                id: 6, 
-                code: "MAS-006", 
-                name: "Hasbunallah", 
-                cat: "calligraphy", 
-                price: 6000, 
-                img: "images/products/hasbunallah.jpg", 
-                best: true, 
-                stock: 4, 
-                sold: 178, 
-                size: '40"W × 10"H',
-                desc: "Hasbunallah premium wall décor. Golden finish, unbreakable."
-            },
-            {
-                id: 7, 
-                code: "MAS-007", 
-                name: "Fabi Ayyi Ala", 
-                cat: "calligraphy", 
-                price: 6000, 
-                img: "images/products/fabi-ayyi.jpg", 
-                best: false, 
-                stock: 10, 
-                sold: 98, 
-                size: '40"W × 10"H',
-                desc: "Surah Ar-Rahman verse. Premium laser-cut stainless steel."
-            },
-            {
-                id: 8, 
-                code: "MAS-008", 
-                name: "La Ilaha Illa Anta", 
-                cat: "kalima", 
-                price: 6000, 
-                img: "images/products/la-ilaha.jpg", 
-                best: false, 
-                stock: 7, 
-                sold: 67, 
-                size: '40"W × 10"H',
-                desc: "Ayat-e-Karima Islamic wall art. Precision fiber laser cut."
-            }
+            {id:1, code:"MAS-001", name:"Masha Allah", cat:"calligraphy", price:6000, img:"images/products/masha-allah.jpg", best:true, stock:5, sold:234, size:'40"W × 10"H'},
+            {id:2, code:"MAS-002", name:"Bismillah", cat:"bismillah", price:6000, img:"images/products/bismillah.jpg", best:false, stock:3, sold:189, size:'40"W × 10"H'},
+            {id:3, code:"MAS-003", name:"Alhamdulillah", cat:"calligraphy", price:6000, img:"images/products/alhamdulillah.jpg", best:false, stock:8, sold:156, size:'40"W × 10"H'},
+            {id:4, code:"MAS-004", name:"Ayat ul Kursi Round", cat:"ayat", price:7000, img:"images/products/ayat-kursi.jpg", best:true, stock:2, sold:312, size:'19"W × 23"H'},
+            {id:5, code:"MAS-005", name:"First Kalma", cat:"kalima", price:6000, img:"images/products/first-kalma.jpg", best:false, stock:6, sold:145, size:'40"W × 10"H'},
+            {id:6, code:"MAS-006", name:"Hasbunallah", cat:"calligraphy", price:6000, img:"images/products/hasbunallah.jpg", best:true, stock:4, sold:178, size:'40"W × 10"H'},
+            {id:7, code:"MAS-007", name:"Fabi Ayyi Ala", cat:"calligraphy", price:6000, img:"images/products/fabi-ayyi.jpg", best:false, stock:10, sold:98, size:'40"W × 10"H'},
+            {id:8, code:"MAS-008", name:"La Ilaha Illa Anta", cat:"kalima", price:6000, img:"images/products/la-ilaha.jpg", best:0, stock:7, sold:67, size:'40"W × 10"H'}
         ];
         
         let cart = JSON.parse(localStorage.getItem('metalCart') || '[]');
-        let currentFilter = 'all';
         
-        // ===== RENDER PRODUCTS =====
+        function getFallbackImage(name) {
+            return `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><rect width="400" height="400" fill="%23C4A265"/><text x="200" y="200" font-size="35" text-anchor="middle" fill="white" font-family="Georgia" font-weight="bold">${name}</text></svg>`;
+        }
+        
         function renderProducts(filter = 'all') {
             const grid = document.getElementById('productGrid');
             const filtered = filter === 'all' ? products : products.filter(p => p.cat === filter);
-            
             grid.innerHTML = filtered.map(p => productCard(p)).join('');
         }
         
         function productCard(p) {
             let badge = '';
-            if (p.best) {
-                badge = '<span class="product-badge bestseller">⭐ BESTSELLER</span>';
-            } else if (p.stock <= 5) {
-                badge = '<span class="product-badge low-stock">🔥 LOW STOCK</span>';
-            } else if (p.cat === 'ayat') {
-                badge = '<span class="product-badge">👑 PREMIUM</span>';
-            }
+            if (p.best) badge = '<span class="product-badge">⭐ BEST</span>';
+            else if (p.stock <= 5) badge = '<span class="product-badge" style="background:#FF9800;">🔥 LOW</span>';
             
-            return `
-                <div class="product-card" onclick="window.location.href='product.html?id=${p.id}'">
-                    <div class="product-image">
-                        ${badge}
-                        <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/800x800/C4A265/FFFFFF?text=${encodeURIComponent(p.name)}'">
-                    </div>
-                    <div class="product-info">
-                        <span class="product-code">${p.code}</span>
-                        <h3 class="product-name">${p.name}</h3>
-                        <p class="product-price">Rs. ${p.price.toLocaleString()}</p>
-                        <span class="product-size">📏 ${p.size}</span>
-                        <p class="product-sold">🔥 ${p.sold}+ sold</p>
-                        <div class="product-actions">
-                            <button class="btn-add-cart" onclick="event.stopPropagation();addToCart(${p.id})">🛒 Cart</button>
-                            <button class="btn-buy-now" onclick="event.stopPropagation();buyNow(${p.id})">⚡ Buy</button>
-                        </div>
-                        <button class="btn-view" onclick="event.stopPropagation();window.location.href='product.html?id=${p.id}'">🔍 View Details</button>
+            return `<div class="product-card" onclick="window.location.href='product.html?id=${p.id}'">
+                <div class="product-image">${badge}<img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.onerror=null;this.src='${getFallbackImage(encodeURIComponent(p.name))}';"></div>
+                <div class="product-info">
+                    <span class="product-code">${p.code}</span>
+                    <h3 class="product-name">${p.name}</h3>
+                    <p class="product-price">Rs. ${p.price.toLocaleString()}</p>
+                    <span class="product-size">📏 ${p.size}</span>
+                    <p class="product-sold">🔥 ${p.sold}+ sold</p>
+                    ${p.stock <= 5 ? '<p class="stock-low">🔥 Only ' + p.stock + ' left</p>' : ''}
+                    <div class="product-actions">
+                        <button class="btn-cart" onclick="event.stopPropagation();addToCart(${p.id})">🛒 Cart</button>
+                        <button class="btn-buy" onclick="event.stopPropagation();buyNow(${p.id})">⚡ Buy</button>
                     </div>
                 </div>
-            `;
+            </div>`;
         }
         
-        // ===== FILTER FUNCTIONS =====
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
-                currentFilter = this.dataset.filter;
-                renderProducts(currentFilter);
+                renderProducts(this.dataset.filter);
             });
         });
         
-        // ===== CART FUNCTIONS =====
+        async function sendAddToCartNotification(product) {
+            const waMsg = `🛒 *ADDED TO CART!*\n\n*Product:* ${product.name}\n*Price:* Rs. ${product.price.toLocaleString()}\n*Size:* ${product.size}`;
+            window.open(`https://wa.me/${ADMIN_WHATSAPP}?text=${encodeURIComponent(waMsg)}`, '_blank');
+            try {
+                await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        _subject: '🛒 Product Added to Cart',
+                        email: ADMIN_EMAIL,
+                        message: `Product: ${product.name}\nPrice: Rs. ${product.price.toLocaleString()}\nSize: ${product.size}`
+                    })
+                });
+            } catch(e) {}
+        }
+        
         function addToCart(id) {
             const existing = cart.find(x => x.id === id);
-            if (existing) {
-                existing.qty++;
-            } else {
-                const product = products.find(p => p.id === id);
-                cart.push({...product, qty: 1});
-            }
+            if (existing) existing.qty++;
+            else cart.push({...products.find(p => p.id === id), qty: 1});
             saveCart();
             showToast('✅ Added to cart!');
+            sendAddToCartNotification(products.find(p => p.id === id));
         }
         
-        function buyNow(id) {
-            addToCart(id);
-            toggleCart();
-        }
-        
-        function removeFromCart(id) {
-            cart = cart.filter(item => item.id !== id);
-            saveCart();
-            renderCart();
-        }
-        
+        function buyNow(id) { addToCart(id); toggleCart(); }
+        function removeFromCart(id) { cart = cart.filter(i => i.id !== id); saveCart(); renderCart(); }
         function updateCartQty(id, delta) {
             const item = cart.find(i => i.id === id);
-            if (item) {
-                item.qty += delta;
-                if (item.qty <= 0) {
-                    removeFromCart(id);
-                    return;
-                }
-                saveCart();
-                renderCart();
-            }
+            if (item) { item.qty += delta; if (item.qty <= 0) { removeFromCart(id); return; } saveCart(); renderCart(); }
         }
-        
-        function saveCart() {
-            localStorage.setItem('metalCart', JSON.stringify(cart));
-            updateCartBadge();
-        }
-        
-        function updateCartBadge() {
-            const total = cart.reduce((s, i) => s + i.qty, 0);
-            const badge = document.getElementById('cartBadge');
-            badge.style.display = total > 0 ? 'flex' : 'none';
-            badge.textContent = total;
-        }
-        
-        function toggleCart() {
-            document.getElementById('cartSidebar').classList.toggle('open');
-            document.getElementById('cartOverlay').classList.toggle('show');
-            if (document.getElementById('cartSidebar').classList.contains('open')) {
-                renderCart();
-            }
-        }
-        
-        function closeCart() {
-            document.getElementById('cartSidebar').classList.remove('open');
-            document.getElementById('cartOverlay').classList.remove('show');
-        }
-        
+        function saveCart() { localStorage.setItem('metalCart', JSON.stringify(cart)); updateCartBadge(); }
+        function updateCartBadge() { const total = cart.reduce((s, i) => s + i.qty, 0); document.getElementById('cartBadge').style.display = total > 0 ? 'flex' : 'none'; document.getElementById('cartBadge').textContent = total; }
+        function toggleCart() { document.getElementById('cartSidebar').classList.toggle('open'); document.getElementById('cartOverlay').classList.toggle('show'); renderCart(); }
+        function closeCart() { document.getElementById('cartSidebar').classList.remove('open'); document.getElementById('cartOverlay').classList.remove('show'); }
         function renderCart() {
-            const container = document.getElementById('cartItems');
-            const footer = document.getElementById('cartFooter');
-            const offerBadge = document.getElementById('offerBadge');
-            
-            if (cart.length === 0) {
-                container.innerHTML = `
-                    <div style="text-align:center;padding:40px 0;color:#999;">
-                        <i class="fas fa-shopping-cart" style="font-size:50px;color:#ddd;display:block;margin-bottom:15px;"></i>
-                        <p>Your cart is empty</p>
-                    </div>
-                `;
-                footer.style.display = 'none';
-                return;
-            }
-            
-            // Check Azadi Offer
-            let hasMashaAllah = cart.some(i => i.id === 1);
-            let hasBismillah = cart.some(i => i.id === 2);
-            let discount = 0;
-            
-            if (hasMashaAllah && hasBismillah) {
-                const masha = cart.find(i => i.id === 1);
-                const bismillah = cart.find(i => i.id === 2);
-                const pairs = Math.min(masha?.qty || 0, bismillah?.qty || 0);
-                discount = pairs * 2000;
-            }
-            
-            container.innerHTML = cart.map(item => `
-                <div style="display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #f5f0e8;align-items:center;">
-                    <img src="${item.img}" style="width:60px;height:60px;object-fit:contain;background:#F5F0E8;border-radius:8px;" onerror="this.src='https://via.placeholder.com/60x60/C4A265/FFFFFF?text=MAS'">
-                    <div style="flex:1;">
-                        <strong style="font-size:14px;">${item.name}</strong>
-                        <p style="color:#C4A265;font-weight:700;font-size:14px;">Rs. ${(item.price * item.qty).toLocaleString()}</p>
-                    </div>
-                    <div style="display:flex;align-items:center;gap:6px;">
-                        <button onclick="updateCartQty(${item.id},-1)" style="width:28px;height:28px;border-radius:50%;border:1px solid #ddd;background:white;cursor:pointer;">−</button>
-                        <span>${item.qty}</span>
-                        <button onclick="updateCartQty(${item.id},1)" style="width:28px;height:28px;border-radius:50%;border:1px solid #ddd;background:white;cursor:pointer;">+</button>
-                    </div>
-                    <button onclick="removeFromCart(${item.id})" style="color:#e53935;cursor:pointer;background:none;border:none;font-size:16px;">✕</button>
-                </div>
-            `).join('');
-            
+            const container = document.getElementById('cartItems'); const footer = document.getElementById('cartFooter'); const offerBadge = document.getElementById('offerBadge');
+            if (cart.length === 0) { container.innerHTML = '<p style="text-align:center;color:#999;padding:30px;">Cart is empty</p>'; footer.style.display = 'none'; return; }
+            let hasMashaAllah = cart.some(i => i.id === 1); let hasBismillah = cart.some(i => i.id === 2); let discount = 0;
+            if (hasMashaAllah && hasBismillah) { const masha = cart.find(i => i.id === 1); const bismillah = cart.find(i => i.id === 2); const pairs = Math.min(masha?.qty || 0, bismillah?.qty || 0); discount = pairs * 2000; }
+            container.innerHTML = cart.map(item => `<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #eee;"><img src="${item.img}" style="width:50px;height:50px;object-fit:cover;border-radius:8px;" onerror="this.onerror=null;this.src='${getFallbackImage(encodeURIComponent(item.name))}';"><div style="flex:1;"><strong style="font-size:12px;">${item.name}</strong><p style="color:#C4A265;font-size:11px;">Rs. ${(item.price * item.qty).toLocaleString()}</p></div><button onclick="removeFromCart(${item.id})" style="background:none;border:none;color:#E53935;cursor:pointer;">✕</button></div>`).join('');
             let total = cart.reduce((s, i) => s + i.price * i.qty, 0);
-            
-            if (discount > 0) {
-                total -= discount;
-                offerBadge.style.display = 'block';
-            } else {
-                offerBadge.style.display = 'none';
-            }
-            
-            document.getElementById('cartTotalPrice').textContent = 'Rs. ' + total.toLocaleString();
-            footer.style.display = 'block';
+            if (discount > 0) { total -= discount; offerBadge.style.display = 'block'; } else { offerBadge.style.display = 'none'; }
+            document.getElementById('cartTotalPrice').textContent = 'Rs. ' + total.toLocaleString(); footer.style.display = 'block';
         }
+        function checkout() { if (cart.length === 0) { alert('Cart is empty!'); return; } window.location.href = 'checkout.html'; }
+        function showToast(message) { const toast = document.createElement('div'); toast.className = 'toast'; toast.textContent = message; document.body.appendChild(toast); setTimeout(() => toast.remove(), 3000); }
+        function toggleMobileMenu() { document.getElementById('mobileMenu').classList.toggle('active'); }
         
-        function checkout() {
-            if (cart.length === 0) {
-                alert('Cart is empty!');
-                return;
-            }
-            window.location.href = 'checkout.html';
-        }
+        const names = ['Ahmed','Fatima','Muhammad','Aisha','Ali','Zainab','Hassan','Sana','Usman','Hira'];
+        const cities = ['Lahore','Karachi','Islamabad','Dubai','London','New York','Toronto','Sydney'];
+        function showLiveActivity() { const name = names[Math.floor(Math.random()*names.length)]; const city = cities[Math.floor(Math.random()*cities.length)]; const product = products[Math.floor(Math.random()*products.length)]; const div = document.createElement('div'); div.className = 'live-activity-item'; div.innerHTML = `<strong>${name}</strong> from ${city} purchased ${product.name} 🎉`; document.getElementById('liveActivity').appendChild(div); setTimeout(() => div.remove(), 6000); }
         
-        // ===== TOAST NOTIFICATION =====
-        function showToast(message) {
-            const toast = document.createElement('div');
-            toast.className = 'toast';
-            toast.textContent = message;
-            document.body.appendChild(toast);
-            setTimeout(() => toast.remove(), 3000);
-        }
-        
-        // ===== MOBILE MENU =====
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('active');
-        }
-        
-        // ===== INITIALIZE =====
         document.addEventListener('DOMContentLoaded', () => {
-            renderProducts();
-            updateCartBadge();
-            
-            // Nav scroll effect
-            window.addEventListener('scroll', () => {
-                const nav = document.getElementById('mainNav');
-                if (window.scrollY > 50) {
-                    nav.classList.add('scrolled');
-                } else {
-                    nav.classList.remove('scrolled');
-                }
-            });
+            renderProducts(); updateCartBadge();
+            setTimeout(showLiveActivity, 3000); setInterval(showLiveActivity, 8000);
         });
     </script>
 </body>
