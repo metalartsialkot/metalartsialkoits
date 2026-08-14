@@ -391,13 +391,15 @@
         }
         
         // ADD TO CART - Cart sidebar khule
-        function addToCart(id) { 
-            const existing = cart.find(x => x.id === id); 
-            if (existing) existing.qty++; 
-            else cart.push({...products.find(p => p.id === id), qty: 1}); 
-            saveCart(); 
-            toggleCart();
-        }
+        function addToCart(id) {
+    const existing = cart.find(x => x.id === id);
+    if (existing) existing.qty++;
+    else cart.push({...products.find(p => p.id === id), qty: 1});
+    saveCart();
+    showToast('✅ Added to cart!');
+    toggleCart(); // Sirf cart sidebar khule
+    // WhatsApp notification HATA DIYA
+}
         
         // BUY NOW - Direct checkout
         function buyNow(id) { 
