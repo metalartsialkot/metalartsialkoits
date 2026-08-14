@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Metal Art Sialkot</title>
+    
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        :root { --gold:#C4A265; --gold-light:#D4B87A; --dark:#1A1815; --cream:#FAF7F2; --green:#1B5E20; --red:#E53935; }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Inter',sans-serif; background:var(--cream); color:#2C2824; padding-top:90px; }
+        
+        .checkout-header { background:linear-gradient(135deg,#1A1815,#2C2824); padding:20px; text-align:center; position:fixed; top:0; left:0; width:100%; z-index:100; }
+        .checkout-header h1 { font-family:'Cormorant Garamond',serif; font-size:24px; color:var(--gold); }
+        .checkout-header p { font-size:10px; color:#D4C5B2; }
+        
+        .checkout-container { max-width:1100px; margin:0 auto; padding:20px; display:grid; grid-template-columns:1fr 400px; gap:25px; }
+        
+        .form-section { background:white; border-radius:16px; padding:25px; border:1px solid rgba(196,162,101,0.2); }
+        .form-section h2 { font-family:'Cormorant Garamond',serif; font-size:22px; margin-bottom:20px; color:var(--dark); border-bottom:2px solid var(--gold); padding-bottom:10px; }
+        
+        .form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+        .form-row-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+        
+        .form-group { margin-bottom:15px; }
+        .form-group label { font-size:11px; font-weight:600; display:block; margin-bottom:5px; color:#333; }
+        .form-group label .required { color:var(--red); }
+        .form-group input, .form-group select, .form-group textarea { width:100%; padding:12px 14px; border:2px solid #E8E0D5; border-radius:10px; font-size:13px; font-family:'Inter',sans-serif; transition:all 0.3s; background:white; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color:var(--gold); outline:none; box-shadow:0 0 0 3px rgba(196,162,101,0.15); }
+        .form-group textarea { resize:vertical; min-height:70px; }
+        
+        .currency-selector { display:flex; gap:8px; margin-bottom:15px; flex-wrap:wrap; }
+        .currency-btn { padding:8px 15px; border-radius:50px; border:2px solid #E8E0D5; background:white; cursor:pointer; font-size:11px; font-weight:600; transition:all 0.3s; }
+        .currency-btn.active { border-color:var(--gold); background:var(--gold); color:white; }
+        
+        .summary-section { background:white; border-radius:16px; padding:25px; border:1px solid rgba(196,162,101,0.2); height:fit-content; position:sticky; top:100px; }
+        .summary-section h3 { font-family:'Cormorant Garamond',serif; font-size:20px; margin-bottom:15px; }
+        
+        .summary-item { display:flex; gap:10px; padding:10px 0; border-bottom:1px solid #eee; align-items:center; }
+        .summary-item img { width:50px; height:50px; object-fit:cover; border-radius:8px; background:#F5F0E8; }
+        .summary-item-info { flex:1; }
+        .summary-item-name { font-size:12px; font-weight:600; }
+        .summary-item-qty { font-size:10px; color:#666; }
+        .summary-item-price { font-weight:700; font-size:12px; color:var(--gold); }
+        
+        .summary-totals { margin-top:15px; border-top:2px solid #eee; padding-top:15px; }
+        .summary-row { display:flex; justify-content:space-between; font-size:13px; margin-bottom:8px; }
+        .summary-row.discount { color:var(--green); font-weight:600; }
+        .summary-row.total { font-size:18px; font-weight:800; color:var(--gold); border-top:2px solid #eee; padding-top:10px; }
+        
+        .offer-badge { background:#E8F5E9; padding:10px 15px; border-radius:10px; margin-bottom:12px; border:2px solid #01411C; text-align:center; }
+        .offer-badge .title { font-size:13px; font-weight:700; color:#01411C; }
+        .offer-badge .desc { font-size:10px; color:#1B5E20; }
+        
+        .place-order-btn { width:100%; padding:16px; background:linear-gradient(135deg,#25D366,#128C7E); color:white; border:none; border-radius:50px; font-weight:700; font-size:15px; cursor:pointer; margin-top:15px; transition:all 0.3s; }
+        .place-order-btn:hover { transform:translateY(-2px); box-shadow:0 10px 25px rgba(37,211,102,0.3); }
+        
+        .secure-badge { text-align:center; margin-top:10px; font-size:10px; color:#999; }
+        
+        @media(max-width:900px) {
+            .checkout-container { grid-template-columns:1fr; }
+            .summary-section { position:static; }
+        }
+        @media(max-width:600px) {
+            .form-row, .form-row-3 { grid-template-columns:1fr; }
+            body { padding-top:70px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="checkout-header">
+        <h1>🛒 Checkout</h1>
+        <p>Metal Art Sialkot - Premium Islamic Wall Art</p>
+    </div>
+    
+    <div class="checkout-container">
+        <!-- FORM SECTION -->
+        <div class="form-section">
+            <h2>📦 Shipping Information</h2>
+            
+            <!-- Contact Info -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Full Name <span class="required">*</span></label>
+                    <input type="text" id="coName" placeholder="e.g., Ahmed Khan">
+                </div>
+                <div class="form-group">
+                    <label>Email Address <span class="required">*</span></label>
+                    <input type="email" id="coEmail" placeholder="you@example.com">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Phone Number <span class="required">*</span></label>
+                    <input type="tel" id="coPhone" placeholder="+92 300 1234567">
+                </div>
+                <div class="form-group">
+                    <label>WhatsApp Number</label>
+                    <input type="tel" id="coWhatsApp" placeholder="Same as phone (optional)">
+                </div>
+            </div>
+            
+            <!-- Address -->
+            <div class="form-group">
+                <label>Street Address <span class="required">*</span></label>
+                <input type="text" id="coAddress" placeholder="House #, Street, Area">
+            </div>
+            
+            <div class="form-group">
+                <label>Apartment / Suite (Optional)</label>
+                <input type="text" id="coApartment" placeholder="Apartment, Suite, Unit, etc.">
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Country <span class="required">*</span></label>
+                    <select id="coCountry" onchange="updateCountryCode()">
+                        <option value="Pakistan">🇵🇰 Pakistan</option>
+                        <option value="USA">🇺🇸 United States</option>
+                        <option value="UK">🇬🇧 United Kingdom</option>
+                        <option value="UAE">🇦🇪 UAE</option>
+                        <option value="Saudi Arabia">🇸🇦 Saudi Arabia</option>
+                        <option value="Canada">🇨🇦 Canada</option>
+                        <option value="Australia">🇦🇺 Australia</option>
+                        <option value="Qatar">🇶🇦 Qatar</option>
+                        <option value="Kuwait">🇰🇼 Kuwait</option>
+                        <option value="Oman">🇴🇲 Oman</option>
+                        <option value="Bahrain">🇧🇭 Bahrain</option>
+                        <option value="Germany">🇩🇪 Germany</option>
+                        <option value="France">🇫🇷 France</option>
+                        <option value="Other">🌍 Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>City <span class="required">*</span></label>
+                    <input type="text" id="coCity" placeholder="e.g., Karachi">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>State / Province</label>
+                    <input type="text" id="coState" placeholder="e.g., Sindh">
+                </div>
+                <div class="form-group">
+                    <label>ZIP / Postal Code <span class="required">*</span></label>
+                    <input type="text" id="coZip" placeholder="e.g., 75300">
+                </div>
+            </div>
+            
+            <!-- Currency -->
+            <h2 style="margin-top:25px;">💱 Currency</h2>
+            <div class="currency-selector" id="currencySelector">
+                <button class="currency-btn active" data-currency="PKR" onclick="setCurrency('PKR')">🇵🇰 PKR (Rs.)</button>
+                <button class="currency-btn" data-currency="USD" onclick="setCurrency('USD')">🇺🇸 USD ($)</button>
+                <button class="currency-btn" data-currency="GBP" onclick="setCurrency('GBP')">🇬🇧 GBP (£)</button>
+                <button class="currency-btn" data-currency="EUR" onclick="setCurrency('EUR')">🇪🇺 EUR (€)</button>
+                <button class="currency-btn" data-currency="AED" onclick="setCurrency('AED')">🇦🇪 AED</button>
+                <button class="currency-btn" data-currency="SAR" onclick="setCurrency('SAR')">🇸🇦 SAR</button>
+            </div>
+            
+            <!-- Order Notes -->
+            <div class="form-group" style="margin-top:15px;">
+                <label>Order Notes (Optional)</label>
+                <textarea id="coNotes" placeholder="Any special instructions..."></textarea>
+            </div>
+        </div>
+        
+        <!-- SUMMARY SECTION -->
+        <div class="summary-section">
+            <h3>🛍️ Order Summary</h3>
+            
+            <div id="offerBadge" class="offer-badge" style="display:none;">
+                <div class="title">🇵🇰 AZADI OFFER APPLIED!</div>
+                <div class="desc">You saved Rs. 2,000</div>
+            </div>
+            
+            <div id="summaryItems"></div>
+            
+            <div class="summary-totals" id="summaryTotals"></div>
+            
+            <button class="place-order-btn" onclick="placeOrder()">
+                ✅ Place Order (Cash on Delivery)
+            </button>
+            
+            <div class="secure-badge">
+                🔒 Your information is safe & secure
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let cart = JSON.parse(localStorage.getItem('metalCart') || '[]');
+        let currentCurrency = 'PKR';
+        
+        const rates = {PKR:1, USD:0.0036, GBP:0.0028, EUR:0.0033, AED:0.013, SAR:0.014};
+        const symbols = {PKR:'Rs.', USD:'$', GBP:'£', EUR:'€', AED:'AED', SAR:'SAR'};
+        
+        function setCurrency(currency) {
+            currentCurrency = currency;
+            document.querySelectorAll('.currency-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.currency === currency) btn.classList.add('active');
+            });
+            renderSummary();
+        }
+        
+        function formatPrice(pkr) {
+            const rate = rates[currentCurrency];
+            const symbol = symbols[currentCurrency];
+            return symbol + ' ' + (pkr * rate).toFixed(2);
+        }
+        
+        function renderSummary() {
+            const container = document.getElementById('summaryItems');
+            const totalsDiv = document.getElementById('summaryTotals');
+            const offerBadge = document.getElementById('offerBadge');
+            
+            if (cart.length === 0) {
+                container.innerHTML = '<p style="text-align:center;color:#999;padding:20px;">Cart is empty</p>';
+                totalsDiv.innerHTML = '';
+                offerBadge.style.display = 'none';
+                return;
+            }
+            
+            container.innerHTML = cart.map(item => `
+                <div class="summary-item">
+                    <img src="${item.img}" onerror="this.src='https://via.placeholder.com/50x50/C4A265/FFFFFF?text=MAS'">
+                    <div class="summary-item-info">
+                        <div class="summary-item-name">${item.name}</div>
+                        <div class="summary-item-qty">Qty: ${item.qty}</div>
+                    </div>
+                    <div class="summary-item-price">${formatPrice(item.price * item.qty)}</div>
+                </div>
+            `).join('');
+            
+            let subtotal = 0;
+            let hasMashaAllah = cart.some(i => i.id === 1);
+            let hasBismillah = cart.some(i => i.id === 2);
+            
+            cart.forEach(item => { subtotal += item.price * item.qty; });
+            
+            let discount = 0;
+            if (hasMashaAllah && hasBismillah) {
+                const masha = cart.find(i => i.id === 1);
+                const bismillah = cart.find(i => i.id === 2);
+                const pairs = Math.min(masha?.qty || 0, bismillah?.qty || 0);
+                discount = pairs * 2000;
+            }
+            
+            const total = subtotal - discount;
+            
+            if (discount > 0) offerBadge.style.display = 'block';
+            else offerBadge.style.display = 'none';
+            
+            totalsDiv.innerHTML = `
+                <div class="summary-row"><span>Subtotal:</span><span>${formatPrice(subtotal)}</span></div>
+                ${discount > 0 ? `<div class="summary-row discount"><span>🇵🇰 Azadi Discount:</span><span>-${formatPrice(discount)}</span></div>` : ''}
+                <div class="summary-row"><span>Shipping:</span><span style="color:#1B5E20;">FREE</span></div>
+                <div class="summary-row total"><span>Total:</span><span>${formatPrice(total)}</span></div>
+            `;
+        }
+        
+        async function placeOrder() {
+            const name = document.getElementById('coName').value.trim();
+            const email = document.getElementById('coEmail').value.trim();
+            const phone = document.getElementById('coPhone').value.trim();
+            const whatsapp = document.getElementById('coWhatsApp').value.trim() || phone;
+            const address = document.getElementById('coAddress').value.trim();
+            const apartment = document.getElementById('coApartment').value.trim();
+            const country = document.getElementById('coCountry').value;
+            const city = document.getElementById('coCity').value.trim();
+            const state = document.getElementById('coState').value.trim();
+            const zip = document.getElementById('coZip').value.trim();
+            const notes = document.getElementById('coNotes').value.trim();
+            
+            if (!name) { alert('⚠️ Please enter your full name!'); return; }
+            if (!email) { alert('⚠️ Please enter your email!'); return; }
+            if (!phone) { alert('⚠️ Please enter your phone!'); return; }
+            if (!address) { alert('⚠️ Please enter your address!'); return; }
+            if (!city) { alert('⚠️ Please enter your city!'); return; }
+            if (!zip) { alert('⚠️ Please enter ZIP/Postal code!'); return; }
+            if (cart.length === 0) { alert('🛒 Cart is empty!'); return; }
+            
+            let subtotal = 0;
+            cart.forEach(item => { subtotal += item.price * item.qty; });
+            
+            let hasMashaAllah = cart.some(i => i.id === 1);
+            let hasBismillah = cart.some(i => i.id === 2);
+            let discount = 0;
+            if (hasMashaAllah && hasBismillah) {
+                const masha = cart.find(i => i.id === 1);
+                const bismillah = cart.find(i => i.id === 2);
+                const pairs = Math.min(masha?.qty || 0, bismillah?.qty || 0);
+                discount = pairs * 2000;
+            }
+            
+            const total = subtotal - discount;
+            const orderId = 'MAS-' + Date.now().toString().slice(-8);
+            const invoiceNumber = 'INV-' + Math.floor(Math.random() * 100000);
+            const promoCode = 'WELCOME5-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+            
+            const order = {
+                orderId, invoiceNumber,
+                date: new Date().toLocaleString('en-PK', {timeZone:'Asia/Karachi'}),
+                name, email, phone, whatsapp,
+                address, apartment, country, city, state, zip, notes,
+                items: cart.slice(),
+                subtotal, discount, total,
+                promoCode, status: 'Pending',
+                currency: currentCurrency,
+                convertedTotal: (total * rates[currentCurrency]).toFixed(2)
+            };
+            
+            // Save order
+            const orders = JSON.parse(localStorage.getItem('metalOrders') || '[]');
+            orders.push(order);
+            localStorage.setItem('metalOrders', JSON.stringify(orders));
+            
+            // Save promo
+            const promos = JSON.parse(localStorage.getItem('metalPromoCodes') || '[]');
+            promos.push({code:promoCode, discount:5, email, created:new Date().toISOString(), expires:new Date(Date.now()+30*24*60*60*1000).toISOString(), used:false});
+            localStorage.setItem('metalPromoCodes', JSON.stringify(promos));
+            
+            // WhatsApp Admin
+            const adminMsg = `🔔 *NEW ORDER!*\n\n*Order:* ${orderId}\n*Invoice:* ${invoiceNumber}\n*Date:* ${order.date}\n\n*CUSTOMER:*\n👤 ${name}\n📱 ${phone}\n📧 ${email}\n📍 ${address}${apartment ? ', ' + apartment : ''}\n🏙️ ${city}, ${state ? state + ', ' : ''}${zip}\n🌍 ${country}\n\n*ITEMS:*\n${cart.map((i, idx) => `${idx+1}. ${i.name} x${i.qty} = Rs. ${(i.price*i.qty).toLocaleString()}`).join('\n')}\n\n${discount > 0 ? `Discount: -Rs. ${discount.toLocaleString()}\n` : ''}*TOTAL: Rs. ${total.toLocaleString()}*\nCurrency: ${currentCurrency} (${symbols[currentCurrency]} ${(total*rates[currentCurrency]).toFixed(2)})\n\n*Promo:* ${promoCode}`;
+            
+            window.open(`https://wa.me/923099915777?text=${encodeURIComponent(adminMsg)}`, '_blank');
+            
+            // WhatsApp Customer
+            const custPhone = phone.replace(/\D/g, '');
+            if (custPhone.length >= 10) {
+                const custMsg = `✅ *ORDER CONFIRMED!*\n\nDear ${name},\n\n*Order:* ${orderId}\n*Invoice:* ${invoiceNumber}\n*Total:* Rs. ${total.toLocaleString()}\n\n🎫 *PROMO CODE:* ${promoCode}\nGet *5% OFF* next order!\nValid for *30 days*\n\n📍 Delivery:\n${address}${apartment ? ', ' + apartment : ''}\n${city}, ${zip}\n${country}\n\nThank you! 🙏\n*Metal Art Sialkot*\n📞 0309-9915777`;
+                
+                window.open(`https://wa.me/${custPhone}?text=${encodeURIComponent(custMsg)}`, '_blank');
+            }
+            
+            // Email Admin
+            try {
+                await fetch('https://formspree.io/f/mnpazgbe', {
+                    method:'POST', headers:{'Content-Type':'application/json'},
+                    body:JSON.stringify({_subject:`🔔 New Order: ${orderId}`, email:'info@metalartsialkot.com', message:adminMsg})
+                });
+            } catch(e) {}
+            
+            // Email Customer
+            try {
+                await fetch('https://formspree.io/f/mnpazgbe', {
+                    method:'POST', headers:{'Content-Type':'application/json'},
+                    body:JSON.stringify({_subject:`✅ Order Confirmed: ${orderId}`, email:email, message:`Dear ${name},\n\nThank you for your order!\n\nOrder: ${orderId}\nTotal: Rs. ${total.toLocaleString()}\n\n🎫 Promo: ${promoCode}\n5% OFF next order (30 days)\n\nMetal Art Sialkot\n📞 0309-9915777`})
+                });
+            } catch(e) {}
+            
+            cart = [];
+            localStorage.setItem('metalCart', JSON.stringify(cart));
+            
+            alert(`✅ ORDER PLACED!\n\nOrder ID: ${orderId}\nInvoice: ${invoiceNumber}\nPromo Code: ${promoCode}\n\nWhatsApp & Email notifications sent!`);
+            window.location.href = 'index.html';
+        }
+        
+        document.addEventListener('DOMContentLoaded', renderSummary);
+    </script>
+</body>
+</html>
