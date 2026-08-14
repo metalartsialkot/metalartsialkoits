@@ -372,14 +372,13 @@
 }
     
     // BUY NOW - Direct checkout redirect
-    function buyNow() {
-        const existing = cart.find(x => x.id === currentProduct.id);
-        if (existing) existing.qty += quantity;
-        else cart.push({...currentProduct, qty: quantity});
-        saveCart();
-        window.location.href = 'checkout.html'; // Direct checkout
-    }
-    
+    function buyNow() { 
+    const existing = cart.find(x => x.id === currentProduct.id);
+    if (existing) existing.qty += quantity;
+    else cart.push({...currentProduct, qty: quantity});
+    saveCart();
+    window.location.href = 'checkout.html'; // ✅ Direct checkout
+}
     function removeFromCart(id) { cart = cart.filter(i => i.id !== id); saveCart(); renderCart(); }
     function saveCart() { localStorage.setItem('metalCart', JSON.stringify(cart)); updateCartBadge(); }
     function updateCartBadge() { const total = cart.reduce((s,i) => s + i.qty, 0); document.getElementById('cartBadge').style.display = total > 0 ? 'flex' : 'none'; document.getElementById('cartBadge').textContent = total; }
